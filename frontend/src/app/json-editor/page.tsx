@@ -87,6 +87,7 @@ export default function JSONGenerator() {
   const [isValid, setIsValid] = useState(false);
   const [categories, setCategories] = useState<Category[]>([]);
   const [zodErrors, setZodErrors] = useState<z.ZodError | null>(null);
+  const [isMounted, setIsMounted] = useState(false);
 
   // Manifest editor state
   const [manifestContents, setManifestContents] = useState<Record<string, string>>({
@@ -107,6 +108,10 @@ export default function JSONGenerator() {
   });
   const [isSavingManifests, setIsSavingManifests] = useState(false);
   const [isSavingJson, setIsSavingJson] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   useEffect(() => {
     fetchCategories()
@@ -497,7 +502,7 @@ export default function JSONGenerator() {
                 {" "}
                 <span className="text-red-500">*</span>
               </Label>
-              <Input placeholder="Example" value={script.name} onChange={e => updateScript("name", e.target.value)} />
+              <Input placeholder="Example" value={script.name} onChange={e => updateScript("name", e.target.value)} suppressHydrationWarning />
             </div>
             <div>
               <Label>
@@ -505,7 +510,7 @@ export default function JSONGenerator() {
                 {" "}
                 <span className="text-red-500">*</span>
               </Label>
-              <Input placeholder="example" value={script.slug} onChange={e => updateScript("slug", e.target.value)} />
+              <Input placeholder="example" value={script.slug} onChange={e => updateScript("slug", e.target.value)} suppressHydrationWarning />
             </div>
           </div>
 
@@ -521,6 +526,7 @@ export default function JSONGenerator() {
               value={script.logo || ""}
               onChange={e => updateScript("logo", normalizeUrl(e.target.value))}
               onBlur={e => updateScript("logo", normalizeUrl(e.target.value))}
+              suppressHydrationWarning
             />
           </div>
 
@@ -579,6 +585,7 @@ export default function JSONGenerator() {
                 const v = e.target.value ? Number(e.target.value) : null;
                 updateScript("interface_port", clampPort(v) as unknown as Script[keyof Script]);
               }}
+              suppressHydrationWarning
             />
             <p className="text-sm text-muted-foreground mt-1">
               Optional — numeric port number (1–65535). Leave empty for no port.
@@ -595,6 +602,7 @@ export default function JSONGenerator() {
                 value={script.website || ""}
                 onChange={e => updateScript("website", e.target.value || null)}
                 onBlur={e => updateScript("website", normalizeUrl(e.target.value))}
+                suppressHydrationWarning
               />
             </div>
 
@@ -606,6 +614,7 @@ export default function JSONGenerator() {
                 value={script.documentation || ""}
                 onChange={e => updateScript("documentation", e.target.value || null)}
                 onBlur={e => updateScript("documentation", normalizeUrl(e.target.value))}
+                suppressHydrationWarning
               />
             </div>
 
@@ -617,6 +626,7 @@ export default function JSONGenerator() {
                 value={(script as any).github || ""}
                 onChange={e => updateScript("github" as keyof Script, e.target.value || null)}
                 onBlur={e => updateScript("github" as keyof Script, normalizeUrl(e.target.value))}
+                suppressHydrationWarning
               />
             </div>
           </div>
@@ -666,7 +676,7 @@ export default function JSONGenerator() {
                       <div className="space-y-2">
                         <div className="space-y-1">
                           <Label>Manifest path</Label>
-                          <Input value={pathValue} readOnly disabled />
+                          <Input value={pathValue} readOnly disabled suppressHydrationWarning />
                           <p className="text-xs text-muted-foreground">
                             File will be saved to <code className="bg-muted px-1 rounded">/public/manifests/{script.slug || "app-name"}/{manifestFileExamples[key]}</code>
                           </p>
@@ -691,13 +701,14 @@ export default function JSONGenerator() {
                           )}
                         </Button>
 
-                        {isExpanded && (
+                        {isExpanded && isMounted && (
                           <div className="space-y-2">
                             <Textarea
                               placeholder={`Enter your ${labelMap[key]} manifest code here...`}
-                              value={manifestContents[key]}
+                              value={manifestContents[key] || ""}
                               onChange={(e) => updateManifestContent(key, e.target.value)}
                               className="font-mono text-sm min-h-[200px]"
+                              suppressHydrationWarning
                             />
                           </div>
                         )}
@@ -718,6 +729,7 @@ export default function JSONGenerator() {
                 username: e.target.value || null,
               })
             }
+            suppressHydrationWarning
           />
           <Input
             placeholder="Password"
@@ -728,6 +740,7 @@ export default function JSONGenerator() {
                 password: e.target.value || null,
               })
             }
+            suppressHydrationWarning
           />
           <Note script={script} setScript={setScript} setIsValid={setIsValid} setZodErrors={setZodErrors} />
         </form>
