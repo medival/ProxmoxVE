@@ -30,6 +30,8 @@ frontend/.svelte-kit/
 frontend/.turbo/
 frontend/.vite/
 frontend/build/
+frontend/package-lock.json
+frontend/.next/
 
 # API and Backend specific exclusions
 api/.env
