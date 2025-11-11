@@ -393,7 +393,7 @@ export default function JSONGenerator() {
 
   const validationAlert = useMemo(
     () => (
-      <Alert className={cn("text-black", isValid ? "bg-green-100" : "bg-red-100")}>
+      <Alert className={cn("text-black", isValid ? "bg-green-100" : "bg-red-100")} suppressHydrationWarning>
         <AlertTitle>{isValid ? "Valid JSON" : "Invalid JSON"}</AlertTitle>
         <AlertDescription>
           {isValid
@@ -401,7 +401,7 @@ export default function JSONGenerator() {
             : "The current JSON does not match the required schema."}
         </AlertDescription>
         {zodErrors && (
-          <div className="mt-2 space-y-1">
+          <div className="mt-2 space-y-1" suppressHydrationWarning>
             {zodErrors.errors.map((error, index) => (
               <AlertDescription key={index} className="p-1 text-red-500">
                 {error.path.join(".")}
@@ -486,14 +486,14 @@ export default function JSONGenerator() {
   };
 
   return (
-    <div className="flex min-h-[calc(100vh-4rem)] mt-20">
+    <div className="flex min-h-[calc(100vh-4rem)] mt-20" suppressHydrationWarning>
       {/* <div className="flex  mt-4"> */}
 
-      <div className="w-1/2 p-4 overflow-y-auto">
+      <div className="w-1/2 p-4 overflow-y-auto" suppressHydrationWarning>
         <h2 className="text-2xl font-bold mb-4">JSON Generator</h2>
 
         {/* MAIN FORM BOX (Platform + Deployment are back here, structured) */}
-        <form className="space-y-4">
+        <form className="space-y-4" suppressHydrationWarning>
           {/* -- rest of your form fields (name, slug, logo...) -- */}
           <div className="grid grid-cols-2 gap-4">
             <div>
@@ -555,12 +555,13 @@ export default function JSONGenerator() {
                   <Button
                     variant="outline"
                     className={cn("pl-3 text-left font-normal w-full", !script.date_created && "text-muted-foreground")}
+                    suppressHydrationWarning
                   >
                     {formattedDate || <span>Pick a date</span>}
                     <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                   </Button>
                 </PopoverTrigger>
-                <PopoverContent className="w-auto p-0" align="start">
+                <PopoverContent className="w-auto p-0" align="start" suppressHydrationWarning>
                   <Calendar
                     mode="single"
                     selected={script.date_created ? new Date(script.date_created) : undefined}
@@ -746,9 +747,9 @@ export default function JSONGenerator() {
         </form>
       </div>
 
-      <div className="w-1/2 p-4 bg-background overflow-y-auto">
+      <div className="w-1/2 p-4 bg-background overflow-y-auto" suppressHydrationWarning>
         {validationAlert}
-        <div className="relative">
+        <div className="relative" suppressHydrationWarning>
           <div className="absolute right-2 top-2 flex gap-1">
             <Button size="icon" variant="outline" onClick={handleCopy} title="Copy to clipboard">
               {isCopied ? <Check className="h-4 w-4" /> : <Clipboard className="h-4 w-4" />}
@@ -767,7 +768,7 @@ export default function JSONGenerator() {
             </Button>
           </div>
 
-          <pre className="mt-4 p-4 bg-secondary rounded shadow overflow-x-scroll">
+          <pre className="mt-4 p-4 bg-secondary rounded shadow overflow-x-scroll" suppressHydrationWarning>
             {JSON.stringify(script, null, 2)}
           </pre>
         </div>
