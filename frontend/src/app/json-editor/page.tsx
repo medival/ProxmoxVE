@@ -2,7 +2,7 @@
 
 import type { z } from "zod";
 
-import { CalendarIcon, Check, Clipboard, Download } from "lucide-react";
+import { CalendarIcon, Check, Clipboard, Download, Save, ChevronDown, ChevronUp } from "lucide-react";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { format } from "date-fns";
 import { toast } from "sonner";
@@ -87,6 +87,26 @@ export default function JSONGenerator() {
   const [isValid, setIsValid] = useState(false);
   const [categories, setCategories] = useState<Category[]>([]);
   const [zodErrors, setZodErrors] = useState<z.ZodError | null>(null);
+
+  // Manifest editor state
+  const [manifestContents, setManifestContents] = useState<Record<string, string>>({
+    script: "",
+    docker: "",
+    docker_compose: "",
+    helm: "",
+    kubernetes: "",
+    terraform: "",
+  });
+  const [expandedEditors, setExpandedEditors] = useState<Record<string, boolean>>({
+    script: false,
+    docker: false,
+    docker_compose: false,
+    helm: false,
+    kubernetes: false,
+    terraform: false,
+  });
+  const [isSavingManifests, setIsSavingManifests] = useState(false);
+  const [isSavingJson, setIsSavingJson] = useState(false);
 
   useEffect(() => {
     fetchCategories()
@@ -199,6 +219,155 @@ export default function JSONGenerator() {
     document.body.removeChild(a);
   }, [script]);
 
+  // Load manifest content from server
+  const loadManifest = useCallback(async (key: string, fileName: string) => {
+    if (!script.slug) return;
+
+    try {
+      const response = await fetch(
+        `/api/load-manifest?appName=${encodeURIComponent(script.slug)}&fileName=${encodeURIComponent(fileName)}`,
+      );
+      const data = await response.json();
+
+      if (data.success && data.exists) {
+        setManifestContents(prev => ({ ...prev, [key]: data.content }));
+      }
+    }
+    catch (error) {
+      console.error(`Error loading manifest for ${key}:`, error);
+    }
+  }, [script.slug]);
+
+  // Load all manifests when slug changes
+  useEffect(() => {
+    if (!script.slug) return;
+
+    const fileExamples: Record<string, string> = {
+      script: "script.sh",
+      docker: "Dockerfile",
+      docker_compose: "docker-compose.yaml",
+      helm: "helm.yaml",
+      kubernetes: "k8s-deployment.yaml",
+      terraform: "main.tf",
+    };
+
+    const manifestKeys = ["script", "docker", "docker_compose", "helm", "kubernetes", "terraform"];
+    manifestKeys.forEach((key) => {
+      const fileName = fileExamples[key];
+      loadManifest(key, fileName);
+    });
+  }, [script.slug, loadManifest]);
+
+  // Save all enabled manifests
+  const handleSaveAllManifests = useCallback(async () => {
+    if (!script.slug) {
+      toast.error("Please enter a slug first");
+      return;
+    }
+
+    const fileExamples: Record<string, string> = {
+      script: "script.sh",
+      docker: "Dockerfile",
+      docker_compose: "docker-compose.yaml",
+      helm: "helm.yaml",
+      kubernetes: "k8s-deployment.yaml",
+      terraform: "main.tf",
+    };
+
+    setIsSavingManifests(true);
+    const deployment: any = (script as any).deployment || {};
+    const enabledManifests = Object.keys(deployment).filter(
+      key => key !== "paths" && deployment[key] === true,
+    );
+
+    if (enabledManifests.length === 0) {
+      toast.error("No deployment options enabled");
+      setIsSavingManifests(false);
+      return;
+    }
+
+    try {
+      const savePromises = enabledManifests.map(async (key) => {
+        const fileName = fileExamples[key];
+        const content = manifestContents[key] || "";
+
+        const response = await fetch("/api/save-manifest", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            appName: script.slug,
+            fileName,
+            content,
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error(`Failed to save ${key}`);
+        }
+
+        return response.json();
+      });
+
+      await Promise.all(savePromises);
+      toast.success(`Saved ${enabledManifests.length} manifest file(s)`);
+    }
+    catch (error) {
+      console.error("Error saving manifests:", error);
+      toast.error("Failed to save some manifests");
+    }
+    finally {
+      setIsSavingManifests(false);
+    }
+  }, [script, manifestContents]);
+
+  // Save JSON file
+  const handleSaveJson = useCallback(async () => {
+    if (!isValid) {
+      toast.error("Cannot save invalid JSON");
+      return;
+    }
+
+    if (!script.slug) {
+      toast.error("Please enter a slug first");
+      return;
+    }
+
+    setIsSavingJson(true);
+
+    try {
+      const response = await fetch("/api/save-json", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ json: script }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to save JSON");
+      }
+
+      toast.success(`JSON saved to ${data.path}`);
+    }
+    catch (error) {
+      console.error("Error saving JSON:", error);
+      toast.error(error instanceof Error ? error.message : "Failed to save JSON");
+    }
+    finally {
+      setIsSavingJson(false);
+    }
+  }, [script, isValid]);
+
+  // Toggle editor expansion
+  const toggleEditor = useCallback((key: string) => {
+    setExpandedEditors(prev => ({ ...prev, [key]: !prev[key] }));
+  }, []);
+
+  // Update manifest content
+  const updateManifestContent = useCallback((key: string, content: string) => {
+    setManifestContents(prev => ({ ...prev, [key]: content }));
+  }, []);
+
   const handleDateSelect = useCallback(
     (date: Date | undefined) => {
       updateScript("date_created", format(date || new Date(), "yyyy-MM-dd"));
@@ -267,7 +436,7 @@ export default function JSONGenerator() {
   };
 
   const buildExamplePath = (fileName: string) =>
-    `/public/manifest/${script.slug || "app-name"}/${fileName}`;
+    `/public/manifests/${script.slug || "app-name"}/${fileName}`;
 
   // PLATFORM helpers: keys and friendly labels
   const platformKeys = [
@@ -460,6 +629,15 @@ export default function JSONGenerator() {
                 <h3 className="text-lg font-semibold">Deployment</h3>
                 <p className="text-sm text-muted-foreground">Script / Docker / Docker Compose / Helm / Kubernetes / Terraform</p>
               </div>
+              <Button
+                onClick={handleSaveAllManifests}
+                disabled={isSavingManifests || !script.slug}
+                size="sm"
+                variant="outline"
+              >
+                <Save className="h-4 w-4 mr-2" />
+                {isSavingManifests ? "Saving..." : "Save All Manifests"}
+              </Button>
             </div>
 
             <div className="space-y-3">
@@ -474,9 +652,8 @@ export default function JSONGenerator() {
                 };
 
                 const isOn = Boolean((script as any).deployment?.[key]);
-                // always compute path from current slug (fallback "app-name")
+                const isExpanded = expandedEditors[key];
                 const pathValue = buildExamplePath(manifestFileExamples[key]);
-
 
                 return (
                   <div key={key} className="p-2 rounded border flex flex-col gap-2">
@@ -486,14 +663,46 @@ export default function JSONGenerator() {
                     </div>
 
                     {isOn && (
-                      <div className="space-y-1">
-                        <Label>Manifest path (read-only)</Label>
-                        <Input value={pathValue} readOnly disabled />
-                        <p className="text-xs text-muted-foreground">
-                          Please create the manifest under <code className="bg-muted px-1 rounded">/public/manifest/&lt;app-name&gt;/&lt;manifest-filename&gt;</code>.
-                        </p>
+                      <div className="space-y-2">
+                        <div className="space-y-1">
+                          <Label>Manifest path</Label>
+                          <Input value={pathValue} readOnly disabled />
+                          <p className="text-xs text-muted-foreground">
+                            File will be saved to <code className="bg-muted px-1 rounded">/public/manifests/{script.slug || "app-name"}/{manifestFileExamples[key]}</code>
+                          </p>
+                        </div>
+
+                        <Button
+                          onClick={() => toggleEditor(key)}
+                          variant="ghost"
+                          size="sm"
+                          className="w-full"
+                        >
+                          {isExpanded ? (
+                            <>
+                              <ChevronUp className="h-4 w-4 mr-2" />
+                              Hide Editor
+                            </>
+                          ) : (
+                            <>
+                              <ChevronDown className="h-4 w-4 mr-2" />
+                              Show Editor
+                            </>
+                          )}
+                        </Button>
+
+                        {isExpanded && (
+                          <div className="space-y-2">
+                            <Textarea
+                              placeholder={`Enter your ${labelMap[key]} manifest code here...`}
+                              value={manifestContents[key]}
+                              onChange={(e) => updateManifestContent(key, e.target.value)}
+                              className="font-mono text-sm min-h-[200px]"
+                            />
+                          </div>
+                        )}
                       </div>
-                    )}  
+                    )}
                   </div>
                 );
               })}
@@ -528,11 +737,20 @@ export default function JSONGenerator() {
         {validationAlert}
         <div className="relative">
           <div className="absolute right-2 top-2 flex gap-1">
-            <Button size="icon" variant="outline" onClick={handleCopy}>
+            <Button size="icon" variant="outline" onClick={handleCopy} title="Copy to clipboard">
               {isCopied ? <Check className="h-4 w-4" /> : <Clipboard className="h-4 w-4" />}
             </Button>
-            <Button size="icon" variant="outline" onClick={handleDownload}>
+            <Button size="icon" variant="outline" onClick={handleDownload} title="Download JSON">
               <Download className="h-4 w-4" />
+            </Button>
+            <Button
+              size="icon"
+              variant="outline"
+              onClick={handleSaveJson}
+              disabled={!isValid || isSavingJson || !script.slug}
+              title="Save JSON to /public/json"
+            >
+              <Save className="h-4 w-4" />
             </Button>
           </div>
 
