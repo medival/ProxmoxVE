@@ -1,5 +1,5 @@
 "use client";
-import { ArrowRightIcon, ExternalLink, Zap, Shield, Users, Code2, Rocket, BookOpen } from "lucide-react";
+import { ArrowRightIcon, ExternalLink, Zap, Shield, Users, Code2, Rocket, BookOpen, Server, Container, Cloud, FileCode, Terminal } from "lucide-react";
 import { useEffect, useState } from "react";
 import { FaGithub, FaLinkedin, FaFacebook, FaXTwitter } from "react-icons/fa6";
 import { SiThreads } from "react-icons/si";
@@ -160,7 +160,7 @@ export default function Page() {
           <div className="py-24" id="features">
             <div className="text-center mb-16">
               <h2 className="text-3xl font-bold tracking-tighter md:text-5xl mb-4">
-                What We Offer
+                Explore by Category
               </h2>
               <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
                 Your complete platform for discovering and deploying free and open source software
@@ -237,6 +237,65 @@ export default function Page() {
                   <CardDescription>
                     Daily updates with new tools, features, and improvements. Never miss out on the latest FOSS.
                   </CardDescription>
+                </CardHeader>
+              </Card>
+            </div>
+          </div>
+
+          {/* Deploy Anywhere Section */}
+          <div className="py-24 border-t">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl font-bold tracking-tighter md:text-5xl mb-4">
+                Deploy Anywhere
+              </h2>
+              <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+                Multiple deployment methods to fit your infrastructure
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 max-w-6xl mx-auto">
+              <Card className="border-2 hover:border-primary/50 transition-all hover:shadow-lg">
+                <CardHeader className="text-center">
+                  <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-[#ffaa40]/20 to-[#9c40ff]/20 flex items-center justify-center mx-auto mb-4">
+                    <Server className="h-8 w-8 text-[#ffaa40]" />
+                  </div>
+                  <CardTitle className="text-lg">Proxmox VE</CardTitle>
+                </CardHeader>
+              </Card>
+
+              <Card className="border-2 hover:border-primary/50 transition-all hover:shadow-lg">
+                <CardHeader className="text-center">
+                  <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-[#9c40ff]/20 to-[#ffaa40]/20 flex items-center justify-center mx-auto mb-4">
+                    <Container className="h-8 w-8 text-[#9c40ff]" />
+                  </div>
+                  <CardTitle className="text-lg">Docker</CardTitle>
+                </CardHeader>
+              </Card>
+
+              <Card className="border-2 hover:border-primary/50 transition-all hover:shadow-lg">
+                <CardHeader className="text-center">
+                  <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-[#ffaa40]/20 to-[#9c40ff]/20 flex items-center justify-center mx-auto mb-4">
+                    <Cloud className="h-8 w-8 text-[#ffaa40]" />
+                  </div>
+                  <CardTitle className="text-lg">Kubernetes</CardTitle>
+                </CardHeader>
+              </Card>
+
+              <Card className="border-2 hover:border-primary/50 transition-all hover:shadow-lg">
+                <CardHeader className="text-center">
+                  <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-[#9c40ff]/20 to-[#ffaa40]/20 flex items-center justify-center mx-auto mb-4">
+                    <FileCode className="h-8 w-8 text-[#9c40ff]" />
+                  </div>
+                  <CardTitle className="text-lg">Terraform</CardTitle>
+                </CardHeader>
+              </Card>
+
+              <Card className="border-2 hover:border-primary/50 transition-all hover:shadow-lg">
+                <CardHeader className="text-center">
+                  <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-[#ffaa40]/20 to-[#9c40ff]/20 flex items-center justify-center mx-auto mb-4">
+                    <Terminal className="h-8 w-8 text-[#ffaa40]" />
+                  </div>
+                  <CardTitle className="text-lg">Shell Script</CardTitle>
                 </CardHeader>
               </Card>
             </div>
