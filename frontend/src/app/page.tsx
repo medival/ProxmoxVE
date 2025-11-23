@@ -255,7 +255,7 @@ export default function Page() {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 max-w-6xl mx-auto">
-              <Card className="border-0">
+              <Card className="border-0 shadow-none">
                 <CardHeader className="text-center">
                   <div className="w-20 h-20 flex items-center justify-center mx-auto mb-4">
                     <SiProxmox className="h-16 w-16 text-[#E57000]" />
@@ -264,7 +264,7 @@ export default function Page() {
                 </CardHeader>
               </Card>
 
-              <Card className="border-0">
+              <Card className="border-0 shadow-none">
                 <CardHeader className="text-center">
                   <div className="w-20 h-20 flex items-center justify-center mx-auto mb-4">
                     <SiDocker className="h-16 w-16 text-[#2496ED]" />
@@ -273,7 +273,7 @@ export default function Page() {
                 </CardHeader>
               </Card>
 
-              <Card className="border-0">
+              <Card className="border-0 shadow-none">
                 <CardHeader className="text-center">
                   <div className="w-20 h-20 flex items-center justify-center mx-auto mb-4">
                     <SiKubernetes className="h-16 w-16 text-[#326CE5]" />
@@ -282,7 +282,7 @@ export default function Page() {
                 </CardHeader>
               </Card>
 
-              <Card className="border-0">
+              <Card className="border-0 shadow-none">
                 <CardHeader className="text-center">
                   <div className="w-20 h-20 flex items-center justify-center mx-auto mb-4">
                     <SiTerraform className="h-16 w-16 text-[#7B42BC]" />
@@ -291,7 +291,7 @@ export default function Page() {
                 </CardHeader>
               </Card>
 
-              <Card className="border-0">
+              <Card className="border-0 shadow-none">
                 <CardHeader className="text-center">
                   <div className="w-20 h-20 flex items-center justify-center mx-auto mb-4">
                     <TbTerminal2 className="h-16 w-16 text-[#4EAA25]" />
