@@ -257,7 +257,7 @@ export default function Page() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 max-w-6xl mx-auto">
               <Card>
                 <CardHeader className="text-center">
-                  <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-[#ffaa40]/20 to-[#9c40ff]/20 flex items-center justify-center mx-auto mb-4">
+                  <div className="w-16 h-16 flex items-center justify-center mx-auto mb-4">
                     <SiProxmox className="h-8 w-8 text-[#E57000]" />
                   </div>
                   <CardTitle className="text-lg">Proxmox VE</CardTitle>
@@ -266,7 +266,7 @@ export default function Page() {
 
               <Card>
                 <CardHeader className="text-center">
-                  <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-[#9c40ff]/20 to-[#ffaa40]/20 flex items-center justify-center mx-auto mb-4">
+                  <div className="w-16 h-16 flex items-center justify-center mx-auto mb-4">
                     <SiDocker className="h-8 w-8 text-[#2496ED]" />
                   </div>
                   <CardTitle className="text-lg">Docker</CardTitle>
@@ -275,7 +275,7 @@ export default function Page() {
 
               <Card>
                 <CardHeader className="text-center">
-                  <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-[#ffaa40]/20 to-[#9c40ff]/20 flex items-center justify-center mx-auto mb-4">
+                  <div className="w-16 h-16 flex items-center justify-center mx-auto mb-4">
                     <SiKubernetes className="h-8 w-8 text-[#326CE5]" />
                   </div>
                   <CardTitle className="text-lg">Kubernetes</CardTitle>
@@ -284,7 +284,7 @@ export default function Page() {
 
               <Card>
                 <CardHeader className="text-center">
-                  <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-[#9c40ff]/20 to-[#ffaa40]/20 flex items-center justify-center mx-auto mb-4">
+                  <div className="w-16 h-16 flex items-center justify-center mx-auto mb-4">
                     <SiTerraform className="h-8 w-8 text-[#7B42BC]" />
                   </div>
                   <CardTitle className="text-lg">Terraform</CardTitle>
@@ -293,7 +293,7 @@ export default function Page() {
 
               <Card>
                 <CardHeader className="text-center">
-                  <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-[#ffaa40]/20 to-[#9c40ff]/20 flex items-center justify-center mx-auto mb-4">
+                  <div className="w-16 h-16 flex items-center justify-center mx-auto mb-4">
                     <TbTerminal2 className="h-8 w-8 text-[#4EAA25]" />
                   </div>
                   <CardTitle className="text-lg">Shell Script</CardTitle>
