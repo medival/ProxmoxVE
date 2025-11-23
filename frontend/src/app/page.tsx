@@ -1,8 +1,9 @@
 "use client";
-import { ArrowRightIcon, ExternalLink, Zap, Shield, Users, Code2, Rocket, BookOpen, Server, Container, Cloud, FileCode, Terminal } from "lucide-react";
+import { ArrowRightIcon, ExternalLink, Zap, Shield, Users, Code2, Rocket, BookOpen } from "lucide-react";
 import { useEffect, useState } from "react";
 import { FaGithub, FaLinkedin, FaFacebook, FaXTwitter } from "react-icons/fa6";
-import { SiThreads } from "react-icons/si";
+import { SiThreads, SiProxmox, SiDocker, SiKubernetes, SiTerraform } from "react-icons/si";
+import { TbTerminal2 } from "react-icons/tb";
 import { useTheme } from "next-themes";
 import Link from "next/link";
 
@@ -257,7 +258,7 @@ export default function Page() {
               <Card className="border-2 hover:border-primary/50 transition-all hover:shadow-lg">
                 <CardHeader className="text-center">
                   <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-[#ffaa40]/20 to-[#9c40ff]/20 flex items-center justify-center mx-auto mb-4">
-                    <Server className="h-8 w-8 text-[#ffaa40]" />
+                    <SiProxmox className="h-8 w-8 text-[#E57000]" />
                   </div>
                   <CardTitle className="text-lg">Proxmox VE</CardTitle>
                 </CardHeader>
@@ -266,7 +267,7 @@ export default function Page() {
               <Card className="border-2 hover:border-primary/50 transition-all hover:shadow-lg">
                 <CardHeader className="text-center">
                   <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-[#9c40ff]/20 to-[#ffaa40]/20 flex items-center justify-center mx-auto mb-4">
-                    <Container className="h-8 w-8 text-[#9c40ff]" />
+                    <SiDocker className="h-8 w-8 text-[#2496ED]" />
                   </div>
                   <CardTitle className="text-lg">Docker</CardTitle>
                 </CardHeader>
@@ -275,7 +276,7 @@ export default function Page() {
               <Card className="border-2 hover:border-primary/50 transition-all hover:shadow-lg">
                 <CardHeader className="text-center">
                   <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-[#ffaa40]/20 to-[#9c40ff]/20 flex items-center justify-center mx-auto mb-4">
-                    <Cloud className="h-8 w-8 text-[#ffaa40]" />
+                    <SiKubernetes className="h-8 w-8 text-[#326CE5]" />
                   </div>
                   <CardTitle className="text-lg">Kubernetes</CardTitle>
                 </CardHeader>
@@ -284,7 +285,7 @@ export default function Page() {
               <Card className="border-2 hover:border-primary/50 transition-all hover:shadow-lg">
                 <CardHeader className="text-center">
                   <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-[#9c40ff]/20 to-[#ffaa40]/20 flex items-center justify-center mx-auto mb-4">
-                    <FileCode className="h-8 w-8 text-[#9c40ff]" />
+                    <SiTerraform className="h-8 w-8 text-[#7B42BC]" />
                   </div>
                   <CardTitle className="text-lg">Terraform</CardTitle>
                 </CardHeader>
@@ -293,7 +294,7 @@ export default function Page() {
               <Card className="border-2 hover:border-primary/50 transition-all hover:shadow-lg">
                 <CardHeader className="text-center">
                   <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-[#ffaa40]/20 to-[#9c40ff]/20 flex items-center justify-center mx-auto mb-4">
-                    <Terminal className="h-8 w-8 text-[#ffaa40]" />
+                    <TbTerminal2 className="h-8 w-8 text-[#4EAA25]" />
                   </div>
                   <CardTitle className="text-lg">Shell Script</CardTitle>
                 </CardHeader>
