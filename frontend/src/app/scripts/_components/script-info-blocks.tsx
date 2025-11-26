@@ -1,4 +1,4 @@
-import { CalendarPlus, LayoutGrid, TrendingUp, Sparkles, Crown } from "lucide-react";
+import { CalendarPlus, LayoutGrid, TrendingUp, Sparkles, Crown, Star } from "lucide-react";
 import { useMemo, useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,6 +10,7 @@ import { mostPopularScripts } from "@/config/site-config";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { extractDate } from "@/lib/time";
+import { cn } from "@/lib/utils";
 
 const ITEMS_PER_PAGE = 3;
 const ITEMS_PER_PAGE_LARGE = 6;
@@ -20,7 +21,7 @@ function AppIcon({ src, name, size = 64 }: { src?: string | null; name: string; 
 
   useEffect(() => setErrored(false), [src]);
 
-  const fallbackClass = "h-11 w-11 object-contain rounded-md p-1";
+  const fallbackClass = "h-14 w-14 object-contain rounded-md p-1";
 
   const resolvedSrc = src && !errored ? src : undefined;
 
@@ -38,7 +39,7 @@ function AppIcon({ src, name, size = 64 }: { src?: string | null; name: string; 
         />
       ) : (
         <div className="flex h-16 w-16 min-w-16 items-center justify-center rounded-lg bg-accent/10 dark:bg-accent/20 p-1">
-          <LayoutGrid className="h-11 w-11 text-muted-foreground" aria-hidden />
+          <LayoutGrid className="h-14 w-14 text-muted-foreground" aria-hidden />
         </div>
       )}
     </>
@@ -184,10 +185,13 @@ export function LatestScripts({ items }: { items: Category[] }) {
   if (!items) return null;
 
   return (
-    <div className="">
+    <div className="mt-12">
       {latestScripts.length > 0 && (
-        <div className="flex w-full items-center justify-between mb-4">
-          <h2 className="text-2xl font-bold tracking-tight">Newest Scripts</h2>
+        <div className="flex w-full items-center justify-between mb-6 pb-4 border-b border-border/40">
+          <div className="flex items-center gap-2">
+            <Sparkles className="h-6 w-6 text-blue-500" />
+            <h2 className="text-2xl font-bold tracking-tight">Newest Scripts</h2>
+          </div>
           <div className="flex items-center justify-end gap-2">
             {page > 1 && (
               <div className="cursor-pointer select-none px-4 py-2 text-sm font-semibold rounded-lg hover:bg-accent transition-colors" onClick={goToPreviousPage}>
@@ -204,46 +208,49 @@ export function LatestScripts({ items }: { items: Category[] }) {
       )}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {latestScripts.slice(startIndex, endIndex).map(script => (
-          <Card key={script.slug} className="bg-accent/30 border-2 hover:border-primary/50 transition-all duration-300 hover:shadow-lg flex flex-col">
-            <CardHeader>
-              <CardTitle className="flex items-start gap-3">
-                <div className="flex h-16 w-16 min-w-16 items-center justify-center rounded-xl bg-gradient-to-br from-accent/40 to-accent/60 p-1 shadow-md">
-                  <AppIcon src={script.logo} name={script.name || script.slug} />
-                </div>
-                <div className="flex flex-col flex-1 min-w-0">
-                  <h3 className="font-semibold text-base line-clamp-1 mb-1">{script.name}</h3>
-                  <p className="text-xs text-muted-foreground flex items-center gap-1">
-                    <CalendarPlus className="h-3 w-3" />
-                    {extractDate(script.date_created)}
-                  </p>
-                </div>
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="flex-grow space-y-3">
-              <CardDescription className="line-clamp-3 text-sm leading-relaxed">{script.description}</CardDescription>
-              {getDeploymentMethods(script).length > 0 && (
-                <div className="flex flex-wrap gap-1.5">
-                  {getDeploymentMethods(script).map(method => (
-                    <Badge key={method} variant="secondary" className="text-xs">
-                      {method}
-                    </Badge>
-                  ))}
-                </div>
-              )}
-            </CardContent>
-            <CardFooter className="pt-2">
-              <Button asChild variant="outline" className="w-full">
-                <Link
-                  href={{
-                    pathname: "/scripts",
-                    query: { id: script.slug },
-                  }}
-                >
-                  View Details
-                </Link>
-              </Button>
-            </CardFooter>
-          </Card>
+          <Link
+            key={script.slug}
+            href={{
+              pathname: "/scripts",
+              query: { id: script.slug },
+            }}
+            className="group"
+          >
+            <Card className="bg-accent/30 border-2 hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 flex flex-col h-full cursor-pointer">
+              <div className="absolute top-2 left-2 z-10">
+                <Badge className="bg-gradient-to-r from-emerald-500 to-teal-500 text-white border-0 text-[10px] px-2 py-0.5">
+                  <Sparkles className="h-3 w-3 mr-1" />
+                  Recent
+                </Badge>
+              </div>
+              <CardHeader className="pb-3">
+                <CardTitle className="flex items-start gap-3">
+                  <div className="flex h-16 w-16 min-w-16 items-center justify-center rounded-xl bg-gradient-to-br from-accent/40 to-accent/60 p-1 shadow-md group-hover:shadow-xl transition-shadow">
+                    <AppIcon src={script.logo} name={script.name || script.slug} />
+                  </div>
+                  <div className="flex flex-col flex-1 min-w-0">
+                    <h3 className="font-semibold text-base line-clamp-1 mb-1 group-hover:text-primary transition-colors">{script.name}</h3>
+                    <p className="text-xs text-muted-foreground flex items-center gap-1" title={script.date_created}>
+                      <CalendarPlus className="h-3 w-3" />
+                      {extractDate(script.date_created)}
+                    </p>
+                  </div>
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="flex-grow space-y-3">
+                <CardDescription className="line-clamp-2 text-sm leading-relaxed">{script.description}</CardDescription>
+                {getDeploymentMethods(script).length > 0 && (
+                  <div className="flex flex-wrap gap-1.5">
+                    {getDeploymentMethods(script).map(method => (
+                      <Badge key={method} variant="secondary" className="text-xs">
+                        {method}
+                      </Badge>
+                    ))}
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          </Link>
         ))}
       </div>
     </div>
@@ -342,58 +349,57 @@ export function TrendingScripts({ items }: { items: Category[] }) {
 
   return (
     <div className="">
-      <div className="flex w-full items-center gap-2 mb-4">
+      {/* Section Header with Divider */}
+      <div className="flex w-full items-center gap-2 mb-6 pb-4 border-b border-border/40">
         <TrendingUp className="h-6 w-6 text-primary" />
         <h2 className="text-2xl font-bold tracking-tight">Trending This Month</h2>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {trendingScripts.map(script => (
-          <Card key={script.slug} className="bg-accent/30 border-2 hover:border-primary/50 transition-all duration-300 hover:shadow-lg flex flex-col relative overflow-hidden">
-            <div className="absolute top-2 right-2 z-10">
-              <Badge className="bg-primary/90 text-primary-foreground">
-                <Sparkles className="h-3 w-3 mr-1" />
-                New
-              </Badge>
-            </div>
-            <CardHeader>
-              <CardTitle className="flex items-start gap-3">
-                <div className="flex h-16 w-16 min-w-16 items-center justify-center rounded-xl bg-gradient-to-br from-accent/40 to-accent/60 p-1 shadow-md">
-                  <AppIcon src={script.logo} name={script.name || script.slug} />
-                </div>
-                <div className="flex flex-col flex-1 min-w-0">
-                  <h3 className="font-semibold text-base line-clamp-1 mb-1">{script.name}</h3>
-                  <p className="text-xs text-muted-foreground flex items-center gap-1">
-                    <CalendarPlus className="h-3 w-3" />
-                    {extractDate(script.date_created)}
-                  </p>
-                </div>
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="flex-grow space-y-3">
-              <CardDescription className="line-clamp-3 text-sm leading-relaxed">{script.description}</CardDescription>
-              {getDeploymentMethods(script).length > 0 && (
-                <div className="flex flex-wrap gap-1.5">
-                  {getDeploymentMethods(script).map(method => (
-                    <Badge key={method} variant="secondary" className="text-xs">
-                      {method}
-                    </Badge>
-                  ))}
-                </div>
-              )}
-            </CardContent>
-            <CardFooter className="pt-2">
-              <Button asChild variant="outline" className="w-full">
-                <Link
-                  href={{
-                    pathname: "/scripts",
-                    query: { id: script.slug },
-                  }}
-                >
-                  View Details
-                </Link>
-              </Button>
-            </CardFooter>
-          </Card>
+          <Link
+            key={script.slug}
+            href={{
+              pathname: "/scripts",
+              query: { id: script.slug },
+            }}
+            className="group"
+          >
+            <Card className="bg-accent/30 border-2 hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 flex flex-col relative overflow-hidden h-full cursor-pointer">
+              {/* Indicator Badge */}
+              <div className="absolute top-2 left-2 z-10">
+                <Badge className="bg-gradient-to-r from-blue-500 to-purple-500 text-white border-0 text-[10px] px-2 py-0.5">
+                  <Sparkles className="h-3 w-3 mr-1" />
+                  Trending
+                </Badge>
+              </div>
+              <CardHeader className="pb-3">
+                <CardTitle className="flex items-start gap-3">
+                  <div className="flex h-16 w-16 min-w-16 items-center justify-center rounded-xl bg-gradient-to-br from-accent/40 to-accent/60 p-1 shadow-md group-hover:shadow-xl transition-shadow">
+                    <AppIcon src={script.logo} name={script.name || script.slug} />
+                  </div>
+                  <div className="flex flex-col flex-1 min-w-0">
+                    <h3 className="font-semibold text-base line-clamp-1 mb-1 group-hover:text-primary transition-colors">{script.name}</h3>
+                    <p className="text-xs text-muted-foreground flex items-center gap-1" title={script.date_created}>
+                      <CalendarPlus className="h-3 w-3" />
+                      {extractDate(script.date_created)}
+                    </p>
+                  </div>
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="flex-grow space-y-3">
+                <CardDescription className="line-clamp-2 text-sm leading-relaxed">{script.description}</CardDescription>
+                {getDeploymentMethods(script).length > 0 && (
+                  <div className="flex flex-wrap gap-1.5">
+                    {getDeploymentMethods(script).map(method => (
+                      <Badge key={method} variant="secondary" className="text-xs">
+                        {method}
+                      </Badge>
+                    ))}
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          </Link>
         ))}
       </div>
     </div>
@@ -443,9 +449,12 @@ export function PopularScripts({ items }: { items: Category[] }) {
   if (!items || popularScripts.length === 0) return null;
 
   return (
-    <div className="">
-      <div className="flex w-full items-center justify-between mb-4">
-        <h2 className="text-2xl font-bold tracking-tight">Popular Scripts</h2>
+    <div className="mt-12">
+      <div className="flex w-full items-center justify-between mb-6 pb-4 border-b border-border/40">
+        <div className="flex items-center gap-2">
+          <Star className="h-6 w-6 text-amber-500" />
+          <h2 className="text-2xl font-bold tracking-tight">Popular Scripts</h2>
+        </div>
         <div className="flex items-center justify-end gap-2">
           {page > 1 && (
             <div className="cursor-pointer select-none px-4 py-2 text-sm font-semibold rounded-lg hover:bg-accent transition-colors" onClick={goToPreviousPage}>
@@ -461,49 +470,51 @@ export function PopularScripts({ items }: { items: Category[] }) {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {popularScripts.slice(startIndex, endIndex).map(script => (
-          <Card key={script.slug} className="bg-accent/30 border-2 hover:border-primary/50 transition-all duration-300 hover:shadow-lg flex flex-col">
-            <CardHeader>
-              <CardTitle className="flex items-start gap-3">
-                <div className="flex h-16 w-16 min-w-16 items-center justify-center rounded-xl bg-gradient-to-br from-accent/40 to-accent/60 p-1 shadow-md">
-                  <AppIcon src={script.logo} name={script.name || script.slug} />
-                </div>
-                <div className="flex flex-col flex-1 min-w-0">
-                  <h3 className="font-semibold text-base line-clamp-1 mb-1">{script.name}</h3>
-                  <p className="text-xs text-muted-foreground flex items-center gap-1">
-                    <CalendarPlus className="h-3 w-3" />
-                    {extractDate(script.date_created)}
-                  </p>
-                </div>
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="flex-grow space-y-3">
-              <CardDescription className="line-clamp-3 text-sm leading-relaxed break-words">
-                {script.description}
-              </CardDescription>
-              {getDeploymentMethods(script).length > 0 && (
-                <div className="flex flex-wrap gap-1.5">
-                  {getDeploymentMethods(script).map(method => (
-                    <Badge key={method} variant="secondary" className="text-xs">
-                      {method}
-                    </Badge>
-                  ))}
-                </div>
-              )}
-            </CardContent>
-            <CardFooter className="pt-2">
-              <Button asChild variant="outline" className="w-full">
-                <Link
-                  href={{
-                    pathname: "/scripts",
-                    query: { id: script.slug },
-                  }}
-                  prefetch={false}
-                >
-                  View Details
-                </Link>
-              </Button>
-            </CardFooter>
-          </Card>
+          <Link
+            key={script.slug}
+            href={{
+              pathname: "/scripts",
+              query: { id: script.slug },
+            }}
+            className="group"
+          >
+            <Card className="bg-accent/30 border-2 hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 flex flex-col h-full cursor-pointer">
+              <div className="absolute top-2 left-2 z-10">
+                <Badge className="bg-gradient-to-r from-amber-500 to-orange-500 text-white border-0 text-[10px] px-2 py-0.5">
+                  <Star className="h-3 w-3 mr-1" />
+                  Popular
+                </Badge>
+              </div>
+              <CardHeader className="pb-3">
+                <CardTitle className="flex items-start gap-3">
+                  <div className="flex h-16 w-16 min-w-16 items-center justify-center rounded-xl bg-gradient-to-br from-accent/40 to-accent/60 p-1 shadow-md group-hover:shadow-xl transition-shadow">
+                    <AppIcon src={script.logo} name={script.name || script.slug} />
+                  </div>
+                  <div className="flex flex-col flex-1 min-w-0">
+                    <h3 className="font-semibold text-base line-clamp-1 mb-1 group-hover:text-primary transition-colors">{script.name}</h3>
+                    <p className="text-xs text-muted-foreground flex items-center gap-1" title={script.date_created}>
+                      <CalendarPlus className="h-3 w-3" />
+                      {extractDate(script.date_created)}
+                    </p>
+                  </div>
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="flex-grow space-y-3">
+                <CardDescription className="line-clamp-2 text-sm leading-relaxed break-words">
+                  {script.description}
+                </CardDescription>
+                {getDeploymentMethods(script).length > 0 && (
+                  <div className="flex flex-wrap gap-1.5">
+                    {getDeploymentMethods(script).map(method => (
+                      <Badge key={method} variant="secondary" className="text-xs">
+                        {method}
+                      </Badge>
+                    ))}
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          </Link>
         ))}
       </div>
     </div>

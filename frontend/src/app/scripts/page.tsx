@@ -1,5 +1,5 @@
 "use client";
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useEffect, useState, useRef } from "react";
 import { Loader2, Search } from "lucide-react";
 import { useQueryState } from "nuqs";
 
@@ -28,6 +28,7 @@ function ScriptContent() {
     hosting: new Set(),
     ui: new Set(),
   });
+  const searchInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (selectedScript && links.length > 0) {
@@ -49,6 +50,19 @@ function ScriptContent() {
       })
       .catch((error) => console.error(error));
   }, []);
+
+  // Keyboard shortcut: Press '/' to focus search
+  useEffect(() => {
+    const handleKeyPress = (e: KeyboardEvent) => {
+      if (e.key === "/" && !selectedScript && searchInputRef.current) {
+        e.preventDefault();
+        searchInputRef.current.focus();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyPress);
+    return () => window.removeEventListener("keydown", handleKeyPress);
+  }, [selectedScript]);
 
   const matchesFilters = (script: Script): boolean => {
     if (!script.install_methods || script.install_methods.length === 0) {
@@ -147,38 +161,63 @@ function ScriptContent() {
               </p>
 
               {/* Search Bar */}
-              <div className="max-w-2xl mx-auto pt-2">
+              <div className="max-w-2xl mx-auto pt-2 space-y-3">
                 <div className="relative">
                   <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground" />
                   <Input
+                    ref={searchInputRef}
                     type="text"
-                    placeholder="Search scripts..."
+                    placeholder="Search scripts... (Press '/' to focus)"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     className="pl-12 h-14 text-lg shadow-lg ring-2 ring-accent/20 focus-visible:ring-accent/40 transition-all"
                   />
                 </div>
+
+                {/* Quick Filter Chips */}
+                <div className="flex flex-wrap items-center justify-center gap-2">
+                  <button className="px-3 py-1.5 text-xs font-medium rounded-full bg-accent/40 hover:bg-accent/60 border border-border/40 transition-all hover:shadow-md">
+                    Most Popular
+                  </button>
+                  <button className="px-3 py-1.5 text-xs font-medium rounded-full bg-accent/40 hover:bg-accent/60 border border-border/40 transition-all hover:shadow-md">
+                    Recently Updated
+                  </button>
+                  <button className="px-3 py-1.5 text-xs font-medium rounded-full bg-accent/40 hover:bg-accent/60 border border-border/40 transition-all hover:shadow-md">
+                    Self-Hosted
+                  </button>
+                  <button className="px-3 py-1.5 text-xs font-medium rounded-full bg-accent/40 hover:bg-accent/60 border border-border/40 transition-all hover:shadow-md">
+                    Docker
+                  </button>
+                  <button className="px-3 py-1.5 text-xs font-medium rounded-full bg-accent/40 hover:bg-accent/60 border border-border/40 transition-all hover:shadow-md">
+                    Kubernetes
+                  </button>
+                  <button className="px-3 py-1.5 text-xs font-medium rounded-full bg-accent/40 hover:bg-accent/60 border border-border/40 transition-all hover:shadow-md">
+                    AI
+                  </button>
+                </div>
               </div>
 
-              {/* Stats */}
-              <div className="grid grid-cols-3 gap-3 max-w-2xl mx-auto pt-2">
-                <div className="flex flex-col items-center">
-                  <div className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-[#ffaa40] to-[#9c40ff] bg-clip-text text-transparent">
+              {/* Stats - Improved Visibility with Mobile Support */}
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-2 pt-2">
+                <div className="px-4 py-2 rounded-lg bg-gradient-to-r from-[#ffaa40]/10 to-[#9c40ff]/10 border border-[#ffaa40]/20 flex items-center gap-2">
+                  <span className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-[#ffaa40] to-[#9c40ff] bg-clip-text text-transparent">
                     {uniqueScripts}
-                  </div>
-                  <div className="text-xs text-muted-foreground">Scripts</div>
+                  </span>
+                  <span className="text-sm font-medium text-muted-foreground">Scripts</span>
                 </div>
-                <div className="flex flex-col items-center">
-                  <div className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-[#9c40ff] to-[#ffaa40] bg-clip-text text-transparent">
+                <span className="text-muted-foreground hidden sm:inline">•</span>
+                <div className="px-4 py-2 rounded-lg bg-gradient-to-r from-[#9c40ff]/10 to-[#ffaa40]/10 border border-[#9c40ff]/20 flex items-center gap-2">
+                  <span className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-[#9c40ff] to-[#ffaa40] bg-clip-text text-transparent">
                     {links.length}
-                  </div>
-                  <div className="text-xs text-muted-foreground">Categories</div>
+                  </span>
+                  <span className="text-sm font-medium text-muted-foreground">Categories</span>
                 </div>
-                <div className="flex flex-col items-center">
-                  <div className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-[#ffaa40] to-[#9c40ff] bg-clip-text text-transparent">
+                <span className="text-muted-foreground hidden sm:inline">•</span>
+                <div className="px-4 py-2 rounded-lg bg-gradient-to-r from-[#ffaa40]/10 to-[#9c40ff]/10 border border-[#ffaa40]/20 flex items-center gap-2">
+                  <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-[#ffaa40] to-[#9c40ff] bg-clip-text text-transparent">
                     Daily
-                  </div>
-                  <div className="text-xs text-muted-foreground">Updates</div>
+                  </span>
+                  <span className="text-sm font-medium text-muted-foreground">Updates</span>
                 </div>
               </div>
             </div>

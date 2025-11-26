@@ -78,16 +78,16 @@ export function SponsoredSidebar({ items, onScriptSelect }: SponsoredSidebarProp
   if (!items) return null;
 
   return (
-    <aside className="hidden lg:block lg:min-w-[300px] lg:max-w-[300px]">
+    <aside className="hidden lg:block lg:min-w-[250px] lg:max-w-[250px]">
       <div className="sticky top-4 space-y-3">
         {/* Header */}
         <div className="px-1">
           <div className="flex items-center gap-2 mb-1">
-            <Crown className="h-4 w-4 text-blue-600 dark:text-blue-500" />
-            <h2 className="text-base font-bold">Sponsored</h2>
+            <Crown className="h-3.5 w-3.5 text-muted-foreground/60" />
+            <h2 className="text-sm font-semibold text-muted-foreground">Ads</h2>
           </div>
           {sponsoredScripts.length > 0 && (
-            <p className="text-[10px] text-muted-foreground">
+            <p className="text-[10px] text-muted-foreground/60">
               {isFull ? (
                 "All spots taken"
               ) : (
@@ -103,13 +103,13 @@ export function SponsoredSidebar({ items, onScriptSelect }: SponsoredSidebarProp
           {sponsoredScripts.map(script => (
             <Card
               key={script.slug}
-              className="bg-accent/30 border-2 border-blue-500/40 hover:border-blue-500/60 transition-all duration-300 hover:shadow-lg flex flex-col relative overflow-hidden"
+              className="bg-accent/10 border border-border/40 hover:border-border/60 transition-all duration-300 hover:shadow-md flex flex-col relative overflow-hidden opacity-85"
             >
               {/* Sponsored Badge */}
               <div className="absolute top-2 right-2 z-10">
-                <Badge variant="secondary" className="text-[10px] px-1.5 py-0.5">
-                  <span className="h-1 w-1 rounded-full bg-blue-500 mr-1" />
-                  SPONSORED
+                <Badge variant="secondary" className="text-[9px] px-1.5 py-0.5 bg-muted/50">
+                  <span className="h-1 w-1 rounded-full bg-muted-foreground/40 mr-1" />
+                  AD
                 </Badge>
               </div>
 
@@ -146,52 +146,52 @@ export function SponsoredSidebar({ items, onScriptSelect }: SponsoredSidebarProp
           ))}
         </div>
         ) : (
-          <Card className="border-2 border-dashed border-blue-500/30 bg-blue-500/5">
+          <Card className="border border-dashed border-border/30 bg-accent/5">
             <CardContent className="text-center py-6 space-y-2">
-              <div className="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-full bg-blue-500/10">
-                <Crown className="h-6 w-6 text-blue-600 dark:text-blue-500" />
+              <div className="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-full bg-muted/20">
+                <Crown className="h-5 w-5 text-muted-foreground/60" />
               </div>
-              <CardTitle className="text-base">5 Spots Available</CardTitle>
+              <CardTitle className="text-sm text-muted-foreground">5 Spots Available</CardTitle>
               <CardDescription className="text-xs">
-                Be the first to sponsor and reach developers!
+                Be the first to sponsor
               </CardDescription>
             </CardContent>
           </Card>
         )}
 
         {/* Advertise Here Card */}
-        <Card className="border-2 border-dashed border-primary/20 bg-accent/10">
+        <Card className="border border-dashed border-border/30 bg-accent/5">
           <CardHeader className="text-center pb-2">
-            <div className="mx-auto mb-1 flex h-10 w-10 items-center justify-center rounded-full bg-primary/10">
-              <Crown className="h-5 w-5 text-primary" />
+            <div className="mx-auto mb-1 flex h-8 w-8 items-center justify-center rounded-full bg-muted/20">
+              <Crown className="h-4 w-4 text-muted-foreground/60" />
             </div>
-            <CardTitle className="text-base">Advertise Here</CardTitle>
+            <CardTitle className="text-sm text-muted-foreground">Advertise Here</CardTitle>
           </CardHeader>
           <CardContent className="text-center space-y-2">
-            <CardDescription className="text-xs">
-              Reach VPS enthusiasts & developers
+            <CardDescription className="text-[11px]">
+              Reach developers
             </CardDescription>
-            <ul className="text-[10px] space-y-1 text-muted-foreground">
+            <ul className="text-[10px] space-y-1 text-muted-foreground/70">
               <li className="flex items-center justify-center gap-1.5">
-                <span className="h-1 w-1 rounded-full bg-green-500" />
-                Highly engaged audience
+                <span className="h-1 w-1 rounded-full bg-muted-foreground/40" />
+                Engaged audience
               </li>
               <li className="flex items-center justify-center gap-1.5">
-                <span className="h-1 w-1 rounded-full bg-green-500" />
+                <span className="h-1 w-1 rounded-full bg-muted-foreground/40" />
                 Premium visibility
               </li>
               <li className="flex items-center justify-center gap-1.5">
-                <span className="h-1 w-1 rounded-full bg-green-500" />
+                <span className="h-1 w-1 rounded-full bg-muted-foreground/40" />
                 Flexible terms
               </li>
             </ul>
-            <Button asChild variant="outline" className="w-full h-8" size="sm">
-              <a href="mailto:support@example.com" className="flex items-center gap-1.5 text-xs">
+            <Button asChild variant="outline" className="w-full h-7 opacity-80" size="sm">
+              <a href="mailto:support@example.com" className="flex items-center gap-1.5 text-[11px]">
                 <Mail className="h-3 w-3" />
                 Get In Touch
               </a>
             </Button>
-            <p className="text-[9px] text-muted-foreground pt-1">
+            <p className="text-[9px] text-muted-foreground/60 pt-1">
               Starting at $99/month
             </p>
           </CardContent>
