@@ -78,13 +78,13 @@ export function SponsoredSidebar({ items, onScriptSelect }: SponsoredSidebarProp
   if (!items) return null;
 
   return (
-    <aside className="hidden lg:block lg:min-w-[300px] lg:max-w-[300px]">
+    <aside className="hidden lg:block lg:min-w-[260px] lg:max-w-[260px]">
       <div className="sticky top-4 space-y-3">
         {/* Header */}
         <div className="px-1">
           <div className="flex items-center gap-2 mb-1">
-            <Crown className="h-4 w-4 text-blue-600 dark:text-blue-500" />
-            <h2 className="text-base font-bold">Sponsored</h2>
+            <Crown className="h-4 w-4 text-muted-foreground/60" />
+            <h2 className="text-sm font-semibold text-muted-foreground">Ads</h2>
           </div>
           {sponsoredScripts.length > 0 && (
             <p className="text-[10px] text-muted-foreground">
@@ -103,13 +103,13 @@ export function SponsoredSidebar({ items, onScriptSelect }: SponsoredSidebarProp
           {sponsoredScripts.map(script => (
             <Card
               key={script.slug}
-              className="bg-accent/30 border-2 border-blue-500/40 hover:border-blue-500/60 transition-all duration-300 hover:shadow-lg flex flex-col relative overflow-hidden"
+              className="bg-muted/20 dark:bg-muted/10 border border-border/30 hover:border-border/50 transition-all duration-200 hover:shadow-md flex flex-col relative overflow-hidden"
             >
               {/* Sponsored Badge */}
               <div className="absolute top-2 right-2 z-10">
-                <Badge variant="secondary" className="text-[10px] px-1.5 py-0.5">
-                  <span className="h-1 w-1 rounded-full bg-blue-500 mr-1" />
-                  SPONSORED
+                <Badge variant="secondary" className="text-[9px] px-1.5 py-0.5 bg-muted/50">
+                  <span className="h-1 w-1 rounded-full bg-muted-foreground/40 mr-1" />
+                  AD
                 </Badge>
               </div>
 
@@ -146,12 +146,12 @@ export function SponsoredSidebar({ items, onScriptSelect }: SponsoredSidebarProp
           ))}
         </div>
         ) : (
-          <Card className="border-2 border-dashed border-blue-500/30 bg-blue-500/5">
+          <Card className="border border-dashed border-border/30 bg-muted/10">
             <CardContent className="text-center py-6 space-y-2">
-              <div className="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-full bg-blue-500/10">
-                <Crown className="h-6 w-6 text-blue-600 dark:text-blue-500" />
+              <div className="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-full bg-muted/20">
+                <Crown className="h-6 w-6 text-muted-foreground/50" />
               </div>
-              <CardTitle className="text-base">5 Spots Available</CardTitle>
+              <CardTitle className="text-sm">5 Spots Available</CardTitle>
               <CardDescription className="text-xs">
                 Be the first to sponsor and reach developers!
               </CardDescription>
@@ -160,12 +160,12 @@ export function SponsoredSidebar({ items, onScriptSelect }: SponsoredSidebarProp
         )}
 
         {/* Advertise Here Card */}
-        <Card className="border-2 border-dashed border-primary/20 bg-accent/10">
+        <Card className="border border-dashed border-border/30 bg-muted/10">
           <CardHeader className="text-center pb-2">
-            <div className="mx-auto mb-1 flex h-10 w-10 items-center justify-center rounded-full bg-primary/10">
-              <Crown className="h-5 w-5 text-primary" />
+            <div className="mx-auto mb-1 flex h-10 w-10 items-center justify-center rounded-full bg-muted/20">
+              <Crown className="h-5 w-5 text-muted-foreground/60" />
             </div>
-            <CardTitle className="text-base">Advertise Here</CardTitle>
+            <CardTitle className="text-sm">Advertise Here</CardTitle>
           </CardHeader>
           <CardContent className="text-center space-y-2">
             <CardDescription className="text-xs">
