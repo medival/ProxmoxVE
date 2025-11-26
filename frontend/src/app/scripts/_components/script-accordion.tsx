@@ -102,6 +102,9 @@ export default function ScriptAccordion({
               <div className="h-px flex-1 bg-gradient-to-r from-transparent via-border to-transparent" />
             </div>
           )}
+          <div className="mb-2 mt-3 px-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+            {groupName}
+          </div>
           {groupedCategories[groupName].map(category => (
         <AccordionItem
           key={`${category.id}:category`}
