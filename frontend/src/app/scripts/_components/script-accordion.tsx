@@ -73,6 +73,20 @@ export default function ScriptAccordion({
       }
     }
   }, [selectedScript, selectedCategory, items, handleSelected]);
+
+  // Group categories by their group field
+  const groupedCategories = items.reduce((acc, category) => {
+    const group = category.group || "Other";
+    if (!acc[group]) {
+      acc[group] = [];
+    }
+    acc[group].push(category);
+    return acc;
+  }, {} as Record<string, Category[]>);
+
+  const groupOrder = ["Platform & Infrastructure", "Development", "Networking", "Media & Content", "Business & Productivity", "Security & Monitoring", "Other"];
+  const orderedGroups = groupOrder.filter(group => groupedCategories[group]);
+
   return (
     <Accordion
       type="single"
@@ -81,7 +95,14 @@ export default function ScriptAccordion({
       collapsible
       className="overflow-y-scroll sm:max-h-[calc(100vh-209px)] overflow-x-hidden p-1"
     >
-      {items.map(category => (
+      {orderedGroups.map((groupName, groupIndex) => (
+        <div key={groupName}>
+          {groupIndex > 0 && (
+            <div className="my-3 flex items-center gap-2">
+              <div className="h-px flex-1 bg-gradient-to-r from-transparent via-border to-transparent" />
+            </div>
+          )}
+          {groupedCategories[groupName].map(category => (
         <AccordionItem
           key={`${category.id}:category`}
           value={category.name}
@@ -102,7 +123,7 @@ export default function ScriptAccordion({
                   {" "}
                 </span>
               </div>
-              <span className="rounded-full bg-gray-200 px-2 py-1 text-xs text-muted-foreground hover:no-underline dark:bg-blue-800/20">
+              <span className="rounded-full bg-gradient-to-r from-blue-500/20 to-blue-600/20 px-2.5 py-1 text-sm font-semibold text-blue-700 hover:no-underline dark:from-blue-400/20 dark:to-blue-500/20 dark:text-blue-300 border border-blue-300/30 dark:border-blue-500/30">
                 {category.scripts.length}
               </span>
             </div>
@@ -164,6 +185,8 @@ export default function ScriptAccordion({
               ))}
           </AccordionContent>
         </AccordionItem>
+          ))}
+        </div>
       ))}
     </Accordion>
   );

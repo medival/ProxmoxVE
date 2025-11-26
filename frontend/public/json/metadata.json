@@ -5,28 +5,32 @@
       "id": 1,
       "sort_order": 1.0,
       "description": "Tools and scripts to manage Proxmox VE and virtualization platforms effectively.",
-      "icon": "server"
+      "icon": "server",
+      "group": "Platform & Infrastructure"
     },
     {
       "name": "Business & ERP",
       "id": 25,
       "sort_order": 25.0,
       "description": "Streamline business operations with ERP and management tools.",
-      "icon": "building"
+      "icon": "building",
+      "group": "Business & Productivity"
     },
     {
       "name": "Miscellaneous",
       "id": 0,
       "sort_order": 99.0,
       "description": "General scripts and tools that don't fit into other categories.",
-      "icon": "more-horizontal"
+      "icon": "more-horizontal",
+      "group": "Other"
     },
     {
       "name": "This only sample",
       "id": 26,
       "sort_order": 26.0,
       "description": "This is sample description",
-      "icon": "building"
+      "icon": "building",
+      "group": "Other"
     }
   ]
 }
