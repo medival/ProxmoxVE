@@ -218,7 +218,7 @@ export function LatestScripts({ items }: { items: Category[] }) {
           >
             <Card className="bg-accent/30 border-2 hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 flex flex-col h-full cursor-pointer">
               <div className="absolute top-2 left-2 z-10">
-                <Badge className="bg-gradient-to-r from-emerald-500 to-teal-500 text-white border-0 text-[10px] px-2 py-0.5">
+                <Badge className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white border-0 text-[10px] px-2 py-0.5">
                   <Sparkles className="h-3 w-3 mr-1" />
                   Recent
                 </Badge>
@@ -367,7 +367,7 @@ export function TrendingScripts({ items }: { items: Category[] }) {
             <Card className="bg-accent/30 border-2 hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 flex flex-col relative overflow-hidden h-full cursor-pointer">
               {/* Indicator Badge */}
               <div className="absolute top-2 left-2 z-10">
-                <Badge className="bg-gradient-to-r from-blue-500 to-purple-500 text-white border-0 text-[10px] px-2 py-0.5">
+                <Badge className="bg-gradient-to-r from-blue-600 to-blue-400 text-white border-0 text-[10px] px-2 py-0.5">
                   <Sparkles className="h-3 w-3 mr-1" />
                   Trending
                 </Badge>
@@ -452,7 +452,7 @@ export function PopularScripts({ items }: { items: Category[] }) {
     <div className="mt-12">
       <div className="flex w-full items-center justify-between mb-6 pb-4 border-b border-border/40">
         <div className="flex items-center gap-2">
-          <Star className="h-6 w-6 text-amber-500" />
+          <Star className="h-6 w-6 text-blue-600" />
           <h2 className="text-2xl font-bold tracking-tight">Popular Scripts</h2>
         </div>
         <div className="flex items-center justify-end gap-2">
@@ -480,7 +480,7 @@ export function PopularScripts({ items }: { items: Category[] }) {
           >
             <Card className="bg-accent/30 border-2 hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 flex flex-col h-full cursor-pointer">
               <div className="absolute top-2 left-2 z-10">
-                <Badge className="bg-gradient-to-r from-amber-500 to-orange-500 text-white border-0 text-[10px] px-2 py-0.5">
+                <Badge className="bg-gradient-to-r from-blue-600 to-indigo-500 text-white border-0 text-[10px] px-2 py-0.5">
                   <Star className="h-3 w-3 mr-1" />
                   Popular
                 </Badge>
