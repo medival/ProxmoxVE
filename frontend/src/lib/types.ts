@@ -78,6 +78,7 @@ export type Category = {
   sort_order: number;
   description: string;
   icon: string;
+  group?: string;
   scripts: Script[];
 };
 
