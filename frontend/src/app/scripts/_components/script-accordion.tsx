@@ -126,7 +126,7 @@ export default function ScriptAccordion({
                   {" "}
                 </span>
               </div>
-              <span className="rounded-full bg-gradient-to-r from-blue-500/20 to-blue-600/20 px-2.5 py-1 text-sm font-semibold text-blue-700 hover:no-underline dark:from-blue-400/20 dark:to-blue-500/20 dark:text-blue-300 border border-blue-300/30 dark:border-blue-500/30">
+              <span className="rounded-full bg-gradient-to-r from-blue-500/30 to-blue-600/40 px-2.5 py-1 text-sm font-bold text-blue-800 hover:no-underline dark:from-blue-400/30 dark:to-blue-500/40 dark:text-blue-200 border border-blue-400/40 dark:border-blue-400/50">
                 {category.scripts.length}
               </span>
             </div>
