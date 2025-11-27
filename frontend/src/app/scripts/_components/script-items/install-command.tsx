@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Info } from "lucide-react";
+import { Info, FileText, Box, Hexagon, Grid3x3, Boxes } from "lucide-react";
 
 import type { Script } from "@/lib/types";
 
@@ -7,6 +7,35 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import CodeCopyButton from "@/components/ui/code-copy-button";
 import { basePath } from "@/config/site-config";
+
+// Tab metadata with icons and descriptions
+const TAB_CONFIG = {
+  script: {
+    icon: FileText,
+    label: "Script",
+    description: "Quick installation script for automated setup",
+  },
+  docker_compose: {
+    icon: Box,
+    label: "Docker Compose",
+    description: "Container-based deployment with docker-compose.yml",
+  },
+  helm: {
+    icon: Hexagon,
+    label: "Helm",
+    description: "Deploy to Kubernetes using Helm charts",
+  },
+  kubernetes: {
+    icon: Grid3x3,
+    label: "Kubernetes",
+    description: "Native Kubernetes manifest files",
+  },
+  terraform: {
+    icon: Boxes,
+    label: "Terraform",
+    description: "Infrastructure as code with Terraform",
+  },
+} as const;
 
 function buildStaticUrl(path: string) {
   if (path.startsWith("http://") || path.startsWith("https://")) {
@@ -159,109 +188,130 @@ export default function InstallCommand({ item }: { item: Script }) {
   );
 
   return (
-    <div className="p-4">
-      <Tabs defaultValue={defaultTab} className="w-full max-w-4xl">
-        <TabsList>
-          {hasScript && <TabsTrigger value="script">Script</TabsTrigger>}
-          {hasDockerCompose && (
-            <TabsTrigger value="docker_compose">Docker Compose</TabsTrigger>
+    <div className="px-4 py-3">
+      <Tabs defaultValue={defaultTab} className="w-full">
+        <TabsList className="mb-3">
+          {hasScript && (
+            <TabsTrigger value="script" className="gap-1.5">
+              <FileText className="h-3.5 w-3.5" />
+              <span>{TAB_CONFIG.script.label}</span>
+            </TabsTrigger>
           )}
-          {hasHelm && <TabsTrigger value="helm">Helm</TabsTrigger>}
+          {hasDockerCompose && (
+            <TabsTrigger value="docker_compose" className="gap-1.5">
+              <Box className="h-3.5 w-3.5" />
+              <span>{TAB_CONFIG.docker_compose.label}</span>
+            </TabsTrigger>
+          )}
+          {hasHelm && (
+            <TabsTrigger value="helm" className="gap-1.5">
+              <Hexagon className="h-3.5 w-3.5" />
+              <span>{TAB_CONFIG.helm.label}</span>
+            </TabsTrigger>
+          )}
           {hasKubernetes && (
-            <TabsTrigger value="kubernetes">Kubernetes</TabsTrigger>
+            <TabsTrigger value="kubernetes" className="gap-1.5">
+              <Grid3x3 className="h-3.5 w-3.5" />
+              <span>{TAB_CONFIG.kubernetes.label}</span>
+            </TabsTrigger>
           )}
           {hasTerraform && (
-            <TabsTrigger value="terraform">Terraform</TabsTrigger>
+            <TabsTrigger value="terraform" className="gap-1.5">
+              <Boxes className="h-3.5 w-3.5" />
+              <span>{TAB_CONFIG.terraform.label}</span>
+            </TabsTrigger>
           )}
         </TabsList>
 
         {hasScript && (
-          <TabsContent value="script">
-            <p className="text-sm mt-2">
-              Installation script for <strong>{item.name}</strong>, loaded from{" "}
-              <code>{manifest.script}</code>.
+          <TabsContent value="script" className="mt-0 space-y-3">
+            <p className="text-xs text-muted-foreground italic">
+              {TAB_CONFIG.script.description}
             </p>
+            {manifest.script && (
+              <div className="rounded-md bg-muted/30 px-3 py-2 text-xs text-muted-foreground border border-border/40">
+                <Info className="h-3 w-3 inline mr-1.5" />
+                Loaded from <code className="text-[11px] bg-muted px-1.5 py-0.5 rounded">{manifest.script}</code>
+              </div>
+            )}
             {scriptLoading && (
-              <p className="text-sm mt-2">Loading script manifest...</p>
+              <p className="text-sm">Loading script manifest...</p>
             )}
             {scriptError && (
-              <p className="text-sm mt-2 text-red-500">{scriptError}</p>
+              <p className="text-sm text-red-500">{scriptError}</p>
             )}
             {scriptContent && <CodeCopyButton>{scriptContent}</CodeCopyButton>}
           </TabsContent>
         )}
 
         {hasDockerCompose && (
-          <TabsContent value="docker_compose">
-            {renderDockercomposeInfo()}
-            {dockerComposeLoading && (
-              <p className="text-sm mt-2">Loading Docker Compose manifest...</p>
+          <TabsContent value="docker_compose" className="mt-0 space-y-3">
+            <p className="text-xs text-muted-foreground italic">
+              {TAB_CONFIG.docker_compose.description}
+            </p>
+            <div className="rounded-md bg-blue-500/5 px-3 py-2 text-xs text-foreground/80 border border-blue-500/20">
+              <Info className="h-3 w-3 inline mr-1.5 text-blue-500" />
+              Save as <code className="text-[11px] bg-muted px-1.5 py-0.5 rounded">docker-compose.yml</code> and run <code className="text-[11px] bg-muted px-1.5 py-0.5 rounded">docker compose up -d</code>
+            </div>
+            {manifest.docker_compose && (
+              <div className="rounded-md bg-muted/30 px-3 py-2 text-xs text-muted-foreground border border-border/40">
+                <Info className="h-3 w-3 inline mr-1.5" />
+                Loaded from <code className="text-[11px] bg-muted px-1.5 py-0.5 rounded">{manifest.docker_compose}</code>
+              </div>
             )}
-            {dockerComposeError && (
-              <p className="text-sm mt-2 text-red-500">
-                {dockerComposeError}
-              </p>
-            )}
-            {dockerComposeContent && (
-              <>
-                <p className="text-sm mt-2">
-                  Manifest loaded from <code>{manifest.docker_compose}</code>.
-                  Adjust ports, volumes, and environment variables as needed.
-                </p>
-                <CodeCopyButton>{dockerComposeContent}</CodeCopyButton>
-              </>
-            )}
+            {dockerComposeLoading && <p className="text-sm">Loading Docker Compose manifest...</p>}
+            {dockerComposeError && <p className="text-sm text-red-500">{dockerComposeError}</p>}
+            {dockerComposeContent && <CodeCopyButton>{dockerComposeContent}</CodeCopyButton>}
           </TabsContent>
         )}
 
         {hasHelm && (
-          <TabsContent value="helm">
-            <Alert className="mt-3 mb-3">
-              <Info className="h-4 w-4" />
-              <AlertDescription className="text-sm">
-                Helm-related manifest for <strong>{item.name}</strong>, loaded
-                from <code>{manifest.helm}</code>. Use it as needed in your
-                Helm workflow.
-              </AlertDescription>
-            </Alert>
-            {helmLoading && (
-              <p className="text-sm mt-2">Loading Helm manifest...</p>
+          <TabsContent value="helm" className="mt-0 space-y-3">
+            <p className="text-xs text-muted-foreground italic">
+              {TAB_CONFIG.helm.description}
+            </p>
+            {manifest.helm && (
+              <div className="rounded-md bg-muted/30 px-3 py-2 text-xs text-muted-foreground border border-border/40">
+                <Info className="h-3 w-3 inline mr-1.5" />
+                Loaded from <code className="text-[11px] bg-muted px-1.5 py-0.5 rounded">{manifest.helm}</code>
+              </div>
             )}
-            {helmError && (
-              <p className="text-sm mt-2 text-red-500">{helmError}</p>
-            )}
+            {helmLoading && <p className="text-sm">Loading Helm manifest...</p>}
+            {helmError && <p className="text-sm text-red-500">{helmError}</p>}
             {helmContent && <CodeCopyButton>{helmContent}</CodeCopyButton>}
           </TabsContent>
         )}
 
         {hasKubernetes && (
-          <TabsContent value="kubernetes">
-            <p className="text-sm mt-2">
-              Kubernetes manifest for <strong>{item.name}</strong>, loaded from{" "}
-              <code>{manifest.kubernetes}</code>.
+          <TabsContent value="kubernetes" className="mt-0 space-y-3">
+            <p className="text-xs text-muted-foreground italic">
+              {TAB_CONFIG.kubernetes.description}
             </p>
-            {k8sLoading && (
-              <p className="text-sm mt-2">Loading Kubernetes manifest...</p>
+            {manifest.kubernetes && (
+              <div className="rounded-md bg-muted/30 px-3 py-2 text-xs text-muted-foreground border border-border/40">
+                <Info className="h-3 w-3 inline mr-1.5" />
+                Loaded from <code className="text-[11px] bg-muted px-1.5 py-0.5 rounded">{manifest.kubernetes}</code>
+              </div>
             )}
-            {k8sError && (
-              <p className="text-sm mt-2 text-red-500">{k8sError}</p>
-            )}
+            {k8sLoading && <p className="text-sm">Loading Kubernetes manifest...</p>}
+            {k8sError && <p className="text-sm text-red-500">{k8sError}</p>}
             {k8sContent && <CodeCopyButton>{k8sContent}</CodeCopyButton>}
           </TabsContent>
         )}
 
         {hasTerraform && (
-          <TabsContent value="terraform">
-            <p className="text-sm mt-2">
-              Terraform configuration for <strong>{item.name}</strong>, loaded
-              from <code>{manifest.terraform}</code>.
+          <TabsContent value="terraform" className="mt-0 space-y-3">
+            <p className="text-xs text-muted-foreground italic">
+              {TAB_CONFIG.terraform.description}
             </p>
-            {tfLoading && (
-              <p className="text-sm mt-2">Loading Terraform manifest...</p>
+            {manifest.terraform && (
+              <div className="rounded-md bg-muted/30 px-3 py-2 text-xs text-muted-foreground border border-border/40">
+                <Info className="h-3 w-3 inline mr-1.5" />
+                Loaded from <code className="text-[11px] bg-muted px-1.5 py-0.5 rounded">{manifest.terraform}</code>
+              </div>
             )}
-            {tfError && (
-              <p className="text-sm mt-2 text-red-500">{tfError}</p>
-            )}
+            {tfLoading && <p className="text-sm">Loading Terraform manifest...</p>}
+            {tfError && <p className="text-sm text-red-500">{tfError}</p>}
             {tfContent && <CodeCopyButton>{tfContent}</CodeCopyButton>}
           </TabsContent>
         )}

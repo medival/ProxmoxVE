@@ -1,7 +1,7 @@
 import type { Script } from "@/lib/types";
 
 import TextCopyBlock from "@/components/text-copy-block";
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, Sparkles } from "lucide-react";
 
 export default function Description({ item }: { item: Script }) {
   // Extract first sentence as summary if features exist
@@ -10,7 +10,21 @@ export default function Description({ item }: { item: Script }) {
     : item.description;
 
   return (
-    <div className="p-2 space-y-4">
+    <div className="p-2 space-y-5">
+      {/* Why Use It? - Tagline */}
+      {item.tagline && (
+        <div className="rounded-lg bg-gradient-to-r from-primary/5 to-accent/10 p-4 border border-primary/10">
+          <div className="flex items-center gap-2 mb-2">
+            <Sparkles className="h-4 w-4 text-primary" />
+            <h3 className="text-sm font-bold text-foreground">Why Use It?</h3>
+          </div>
+          <p className="text-sm text-foreground/80 leading-relaxed italic">
+            {item.tagline}
+          </p>
+        </div>
+      )}
+
+      {/* Description */}
       <div>
         <h2 className="mb-3 text-lg font-semibold">Description</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
@@ -18,6 +32,7 @@ export default function Description({ item }: { item: Script }) {
         </p>
       </div>
 
+      {/* Key Features */}
       {item.features && item.features.length > 0 && (
         <div className="space-y-3">
           <h3 className="text-base font-semibold">Key Features</h3>

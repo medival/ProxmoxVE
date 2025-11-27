@@ -372,8 +372,8 @@ export function ScriptItem({ item, setSelectedScript }: ScriptItemProps) {
             <Separator />
 
             <div className="mt-6 rounded-lg border shadow-md">
-              <div className="flex gap-3 px-6 py-4 bg-accent/25">
-                <h2 className="text-xl font-semibold">
+              <div className="flex gap-3 px-5 py-3 bg-accent/25">
+                <h2 className="text-lg font-semibold">
                   How to Install
                 </h2>
               </div>
@@ -384,8 +384,8 @@ export function ScriptItem({ item, setSelectedScript }: ScriptItemProps) {
               {item.config_path && (
                 <>
                   <Separator />
-                  <div className="flex gap-3 px-6 py-4 bg-accent/25">
-                    <h2 className="text-xl font-semibold">Location of config file</h2>
+                  <div className="flex gap-3 px-5 py-3 bg-accent/25">
+                    <h2 className="text-lg font-semibold">Location of config file</h2>
                   </div>
                   <Separator />
                   <div className="">
