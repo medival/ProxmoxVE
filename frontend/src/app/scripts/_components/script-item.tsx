@@ -1,6 +1,6 @@
 "use client";
 
-import { X, Monitor, Smartphone, Cloud, Boxes, Terminal, MousePointerClick, CalendarDays, Globe, BookOpenText, Code, Stars, LayoutGrid } from "lucide-react";
+import { X, Monitor, Smartphone, Cloud, Boxes, Terminal, MousePointerClick, CalendarDays, Globe, BookOpenText, Code, Stars, LayoutGrid, Server, Layers, CloudUpload } from "lucide-react";
 import { motion } from "framer-motion";
 import { Suspense } from "react";
 import Image from "next/image";
@@ -145,24 +145,37 @@ function PlatformRow({
   label,
   items,
   icon,
+  variant = "default",
 }: {
   label: string;
   items: string[];
   icon: React.ReactNode;
+  variant?: "filled" | "outline" | "minimal" | "default";
 }) {
   if (!items.length) return null;
 
+  const chipStyles = {
+    filled: "bg-primary/10 border-primary/20 text-primary font-semibold",
+    outline: "border border-border/60 text-foreground/80",
+    minimal: "border border-border/30 text-muted-foreground",
+    default: "border border-border/50 text-foreground/70",
+  };
+
   return (
-    <div className="flex items-center gap-2 text-xs text-muted-foreground">
-      {icon}
-      <span className="w-16 shrink-0 text-[11px] uppercase tracking-wide text-muted-foreground">
-        {label}
-      </span>
-      <div className="flex flex-wrap gap-1.5">
+    <div className="flex items-start gap-3">
+      <div className="flex items-center gap-2 min-w-[110px] pt-0.5">
+        <div className="flex items-center justify-center w-5 h-5 text-muted-foreground/70">
+          {icon}
+        </div>
+        <span className="text-[12px] font-semibold text-foreground/80 capitalize">
+          {label}
+        </span>
+      </div>
+      <div className="flex flex-wrap gap-1.5 flex-1">
         {items.map((item) => (
           <span
             key={item}
-            className="rounded-full border px-2 py-0.5 text-[10px] leading-none font-medium"
+            className={`rounded-full px-2.5 py-1 text-[11px] leading-none transition-colors hover:bg-accent/50 ${chipStyles[variant]}`}
           >
             {item}
           </span>
@@ -176,28 +189,24 @@ function PlatformSummary({ method }: { method?: InstallMethodWithPlatform }) {
   const platform = method?.platform;
   if (!platform) return null;
 
-  const desktop = [
+  // Combine Desktop + Mobile into "Platforms"
+  const platforms = [
     platform.desktop?.macos && "macOS",
     platform.desktop?.linux && "Linux",
     platform.desktop?.windows && "Windows",
-  ].filter(Boolean) as string[];
-
-  const mobile = [
     platform.mobile?.android && "Android",
     platform.mobile?.ios && "iOS",
   ].filter(Boolean) as string[];
 
-  const hosting = [
-    platform.hosting?.self_hosted && "Self-hosted",
-    platform.hosting?.managed_cloud && "Managed cloud",
-  ].filter(Boolean) as string[];
-
+  // Combine Hosting + Deploy into "Deployment"
   const deployment = [
-    platform.deployment?.script && "Script",
+    platform.hosting?.self_hosted && "Self-hosted",
+    platform.hosting?.managed_cloud && "Managed Cloud",
     platform.deployment?.docker && "Docker",
     platform.deployment?.docker_compose && "Docker Compose",
-    platform.deployment?.helm && "Helm",
     platform.deployment?.kubernetes && "Kubernetes",
+    platform.deployment?.helm && "Helm",
+    platform.deployment?.script && "Script",
     platform.deployment?.terraform && "Terraform",
   ].filter(Boolean) as string[];
 
@@ -209,42 +218,42 @@ function PlatformSummary({ method }: { method?: InstallMethodWithPlatform }) {
     platform.ui?.api && "API",
   ].filter(Boolean) as string[];
 
-  const interfaceIcon = platform.cli_only ? (
-    <Terminal className="h-3 w-3 shrink-0" />
-  ) : (
-    <MousePointerClick className="h-3 w-3 shrink-0" />
-  );
-
-  if (!desktop.length && !mobile.length && !hosting.length && !deployment.length && !ui.length) {
+  if (!platforms.length && !deployment.length && !ui.length) {
     return null;
   }
 
   return (
-    <div className="mt-3 flex flex-col space-y-2">
-      <div className="text-[11px] font-semibold uppercase text-muted-foreground">
-        Platform
+    <div className="mt-4 flex flex-col space-y-3 rounded-lg bg-accent/5 p-4 border border-border/30">
+      <div className="text-[13px] font-bold text-foreground/90 mb-1">
+        Platform & Deployment
       </div>
-      <PlatformRow
-        label="Desktop"
-        items={desktop}
-        icon={<Monitor className="h-3 w-3 shrink-0" />}
-      />
-      <PlatformRow
-        label="Mobile"
-        items={mobile}
-        icon={<Smartphone className="h-3 w-3 shrink-0" />}
-      />
-      <PlatformRow
-        label="Hosting"
-        items={hosting}
-        icon={<Cloud className="h-3 w-3 shrink-0" />}
-      />
-      <PlatformRow
-        label="Deploy"
-        items={deployment}
-        icon={<Boxes className="h-3 w-3 shrink-0" />}
-      />
-      <PlatformRow label="Interface" items={ui} icon={interfaceIcon} />
+
+      {platforms.length > 0 && (
+        <PlatformRow
+          label="Platforms"
+          items={platforms}
+          icon={<Monitor className="h-4 w-4" />}
+          variant="filled"
+        />
+      )}
+
+      {deployment.length > 0 && (
+        <PlatformRow
+          label="Deployment"
+          items={deployment}
+          icon={<CloudUpload className="h-4 w-4" />}
+          variant="outline"
+        />
+      )}
+
+      {ui.length > 0 && (
+        <PlatformRow
+          label="Interface"
+          items={ui}
+          icon={<Layers className="h-4 w-4" />}
+          variant="minimal"
+        />
+      )}
     </div>
   );
 }
