@@ -99,9 +99,9 @@ function SecondaryMeta({ item }: { item: Script }) {
   const githubStars = (item as any).github_stars;
   if (githubStars) {
     parts.push({
-      label: `★ ${githubStars}`,
+      label: `${githubStars}`,
       href: "",
-      icon: <Stars className="h-5 w-5 text-yellow-500" />,
+      icon: <Stars className="h-5 w-5 text-foreground/60" />,
     });
   }
 
