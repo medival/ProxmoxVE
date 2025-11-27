@@ -13,7 +13,13 @@
   "website": "https://rxresume.org",
   "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/webp/reactive-resume.webp",
   "config_path": "/opt/reactive-resume/.env",
-  "description": "A one-of-a-kind resume builder that keeps your privacy in mind. Completely secure, customizable, portable, open-source and free forever.",
+  "description": "A one-of-a-kind resume builder that keeps your privacy in mind.",
+  "features": [
+    "Completely secure and privacy-focused",
+    "Fully customizable resume templates",
+    "Portable - export and take your data anywhere",
+    "100% open-source and free forever"
+  ],
   "install_methods": [
     {
       "type": "default",

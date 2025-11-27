@@ -18,6 +18,7 @@ export type Script = {
   logo: string | null;
   config_path: string;
   description: string;
+  features?: string[];
   install_methods: {
     platform: {
       desktop: {
