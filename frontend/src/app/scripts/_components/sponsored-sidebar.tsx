@@ -175,7 +175,7 @@ export function SponsoredSidebar({ items, onScriptSelect }: SponsoredSidebarProp
           </CardHeader>
           <CardContent className="text-center space-y-3">
             <CardDescription className="text-xs font-medium">
-              Reach VPS enthusiasts & developers
+              Reach Developers
             </CardDescription>
             <ul className="text-[10px] space-y-1.5 text-muted-foreground">
               <li className="flex items-center justify-center gap-1.5">
