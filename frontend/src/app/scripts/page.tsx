@@ -1,6 +1,6 @@
 "use client";
 import { Suspense, useEffect, useState } from "react";
-import { Loader2, Search } from "lucide-react";
+import { Loader2, Search, TrendingUp, Clock, Home, Container, Hexagon, Sparkles } from "lucide-react";
 import { useQueryState } from "nuqs";
 
 import type { Category, Script } from "@/lib/types";
@@ -8,6 +8,9 @@ import type { Category, Script } from "@/lib/types";
 import { ScriptItem } from "@/app/scripts/_components/script-item";
 import { fetchCategories } from "@/lib/data";
 import { Input } from "@/components/ui/input";
+import { Badge } from "@/components/ui/badge";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 
 import { LatestScripts, TrendingScripts, PopularScripts } from "./_components/script-info-blocks";
 import Sidebar from "./_components/sidebar";
@@ -16,18 +19,67 @@ import { SponsoredSidebar } from "./_components/sponsored-sidebar";
 
 export const dynamic = "force-static";
 
+// Skeleton loader for script cards
+function ScriptCardSkeleton() {
+  return (
+    <Card className="bg-accent/30 border-2 flex flex-col h-full">
+      <CardHeader className="pt-8">
+        <div className="flex items-start gap-3">
+          <Skeleton className="h-20 w-20 min-w-20 rounded-xl" />
+          <div className="flex flex-col flex-1 space-y-2">
+            <Skeleton className="h-4 w-3/4" />
+            <Skeleton className="h-3 w-1/2" />
+          </div>
+        </div>
+      </CardHeader>
+      <CardContent className="flex-grow space-y-3">
+        <Skeleton className="h-3 w-full" />
+        <Skeleton className="h-3 w-full" />
+        <Skeleton className="h-3 w-2/3" />
+        <div className="flex gap-2 pt-2">
+          <Skeleton className="h-5 w-16" />
+          <Skeleton className="h-5 w-20" />
+        </div>
+      </CardContent>
+      <CardFooter className="pt-2">
+        <Skeleton className="h-9 w-full" />
+      </CardFooter>
+    </Card>
+  );
+}
+
 function ScriptContent() {
   const [selectedScript, setSelectedScript] = useQueryState("id");
   const [selectedCategory, setSelectedCategory] = useQueryState("category");
   const [links, setLinks] = useState<Category[]>([]);
   const [item, setItem] = useState<Script>();
   const [searchQuery, setSearchQuery] = useState("");
+  const [quickFilter, setQuickFilter] = useState<string | null>(null);
   const [filters, setFilters] = useState<FilterState>({
     platforms: new Set(),
     deployments: new Set(),
     hosting: new Set(),
     ui: new Set(),
   });
+
+  // Keyboard shortcut for search focus
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "/" && !e.metaKey && !e.ctrlKey && !e.altKey) {
+        // Only trigger if not in an input field
+        const target = e.target as HTMLElement;
+        if (target.tagName !== "INPUT" && target.tagName !== "TEXTAREA") {
+          e.preventDefault();
+          const searchInput = document.querySelector('input[type="text"][placeholder*="Search"]') as HTMLInputElement;
+          if (searchInput) {
+            searchInput.focus();
+          }
+        }
+      }
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, []);
 
   useEffect(() => {
     if (selectedScript && links.length > 0) {
@@ -120,7 +172,33 @@ function ScriptContent() {
       // Then check filters
       const matchesFilter = matchesFilters(script);
 
-      return matchesSearch && matchesFilter;
+      // Check quick filter
+      let matchesQuickFilter = true;
+      if (quickFilter) {
+        const platform = script.install_methods?.[0]?.platform;
+        switch (quickFilter) {
+          case "popular":
+            // This is a visual filter, we'll handle it differently
+            matchesQuickFilter = true;
+            break;
+          case "recent":
+            const thirtyDaysAgo = new Date();
+            thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+            matchesQuickFilter = new Date(script.date_created) >= thirtyDaysAgo;
+            break;
+          case "self-hosted":
+            matchesQuickFilter = platform?.hosting?.self_hosted || false;
+            break;
+          case "docker":
+            matchesQuickFilter = platform?.deployment?.docker || platform?.deployment?.docker_compose || false;
+            break;
+          case "kubernetes":
+            matchesQuickFilter = platform?.deployment?.kubernetes || platform?.deployment?.helm || false;
+            break;
+        }
+      }
+
+      return matchesSearch && matchesFilter && matchesQuickFilter;
     })
   })).filter(category => category.scripts.length > 0);
 
@@ -147,38 +225,86 @@ function ScriptContent() {
               </p>
 
               {/* Search Bar */}
-              <div className="max-w-2xl mx-auto pt-2">
+              <div className="max-w-2xl mx-auto pt-2 space-y-3">
                 <div className="relative">
                   <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground" />
                   <Input
                     type="text"
-                    placeholder="Search scripts..."
+                    placeholder="Search scripts... (Press / to focus)"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="pl-12 h-14 text-lg shadow-lg ring-2 ring-accent/20 focus-visible:ring-accent/40 transition-all"
+                    className="pl-12 pr-20 h-14 text-lg shadow-lg ring-2 ring-accent/20 focus-visible:ring-accent/40 transition-all"
                   />
+                  <div className="absolute right-4 top-1/2 transform -translate-y-1/2 hidden sm:flex items-center gap-1">
+                    <kbd className="px-2 py-1 text-xs font-semibold text-muted-foreground bg-muted rounded border border-border">/</kbd>
+                  </div>
+                </div>
+
+                {/* Quick Filter Chips - Horizontal scroll on mobile */}
+                <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-hide sm:flex-wrap sm:justify-center sm:overflow-visible">
+                  <span className="text-xs text-muted-foreground font-medium whitespace-nowrap">Quick filters:</span>
+                  <Badge
+                    variant={quickFilter === "popular" ? "default" : "outline"}
+                    className="cursor-pointer hover:bg-primary/90 hover:text-primary-foreground transition-colors whitespace-nowrap"
+                    onClick={() => setQuickFilter(quickFilter === "popular" ? null : "popular")}
+                  >
+                    <TrendingUp className="h-3 w-3 mr-1" />
+                    Most Popular
+                  </Badge>
+                  <Badge
+                    variant={quickFilter === "recent" ? "default" : "outline"}
+                    className="cursor-pointer hover:bg-primary/90 hover:text-primary-foreground transition-colors whitespace-nowrap"
+                    onClick={() => setQuickFilter(quickFilter === "recent" ? null : "recent")}
+                  >
+                    <Clock className="h-3 w-3 mr-1" />
+                    Recently Updated
+                  </Badge>
+                  <Badge
+                    variant={quickFilter === "self-hosted" ? "default" : "outline"}
+                    className="cursor-pointer hover:bg-primary/90 hover:text-primary-foreground transition-colors whitespace-nowrap"
+                    onClick={() => setQuickFilter(quickFilter === "self-hosted" ? null : "self-hosted")}
+                  >
+                    <Home className="h-3 w-3 mr-1" />
+                    Self-Hosted
+                  </Badge>
+                  <Badge
+                    variant={quickFilter === "docker" ? "default" : "outline"}
+                    className="cursor-pointer hover:bg-primary/90 hover:text-primary-foreground transition-colors whitespace-nowrap"
+                    onClick={() => setQuickFilter(quickFilter === "docker" ? null : "docker")}
+                  >
+                    <Container className="h-3 w-3 mr-1" />
+                    Docker
+                  </Badge>
+                  <Badge
+                    variant={quickFilter === "kubernetes" ? "default" : "outline"}
+                    className="cursor-pointer hover:bg-primary/90 hover:text-primary-foreground transition-colors whitespace-nowrap"
+                    onClick={() => setQuickFilter(quickFilter === "kubernetes" ? null : "kubernetes")}
+                  >
+                    <Hexagon className="h-3 w-3 mr-1" />
+                    Kubernetes
+                  </Badge>
                 </div>
               </div>
 
-              {/* Stats */}
-              <div className="grid grid-cols-3 gap-3 max-w-2xl mx-auto pt-2">
-                <div className="flex flex-col items-center">
-                  <div className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-[#ffaa40] to-[#9c40ff] bg-clip-text text-transparent">
+              {/* Stats - Enhanced Visibility */}
+              <div className="grid grid-cols-3 gap-4 max-w-2xl mx-auto pt-4">
+                <div className="flex flex-col items-center p-3 rounded-lg bg-gradient-to-br from-accent/30 to-accent/10 border border-accent/20">
+                  <div className="text-2xl sm:text-3xl font-black bg-gradient-to-r from-[#ffaa40] to-[#9c40ff] bg-clip-text text-transparent drop-shadow-sm">
                     {uniqueScripts}
                   </div>
-                  <div className="text-xs text-muted-foreground">Scripts</div>
+                  <div className="text-xs sm:text-sm font-semibold text-foreground/80 mt-1">Scripts</div>
                 </div>
-                <div className="flex flex-col items-center">
-                  <div className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-[#9c40ff] to-[#ffaa40] bg-clip-text text-transparent">
+                <div className="flex flex-col items-center p-3 rounded-lg bg-gradient-to-br from-accent/30 to-accent/10 border border-accent/20">
+                  <div className="text-2xl sm:text-3xl font-black bg-gradient-to-r from-[#9c40ff] to-[#ffaa40] bg-clip-text text-transparent drop-shadow-sm">
                     {links.length}
                   </div>
-                  <div className="text-xs text-muted-foreground">Categories</div>
+                  <div className="text-xs sm:text-sm font-semibold text-foreground/80 mt-1">Categories</div>
                 </div>
-                <div className="flex flex-col items-center">
-                  <div className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-[#ffaa40] to-[#9c40ff] bg-clip-text text-transparent">
+                <div className="flex flex-col items-center p-3 rounded-lg bg-gradient-to-br from-accent/30 to-accent/10 border border-accent/20">
+                  <div className="text-2xl sm:text-3xl font-black bg-gradient-to-r from-[#ffaa40] to-[#9c40ff] bg-clip-text text-transparent drop-shadow-sm">
                     Daily
                   </div>
-                  <div className="text-xs text-muted-foreground">Updates</div>
+                  <div className="text-xs sm:text-sm font-semibold text-foreground/80 mt-1">Updates</div>
                 </div>
               </div>
             </div>
@@ -230,9 +356,11 @@ function ScriptContent() {
           {selectedScript && item ? (
             <ScriptItem item={item} setSelectedScript={setSelectedScript} />
           ) : (
-            <div className="flex w-full flex-col gap-8">
+            <div className="flex w-full flex-col gap-12">
               <TrendingScripts items={filteredLinks} />
+              <div className="border-t border-border/50" />
               <LatestScripts items={filteredLinks} />
+              <div className="border-t border-border/50" />
               <PopularScripts items={filteredLinks} />
             </div>
           )}
@@ -249,9 +377,53 @@ export default function Page() {
   return (
     <Suspense
       fallback={
-        <div className="flex h-screen w-full flex-col items-center justify-center gap-5 bg-background px-4 md:px-6">
-          <div className="space-y-2 text-center">
-            <Loader2 className="h-10 w-10 animate-spin" />
+        <div className="mb-3 pt-6">
+          {/* Hero Skeleton */}
+          <div className="w-full border-b bg-gradient-to-br from-accent/20 to-accent/5">
+            <div className="w-full py-8 sm:py-10">
+              <div className="max-w-3xl mx-auto text-center space-y-4 px-2 sm:px-16">
+                <Skeleton className="h-10 w-3/4 mx-auto" />
+                <Skeleton className="h-5 w-2/3 mx-auto" />
+                <div className="max-w-2xl mx-auto pt-2">
+                  <Skeleton className="h-14 w-full" />
+                </div>
+                <div className="grid grid-cols-3 gap-4 max-w-2xl mx-auto pt-4">
+                  <Skeleton className="h-20 rounded-lg" />
+                  <Skeleton className="h-20 rounded-lg" />
+                  <Skeleton className="h-20 rounded-lg" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Content Skeleton */}
+          <div className="mt-6 sm:mt-8 flex w-full gap-2 px-2 sm:px-16">
+            {/* Sidebar Skeleton */}
+            <div className="hidden sm:flex">
+              <div className="w-[240px] space-y-2">
+                <Skeleton className="h-8 w-full" />
+                <Skeleton className="h-6 w-full" />
+                <Skeleton className="h-6 w-full" />
+                <Skeleton className="h-6 w-full" />
+              </div>
+            </div>
+
+            {/* Main Content Skeleton */}
+            <div className="w-full px-2 sm:px-0 sm:w-auto pb-8 flex-1 min-w-0">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <ScriptCardSkeleton />
+                <ScriptCardSkeleton />
+                <ScriptCardSkeleton />
+                <ScriptCardSkeleton />
+                <ScriptCardSkeleton />
+                <ScriptCardSkeleton />
+              </div>
+            </div>
+
+            {/* Sidebar Skeleton */}
+            <div className="hidden lg:block lg:w-[260px]">
+              <Skeleton className="h-32 w-full rounded-lg" />
+            </div>
           </div>
         </div>
       }

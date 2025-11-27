@@ -78,16 +78,16 @@ export function SponsoredSidebar({ items, onScriptSelect }: SponsoredSidebarProp
   if (!items) return null;
 
   return (
-    <aside className="hidden lg:block lg:min-w-[300px] lg:max-w-[300px]">
-      <div className="sticky top-4 space-y-3">
-        {/* Header */}
+    <aside className="hidden lg:block lg:min-w-[260px] lg:max-w-[260px]">
+      <div className="sticky top-4 space-y-4">
+        {/* Header - Enhanced */}
         <div className="px-1">
-          <div className="flex items-center gap-2 mb-1">
-            <Crown className="h-4 w-4 text-blue-600 dark:text-blue-500" />
-            <h2 className="text-base font-bold">Sponsored</h2>
+          <div className="flex items-center gap-2 mb-2 pb-2 border-b border-border/40">
+            <Crown className="h-5 w-5 text-blue-500/80" />
+            <h2 className="text-base font-bold text-foreground/90">Sponsored Tools</h2>
           </div>
           {sponsoredScripts.length > 0 && (
-            <p className="text-[10px] text-muted-foreground">
+            <p className="text-[10px] text-muted-foreground/80">
               {isFull ? (
                 "All spots taken"
               ) : (
@@ -103,13 +103,16 @@ export function SponsoredSidebar({ items, onScriptSelect }: SponsoredSidebarProp
           {sponsoredScripts.map(script => (
             <Card
               key={script.slug}
-              className="bg-accent/30 border-2 border-blue-500/40 hover:border-blue-500/60 transition-all duration-300 hover:shadow-lg flex flex-col relative overflow-hidden"
+              className="bg-gradient-to-br from-background via-background to-accent/5 border border-blue-500/20 hover:border-blue-500/40 transition-all duration-200 hover:shadow-lg hover:scale-[1.01] flex flex-col relative overflow-hidden group"
             >
-              {/* Sponsored Badge */}
+              {/* Accent bar */}
+              <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-500/50 via-blue-600/50 to-blue-500/50" />
+
+              {/* Sponsored Badge - Improved */}
               <div className="absolute top-2 right-2 z-10">
-                <Badge variant="secondary" className="text-[10px] px-1.5 py-0.5">
-                  <span className="h-1 w-1 rounded-full bg-blue-500 mr-1" />
-                  SPONSORED
+                <Badge className="bg-gradient-to-r from-blue-500 to-blue-600 text-white border-0 text-[9px] px-2 py-0.5 shadow-sm">
+                  <Crown className="h-2.5 w-2.5 mr-0.5" />
+                  Sponsored
                 </Badge>
               </div>
 
@@ -131,7 +134,7 @@ export function SponsoredSidebar({ items, onScriptSelect }: SponsoredSidebarProp
               </CardContent>
 
               <CardFooter className="pt-0">
-                <Button asChild variant="outline" className="w-full h-8 text-xs">
+                <Button asChild variant="outline" className="w-full h-8 text-xs group-hover:bg-blue-500/10 group-hover:border-blue-500/30 transition-colors">
                   <Link
                     href={{
                       pathname: "/scripts",
@@ -146,53 +149,56 @@ export function SponsoredSidebar({ items, onScriptSelect }: SponsoredSidebarProp
           ))}
         </div>
         ) : (
-          <Card className="border-2 border-dashed border-blue-500/30 bg-blue-500/5">
+          <Card className="border border-dashed border-blue-500/30 bg-gradient-to-br from-background to-blue-500/5">
             <CardContent className="text-center py-6 space-y-2">
               <div className="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-full bg-blue-500/10">
-                <Crown className="h-6 w-6 text-blue-600 dark:text-blue-500" />
+                <Crown className="h-6 w-6 text-blue-500" />
               </div>
-              <CardTitle className="text-base">5 Spots Available</CardTitle>
+              <CardTitle className="text-sm font-bold">5 Spots Available</CardTitle>
               <CardDescription className="text-xs">
-                Be the first to sponsor and reach developers!
+                Be the first to sponsor!
               </CardDescription>
             </CardContent>
           </Card>
         )}
 
-        {/* Advertise Here Card */}
-        <Card className="border-2 border-dashed border-primary/20 bg-accent/10">
-          <CardHeader className="text-center pb-2">
-            <div className="mx-auto mb-1 flex h-10 w-10 items-center justify-center rounded-full bg-primary/10">
-              <Crown className="h-5 w-5 text-primary" />
+        {/* Advertise Here Card - Enhanced */}
+        <Card className="border-2 border-dashed border-primary/30 bg-gradient-to-br from-primary/5 to-accent/10 hover:border-primary/50 transition-all duration-200 hover:shadow-md">
+          <CardHeader className="text-center pb-3">
+            <div className="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-primary/20 to-accent/20 shadow-sm">
+              <Crown className="h-6 w-6 text-primary" />
             </div>
-            <CardTitle className="text-base">Advertise Here</CardTitle>
+            <CardTitle className="text-base font-bold">Advertise Here</CardTitle>
+            <p className="text-[10px] text-muted-foreground font-medium mt-1">
+              🎯 Reach 10,000+ monthly visitors
+            </p>
           </CardHeader>
-          <CardContent className="text-center space-y-2">
-            <CardDescription className="text-xs">
-              Reach VPS enthusiasts & developers
+          <CardContent className="text-center space-y-3">
+            <CardDescription className="text-xs font-medium">
+              Reach Developers
             </CardDescription>
-            <ul className="text-[10px] space-y-1 text-muted-foreground">
+            <ul className="text-[10px] space-y-1.5 text-muted-foreground">
               <li className="flex items-center justify-center gap-1.5">
-                <span className="h-1 w-1 rounded-full bg-green-500" />
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
                 Highly engaged audience
               </li>
               <li className="flex items-center justify-center gap-1.5">
-                <span className="h-1 w-1 rounded-full bg-green-500" />
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
                 Premium visibility
               </li>
               <li className="flex items-center justify-center gap-1.5">
-                <span className="h-1 w-1 rounded-full bg-green-500" />
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
                 Flexible terms
               </li>
             </ul>
-            <Button asChild variant="outline" className="w-full h-8" size="sm">
-              <a href="mailto:support@example.com" className="flex items-center gap-1.5 text-xs">
-                <Mail className="h-3 w-3" />
-                Get In Touch
+            <Button asChild variant="default" className="w-full h-9 bg-primary hover:bg-primary/90 shadow-sm" size="sm">
+              <a href="mailto:support@example.com" className="flex items-center gap-1.5 text-xs font-semibold">
+                <Mail className="h-3.5 w-3.5" />
+                Get Started
               </a>
             </Button>
-            <p className="text-[9px] text-muted-foreground pt-1">
-              Starting at $99/month
+            <p className="text-[9px] text-muted-foreground/80 pt-1 font-medium">
+              From $99/month
             </p>
           </CardContent>
         </Card>
