@@ -23,6 +23,7 @@ export default function CodeCopyButton({
   const [hasCopied, setHasCopied] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(defaultCollapsed);
+  const [ripple, setRipple] = useState(false);
 
   // deteksi mobile di client
   useEffect(() => {
@@ -45,6 +46,10 @@ export default function CodeCopyButton({
         : Array.isArray(children)
           ? children.join("")
           : String(children ?? "");
+
+    // Trigger ripple effect
+    setRipple(true);
+    setTimeout(() => setRipple(false), 600);
 
     await handleCopy(label, value);
     setHasCopied(true);
@@ -78,13 +83,17 @@ export default function CodeCopyButton({
           <button
             type="button"
             className={cn(
-              "flex items-center justify-center gap-1",
-              "cursor-pointer rounded-md bg-muted px-2 py-1 text-xs hover:bg-muted/80 transition-colors"
+              "flex items-center justify-center gap-1 relative overflow-hidden",
+              "cursor-pointer rounded-md bg-muted px-2 py-1 text-xs hover:bg-muted/80 transition-all active:scale-95",
+              hasCopied && "bg-green-500/20 hover:bg-green-500/30"
             )}
             onClick={onCopyClick}
           >
+            {ripple && (
+              <span className="absolute inset-0 animate-ping bg-primary/30 rounded-md" />
+            )}
             {hasCopied ? (
-              <CheckIcon className="h-3 w-3" />
+              <CheckIcon className="h-3 w-3 text-green-600 dark:text-green-400 animate-in zoom-in-50 duration-200" />
             ) : (
               <ClipboardIcon className="h-3 w-3" />
             )}

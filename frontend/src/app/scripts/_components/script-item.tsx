@@ -101,7 +101,7 @@ function SecondaryMeta({ item }: { item: Script }) {
     parts.push({
       label: `${githubStars}`,
       href: "",
-      icon: <Stars className="h-5 w-5 text-foreground/60" />,
+      icon: <Stars className="h-5 w-5 text-foreground/60 hover:text-yellow-500 hover:scale-125 transition-all duration-200 cursor-pointer" />,
     });
   }
 
@@ -338,13 +338,18 @@ export function ScriptItem({ item, setSelectedScript }: ScriptItemProps) {
           </h2>
           <button
             onClick={closeScript}
-            className="rounded-full p-2 text-muted-foreground hover:bg-card/50 transition-colors"
+            className="rounded-full p-2 text-muted-foreground hover:bg-card/50 transition-all duration-200 hover:rotate-90 active:scale-90"
           >
             <X className="h-5 w-5" />
           </button>
         </div>
 
-        <div className="rounded-xl border border-border bg-accent/30 backdrop-blur-sm shadow-lg">
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+          className="rounded-xl border border-border bg-accent/30 backdrop-blur-sm shadow-lg transition-all duration-300 hover:shadow-xl"
+        >
           <div className="p-8 space-y-8">
             <Suspense fallback={<div className="animate-pulse h-32 bg-accent/20 rounded-xl" />}>
               <ScriptHeader item={item} />
@@ -383,7 +388,7 @@ export function ScriptItem({ item, setSelectedScript }: ScriptItemProps) {
 
             <DefaultPassword item={item} />
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   );
