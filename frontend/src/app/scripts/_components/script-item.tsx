@@ -63,7 +63,7 @@ function SecondaryMeta({ item }: { item: Script }) {
   if (item.date_created) {
     parts.push({
       label: `Added ${extractDate(item.date_created)}`,
-      icon: <CalendarDays className="h-4 w-4 text-muted-foreground" />,
+      icon: <CalendarDays className="h-5 w-5 text-foreground/60" />,
     });
   }
 
@@ -72,7 +72,7 @@ function SecondaryMeta({ item }: { item: Script }) {
     parts.push({
       label: "Website",
       href: ensureHttps(item.website),
-      icon: <Globe className="h-4 w-4 text-muted-foreground" />,
+      icon: <Globe className="h-5 w-5 text-foreground/60" />,
     });
   }
 
@@ -81,7 +81,7 @@ function SecondaryMeta({ item }: { item: Script }) {
     parts.push({
       label: "Docs",
       href: ensureHttps(item.documentation),
-      icon: <BookOpenText className="h-4 w-4 text-muted-foreground" />,
+      icon: <BookOpenText className="h-5 w-5 text-foreground/60" />,
     });
   }
 
@@ -91,7 +91,7 @@ function SecondaryMeta({ item }: { item: Script }) {
     parts.push({
       label: "Source code",
       href: ensureHttps(sourceCode),
-      icon: <Code className="h-4 w-4 text-muted-foreground" />,
+      icon: <Code className="h-5 w-5 text-foreground/60" />,
     });
   }
 
@@ -99,9 +99,9 @@ function SecondaryMeta({ item }: { item: Script }) {
   const githubStars = (item as any).github_stars;
   if (githubStars) {
     parts.push({
-      label: githubStars,
+      label: `★ ${githubStars}`,
       href: "",
-      icon: <Stars className="h-4 w-4 text-muted-foreground" />,
+      icon: <Stars className="h-5 w-5 text-yellow-500" />,
     });
   }
 
@@ -112,7 +112,7 @@ function SecondaryMeta({ item }: { item: Script }) {
       initial={{ opacity: 0, y: -3 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.25, ease: "easeOut" }}
-      className="mt-1 mb-1 flex flex-wrap items-center gap-3 text-sm text-muted-foreground"
+      className="mt-2 mb-2 flex flex-wrap items-center gap-4 text-base font-medium text-foreground/80"
     >
       {parts.map((p, i) => (
         <div
@@ -277,10 +277,10 @@ function ScriptHeader({ item }: { item: Script }) {
           </div>
         </div>
         <div className="flex flex-col justify-between flex-grow space-y-4">
-          <div className="space-y-2">
+          <div className="space-y-3">
             <div className="flex items-start justify-between">
-              <div>
-                <h1 className="text-2xl font-semibold tracking-tight flex items-center gap-2">
+              <div className="space-y-3">
+                <h1 className="text-4xl font-bold tracking-tight flex items-center gap-3">
                   {item.name}
                   <VersionInfo item={item} />
                   {/* <span className="inline-flex items-center rounded-md bg-accent/30 px-2 py-1 text-sm">
@@ -289,7 +289,7 @@ function ScriptHeader({ item }: { item: Script }) {
                 </h1>
 
                 <SecondaryMeta item={item} />
-                <hr className="border-border/40 my-2" />
+                <Separator className="my-4" />
               </div>
             </div>
 
@@ -330,8 +330,8 @@ export function ScriptItem({ item, setSelectedScript }: ScriptItemProps) {
   return (
     <div className="w-full mx-auto">
       <div className="flex w-full flex-col">
-        <div className="mb-3 flex items-center justify-between">
-          <h2 className="text-2xl font-semibold tracking-tight text-foreground/90">
+        <div className="mb-4 flex items-center justify-between">
+          <h2 className="text-sm font-medium tracking-tight text-muted-foreground uppercase">
             Selected Script
           </h2>
           <button
@@ -342,18 +342,22 @@ export function ScriptItem({ item, setSelectedScript }: ScriptItemProps) {
           </button>
         </div>
 
-        <div className="rounded-xl border border-border bg-accent/30 backdrop-blur-sm shadow-sm">
-          <div className="p-6 space-y-6">
+        <div className="rounded-xl border border-border bg-accent/30 backdrop-blur-sm shadow-lg">
+          <div className="p-8 space-y-8">
             <Suspense fallback={<div className="animate-pulse h-32 bg-accent/20 rounded-xl" />}>
               <ScriptHeader item={item} />
             </Suspense>
 
+            <Separator />
+
             <Description item={item} />
             <Alerts item={item} />
 
-            <div className="mt-4 rounded-lg border shadow-sm">
-              <div className="flex gap-3 px-4 py-2 bg-accent/25">
-                <h2 className="text-lg font-semibold">
+            <Separator />
+
+            <div className="mt-6 rounded-lg border shadow-md">
+              <div className="flex gap-3 px-6 py-4 bg-accent/25">
+                <h2 className="text-xl font-semibold">
                   How to Install
                 </h2>
               </div>
@@ -364,8 +368,8 @@ export function ScriptItem({ item, setSelectedScript }: ScriptItemProps) {
               {item.config_path && (
                 <>
                   <Separator />
-                  <div className="flex gap-3 px-4 py-2 bg-accent/25">
-                    <h2 className="text-lg font-semibold">Location of config file</h2>
+                  <div className="flex gap-3 px-6 py-4 bg-accent/25">
+                    <h2 className="text-xl font-semibold">Location of config file</h2>
                   </div>
                   <Separator />
                   <div className="">
