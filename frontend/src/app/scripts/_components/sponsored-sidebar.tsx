@@ -83,7 +83,7 @@ export function SponsoredSidebar({ items, onScriptSelect }: SponsoredSidebarProp
         {/* Header - Enhanced */}
         <div className="px-1">
           <div className="flex items-center gap-2 mb-2 pb-2 border-b border-border/40">
-            <Crown className="h-5 w-5 text-amber-500/80" />
+            <Crown className="h-5 w-5 text-blue-500/80" />
             <h2 className="text-base font-bold text-foreground/90">Sponsored Tools</h2>
           </div>
           {sponsoredScripts.length > 0 && (
@@ -103,14 +103,14 @@ export function SponsoredSidebar({ items, onScriptSelect }: SponsoredSidebarProp
           {sponsoredScripts.map(script => (
             <Card
               key={script.slug}
-              className="bg-gradient-to-br from-background via-background to-accent/5 border border-amber-500/20 hover:border-amber-500/40 transition-all duration-200 hover:shadow-lg hover:scale-[1.01] flex flex-col relative overflow-hidden group"
+              className="bg-gradient-to-br from-background via-background to-accent/5 border border-blue-500/20 hover:border-blue-500/40 transition-all duration-200 hover:shadow-lg hover:scale-[1.01] flex flex-col relative overflow-hidden group"
             >
               {/* Accent bar */}
-              <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-amber-500/50 via-orange-500/50 to-amber-500/50" />
+              <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-500/50 via-blue-600/50 to-blue-500/50" />
 
               {/* Sponsored Badge - Improved */}
               <div className="absolute top-2 right-2 z-10">
-                <Badge className="bg-gradient-to-r from-amber-500 to-orange-500 text-white border-0 text-[9px] px-2 py-0.5 shadow-sm">
+                <Badge className="bg-gradient-to-r from-blue-500 to-blue-600 text-white border-0 text-[9px] px-2 py-0.5 shadow-sm">
                   <Crown className="h-2.5 w-2.5 mr-0.5" />
                   Sponsored
                 </Badge>
@@ -134,7 +134,7 @@ export function SponsoredSidebar({ items, onScriptSelect }: SponsoredSidebarProp
               </CardContent>
 
               <CardFooter className="pt-0">
-                <Button asChild variant="outline" className="w-full h-8 text-xs group-hover:bg-amber-500/10 group-hover:border-amber-500/30 transition-colors">
+                <Button asChild variant="outline" className="w-full h-8 text-xs group-hover:bg-blue-500/10 group-hover:border-blue-500/30 transition-colors">
                   <Link
                     href={{
                       pathname: "/scripts",
@@ -149,10 +149,10 @@ export function SponsoredSidebar({ items, onScriptSelect }: SponsoredSidebarProp
           ))}
         </div>
         ) : (
-          <Card className="border border-dashed border-amber-500/30 bg-gradient-to-br from-background to-amber-500/5">
+          <Card className="border border-dashed border-blue-500/30 bg-gradient-to-br from-background to-blue-500/5">
             <CardContent className="text-center py-6 space-y-2">
-              <div className="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-full bg-amber-500/10">
-                <Crown className="h-6 w-6 text-amber-500" />
+              <div className="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-full bg-blue-500/10">
+                <Crown className="h-6 w-6 text-blue-500" />
               </div>
               <CardTitle className="text-sm font-bold">5 Spots Available</CardTitle>
               <CardDescription className="text-xs">
