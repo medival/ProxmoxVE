@@ -51,11 +51,11 @@
     }
   ],
   "manifest_path": {
-    "script": "/public/manifest/dummy/script.sh",
-    "docker_compose": "/public/manifest/dummy/docker-compose.yaml",
-    "helm": "/public/manifest/dummy/helm.yaml",
-    "kubernetes": "/public/manifest/dummy/k8s-deployment.yaml",
-    "terraform": "/public/manifest/dummy/main.tf"
+    "script": "/public/manifests/dummy/script.sh",
+    "docker_compose": "/public/manifests/dummy/docker-compose.yaml",
+    "helm": "/public/manifests/dummy/helm.yaml",
+    "kubernetes": "/public/manifests/dummy/k8s-deployment.yaml",
+    "terraform": "/public/manifests/dummy/main.tf"
   },
   "default_credentials": {
     "username": null,
