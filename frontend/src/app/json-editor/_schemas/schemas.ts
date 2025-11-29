@@ -32,26 +32,22 @@ export const UiSchema = z
 /** Platform object: now includes hosting and ui nested (to match your UI code) */
 export const PlatformSchema = z
   .object({
-    desktop: z
-      .object({
-        linux: z.boolean().optional(),
-        windows: z.boolean().optional(),
-        macos: z.boolean().optional(),
-      })
-      .optional(),
-    mobile: z
-      .object({
-        android: z.boolean().optional(),
-        ios: z.boolean().optional(),
-      })
-      .optional(),
+    desktop: z.object({
+      linux: z.boolean().optional(),
+      windows: z.boolean().optional(),
+      macos: z.boolean().optional(),
+    }),
+    mobile: z.object({
+      android: z.boolean().optional(),
+      ios: z.boolean().optional(),
+    }),
     web_app: z.boolean().optional(),
     browser_extension: z.boolean().optional(),
     cli_only: z.boolean().optional(),
 
     // nested hosting + ui to match install-method.tsx usage (method.platform.hosting / method.platform.ui)
-    hosting: HostingSchema.optional(),
-    ui: UiSchema.optional(),
+    hosting: HostingSchema,
+    ui: UiSchema,
   })
   .partial();
 
