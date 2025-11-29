@@ -25,49 +25,42 @@ export const HostingSchema = z.object({
 }).partial();
 
 /** UI (flags) */
-export const UiSchema = z.object({
-  cli: z.boolean().optional(),
-  gui: z.boolean().optional(),
-  web_ui: z.boolean().optional(),
-  api: z.boolean().optional(),
-  tui: z.boolean().optional(),
-}).partial();
+export const UiSchema = z
+  .object({
+    cli: z.boolean().optional(),
+    gui: z.boolean().optional(),
+    web_ui: z.boolean().optional(),
+    api: z.boolean().optional(),
+    tui: z.boolean().optional(),
+  })
+  .partial();
 
-export const PlatformSchema = z.object({
-  /** Top-level flags used by your main JSONGenerator UI */
-  desktop: z.boolean().optional(),
-  mobile: z.boolean().optional(),
-  web_extensions: z.boolean().optional(),
-  hosting: z.boolean().optional(),
-  ui_interface: z.boolean().optional(),
-
-  /** Extended nested platform fields (for install-method usage) */
-  browser_extension: z.boolean().optional(),
-  web_app: z.boolean().optional(),
-  cli_only: z.boolean().optional(),
-
-  /** Optional nested hosting and UI */
-  hosting_detail: HostingSchema.optional(),
-  ui: UiSchema.optional(),
-
-  /** OS-level details (optional, not required by main UI but useful in metadata) */
-  desktop_detail: z
-    .object({
+/** Platform object: now includes hosting and ui nested (to match your UI code) */
+export const PlatformSchema = z
+  .object({
+    desktop: z.object({
       linux: z.boolean().optional(),
       windows: z.boolean().optional(),
       macos: z.boolean().optional(),
-    })
-    .optional(),
-
-  mobile_detail: z
-    .object({
+    }),
+    mobile: z.object({
       android: z.boolean().optional(),
       ios: z.boolean().optional(),
-    })
-    .optional(),
-}).partial();
+    }),
+    web_app: z.boolean().optional(),
+    browser_extension: z.boolean().optional(),
+    cli_only: z.boolean().optional(),
 
-/** Single install method shape */
+    // nested hosting + ui to match install-method.tsx usage (method.platform.hosting / method.platform.ui)
+    hosting: HostingSchema,
+    ui: UiSchema,
+  })
+  .partial();
+
+/** Single install method shape
+ *  platform is optional, deployment is optional (we keep top-level deployment optional
+ *  because your page.tsx also keeps a top-level script.deployment object)
+ */
 export const InstallMethodSchema = z.object({
   platform: PlatformSchema.optional(),
   deployment: DeploymentSchema.optional(),

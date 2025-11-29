@@ -45,22 +45,6 @@ const initialScript: Script = {
     password: null,
   },
   notes: [],
-  deployment: {
-    script: false,
-    docker: false,
-    docker_compose: false,
-    helm: false,
-    kubernetes: false,
-    terraform: false,
-    paths: {
-      script: null,
-      docker: null,
-      docker_compose: null,
-      helm: null,
-      kubernetes: null,
-      terraform: null,
-    },
-  } as any,
 };
 
 export default function JSONGenerator() {
@@ -440,7 +424,7 @@ export default function JSONGenerator() {
             onChange={e =>
               updateScript("default_credentials", {
                 username: e.target.value || null,
-                password: script.default_credentials?.password || null,
+                password: script.default_credentials?.password ?? null,
               })
             }
           />
@@ -449,7 +433,7 @@ export default function JSONGenerator() {
             value={script.default_credentials?.password || ""}
             onChange={e =>
               updateScript("default_credentials", {
-                username: script.default_credentials?.username || null,
+                username: script.default_credentials?.username ?? null,
                 password: e.target.value || null,
               })
             }
