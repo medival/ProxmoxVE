@@ -48,3 +48,5 @@ jobs:
           branch: gh-pages
           folder: frontend/out
           clean: true
+          clean-exclude: |
+            .nojekyll
