@@ -45,13 +45,6 @@ const initialScript: Script = {
     password: null,
   },
   notes: [],
-  platform: {
-    desktop: false,
-    mobile: false,
-    web_extensions: false,
-    hosting: false,
-    ui_interface: false,
-  } as any,
   deployment: {
     script: false,
     docker: false,
