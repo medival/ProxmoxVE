@@ -3,7 +3,7 @@ name: Deploy frontend to GitHub Pages
 on:
   push:
     branches:
-      - main
+      - '**'
 
 jobs:
   build-and-deploy:
@@ -11,7 +11,7 @@ jobs:
     permissions:
       pages: write
       id-token: write
-      contents: read
+      contents: write
 
     steps:
       - name: Checkout repository
@@ -31,9 +31,9 @@ jobs:
         with:
           path: |
             frontend/.next/cache
-          key: ${{ runner.os }}-nextjs-${{ hashFiles('frontend/bun.lockb') }}-${{ hashFiles('frontend/**/*.[jt]s', 'frontend/**/*.[jt]sx') }}
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('frontend/bun.lock') }}-${{ hashFiles('frontend/**/*.[jt]s', 'frontend/**/*.[jt]sx') }}
           restore-keys: |
-            ${{ runner.os }}-nextjs-${{ hashFiles('frontend/bun.lockb') }}-
+            ${{ runner.os }}-nextjs-${{ hashFiles('frontend/bun.lock') }}-
             ${{ runner.os }}-nextjs-
 
       - name: Build with Next.js
