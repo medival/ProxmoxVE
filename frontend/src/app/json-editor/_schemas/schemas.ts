@@ -11,54 +11,55 @@ export const DeploymentSchema = z.object({
 }).partial();
 
 /** Hosting (flags) */
-export const HostingSchema = z
-  .object({
-    self_hosted: z.boolean().optional(),
-    managed_cloud: z.boolean().optional(),
-  })
-  .partial();
+export const HostingSchema = z.object({
+  self_hosted: z.boolean().optional(),
+  managed_cloud: z.boolean().optional(),
+}).partial();
 
 /** UI (flags) */
-export const UiSchema = z
-  .object({
-    cli: z.boolean().optional(),
-    gui: z.boolean().optional(),
-    web_ui: z.boolean().optional(),
-    api: z.boolean().optional(),
-    tui: z.boolean().optional(),
-  })
-  .partial();
+export const UiSchema = z.object({
+  cli: z.boolean().optional(),
+  gui: z.boolean().optional(),
+  web_ui: z.boolean().optional(),
+  api: z.boolean().optional(),
+  tui: z.boolean().optional(),
+}).partial();
 
-/** Platform object: now includes hosting and ui nested (to match your UI code) */
-export const PlatformSchema = z
-  .object({
-    desktop: z
-      .object({
-        linux: z.boolean().optional(),
-        windows: z.boolean().optional(),
-        macos: z.boolean().optional(),
-      })
-      .optional(),
-    mobile: z
-      .object({
-        android: z.boolean().optional(),
-        ios: z.boolean().optional(),
-      })
-      .optional(),
-    web_app: z.boolean().optional(),
-    browser_extension: z.boolean().optional(),
-    cli_only: z.boolean().optional(),
+export const PlatformSchema = z.object({
+  /** Top-level flags used by your main JSONGenerator UI */
+  desktop: z.boolean().optional(),
+  mobile: z.boolean().optional(),
+  web_extensions: z.boolean().optional(),
+  hosting: z.boolean().optional(),
+  ui_interface: z.boolean().optional(),
 
-    // nested hosting + ui to match install-method.tsx usage (method.platform.hosting / method.platform.ui)
-    hosting: HostingSchema.optional(),
-    ui: UiSchema.optional(),
-  })
-  .partial();
+  /** Extended nested platform fields (for install-method usage) */
+  browser_extension: z.boolean().optional(),
+  web_app: z.boolean().optional(),
+  cli_only: z.boolean().optional(),
 
-/** Single install method shape
- *  platform is optional, deployment is optional (we keep top-level deployment optional
- *  because your page.tsx also keeps a top-level script.deployment object)
- */
+  /** Optional nested hosting and UI */
+  hosting_detail: HostingSchema.optional(),
+  ui: UiSchema.optional(),
+
+  /** OS-level details (optional, not required by main UI but useful in metadata) */
+  desktop_detail: z
+    .object({
+      linux: z.boolean().optional(),
+      windows: z.boolean().optional(),
+      macos: z.boolean().optional(),
+    })
+    .optional(),
+
+  mobile_detail: z
+    .object({
+      android: z.boolean().optional(),
+      ios: z.boolean().optional(),
+    })
+    .optional(),
+}).partial();
+
+/** Single install method shape */
 export const InstallMethodSchema = z.object({
   platform: PlatformSchema.optional(),
   deployment: DeploymentSchema.optional(),
@@ -69,12 +70,14 @@ export const ScriptSchema = z.object({
   name: z.string().min(1, "Name is required"),
   slug: z.string().min(1, "Slug is required"),
   categories: z.array(z.number()).min(1, "At least one category is required"),
+
   date_created: z
     .string()
-    .regex(/^\d{4}-\d{2}-\d{2}$/, "Date must be in YYYY-MM-DD format")
-    .min(1, "Date is required"),
+    .regex(/^\d{4}-\d{2}-\d{2}$/, "Date must be in YYYY-MM-DD format"),
+
   interface_port: z.number().nullable().optional(),
-  documentation: z.string().nullable().optional(),
+
+  documentation: z.string().url().nullable().optional(),
   website: z.string().url().nullable().optional(),
   source_code: z.string().url().nullable().optional(),
   logo: z.string().url().nullable().optional(),
@@ -90,12 +93,17 @@ export const ScriptSchema = z.object({
     })
     .optional(),
 
-  notes: z.array(
-    z.object({
-      text: z.string().min(1, "Note text cannot be empty"),
-      type: z.string().min(1, "Note type cannot be empty"),
-    }),
-  ).optional().default([]),
+  platform: PlatformSchema.optional(),
+
+  notes: z
+    .array(
+      z.object({
+        text: z.string().min(1, "Note text cannot be empty"),
+        type: z.string().min(1, "Note type cannot be empty"),
+      })
+    )
+    .optional()
+    .default([]),
 });
 
 export type Script = z.infer<typeof ScriptSchema>;
