@@ -45,13 +45,6 @@ const initialScript: Script = {
     password: null,
   },
   notes: [],
-  platform: {
-    desktop: false,
-    mobile: false,
-    web_extensions: false,
-    hosting: false,
-    ui_interface: false,
-  } as any,
   deployment: {
     script: false,
     docker: false,
@@ -350,7 +343,7 @@ export default function JSONGenerator() {
               value={script.interface_port ?? ""}
               onChange={e => {
                 const v = e.target.value ? Number(e.target.value) : null;
-                updateScript("interface_port", clampPort(v) as unknown as Script[keyof Script]);
+                updateScript("interface_port", clampPort(v));
               }}
             />
             <p className="text-sm text-muted-foreground mt-1">
@@ -443,20 +436,20 @@ export default function JSONGenerator() {
           <h3 className="text-xl font-semibold">Default Credentials</h3>
           <Input
             placeholder="Username"
-            value={script.default_credentials.username || ""}
+            value={script.default_credentials?.username || ""}
             onChange={e =>
               updateScript("default_credentials", {
-                ...script.default_credentials,
                 username: e.target.value || null,
+                password: script.default_credentials?.password || null,
               })
             }
           />
           <Input
             placeholder="Password"
-            value={script.default_credentials.password || ""}
+            value={script.default_credentials?.password || ""}
             onChange={e =>
               updateScript("default_credentials", {
-                ...script.default_credentials,
+                username: script.default_credentials?.username || null,
                 password: e.target.value || null,
               })
             }
