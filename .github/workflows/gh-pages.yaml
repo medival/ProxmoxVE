@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Deploy frontend to GitHub Pages
 
 on:
   push:
@@ -14,25 +14,30 @@ jobs:
       contents: read
 
     steps:
-      - name: Checkout repo
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'   # choose your node version
+          node-version: '20'
+          cache: 'npm'
 
       - name: Install dependencies
         run: npm ci
+        working-directory: frontend
 
-      - name: Build and export
+      - name: Build and export (Next static export)
         run: |
           npm run build
           npm run export
+        working-directory: frontend
+        env:
+          NODE_ENV: production
 
-      - name: Deploy to GitHub Pages
+      - name: Deploy to gh-pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          branch: gh-pages       # branch to deploy to
-          folder: out            # folder from next export
+          branch: gh-pages
+          folder: frontend/out
           clean: true
