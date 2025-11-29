@@ -1,29 +1,43 @@
 {
-  "name": "Wallos",
+  "name": "wallos",
   "slug": "wallos",
   "categories": [
-    23
+    22
   ],
-  "date_created": "2024-10-24",
-  "type": "ct",
-  "updateable": true,
-  "privileged": false,
-  "interface_port": 80,
-  "documentation": "https://github.com/ellite/wallos",
-  "website": "https://wallosapp.com/",
+  "date_created": "2025-11-23",
+  "interface_port": null,
+  "documentation": "github.com/ellite/Wallos",
+  "website": "github.com/ellite/Wallos",
+  "source_code": "github.com/ellite/Wallos",
   "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/webp/wallos.webp",
-  "config_path": "",
-  "description": "Wallos is a personal finance and budgeting tool that provides an intuitive interface for tracking expenses, managing subscriptions, and monitoring financial health. It features APIs for categories, notifications, payments, and user settings, making it suitable for automation and custom integrations. Additionally, it supports multi-language functionality.",
+  "description": "Wallos is a self-hosted subscription management app that tracks recurring expenses. It shows cost breakdowns, renewal dates, and categories in a clean, mobile-friendly interface.",
   "install_methods": [
     {
-      "type": "default",
-      "script": "ct/wallos.sh",
-      "resources": {
-        "cpu": 1,
-        "ram": 1024,
-        "hdd": 5,
-        "os": "debian",
-        "version": "13"
+      "platform": {
+        "desktop": {
+          "linux": false,
+          "windows": false,
+          "macos": false
+        },
+        "mobile": {
+          "android": false,
+          "ios": false
+        },
+        "web_app": false,
+        "browser_extension": false,
+        "cli_only": false,
+        "hosting": {
+          "self_hosted": false,
+          "saas": false,
+          "managed_cloud": false
+        },
+        "ui": {
+          "cli": false,
+          "gui": false,
+          "web_ui": false,
+          "api": false,
+          "tui": false
+        }
       }
     }
   ],
@@ -32,5 +46,27 @@
     "password": null
   },
   "notes": [],
-  "docker_compose_path": "docker-compose/wallos.yaml"
+  "platform": {
+    "desktop": false,
+    "mobile": false,
+    "web_extensions": false,
+    "hosting": false,
+    "ui_interface": false
+  },
+  "deployment": {
+    "script": true,
+    "docker": true,
+    "docker_compose": true,
+    "helm": true,
+    "kubernetes": true,
+    "terraform": true,
+    "paths": {
+      "script": "/public/manifest/dummy/script.sh",
+      "docker": "/public/manifest/dummy/Dockerfile",
+      "docker_compose": "/public/manifest/dummy/docker-compose.yaml",
+      "helm": "/public/manifest/dummy/helm.yaml",
+      "kubernetes": "/public/manifest/dummy/k8s-deployment.yaml",
+      "terraform": "/public/manifest/dummy/main.tf"
+    }
+  }
 }

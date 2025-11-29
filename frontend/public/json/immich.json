@@ -1,29 +1,43 @@
 {
-  "name": "Immich",
+  "name": "immich",
   "slug": "immich",
   "categories": [
-    13
+    120
   ],
-  "date_created": "2025-06-01",
-  "type": "ct",
-  "updateable": true,
-  "privileged": false,
-  "interface_port": 2283,
-  "documentation": "https://immich.app/docs/overview/introduction",
-  "website": "https://immich.app",
+  "date_created": "2025-11-23",
+  "interface_port": null,
+  "documentation": "github.com/immich-app/immich",
+  "website": "immich.app",
+  "source_code": "github.com/immich-app/immich",
   "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/webp/immich.webp",
-  "config_path": "/opt/immich/.env",
-  "description": "High performance self-hosted photo and video management solution.",
+  "description": "Immich is a self hosted photo and video backup solution for mobile and desktop. It offers automatic uploads, face recognition, maps, albums and multi user support, providing a private alternative to big cloud photo services.",
   "install_methods": [
     {
-      "type": "default",
-      "script": "ct/immich.sh",
-      "resources": {
-        "cpu": 4,
-        "ram": 4096,
-        "hdd": 20,
-        "os": "Debian",
-        "version": "13"
+      "platform": {
+        "desktop": {
+          "linux": false,
+          "windows": false,
+          "macos": false
+        },
+        "mobile": {
+          "android": false,
+          "ios": false
+        },
+        "web_app": false,
+        "browser_extension": false,
+        "cli_only": false,
+        "hosting": {
+          "self_hosted": false,
+          "saas": false,
+          "managed_cloud": false
+        },
+        "ui": {
+          "cli": false,
+          "gui": false,
+          "web_ui": false,
+          "api": false,
+          "tui": false
+        }
       }
     }
   ],
@@ -31,26 +45,28 @@
     "username": null,
     "password": null
   },
-  "notes": [
-    {
-      "text": "Please be aware that Immich releases are pinned to specific versions until compatibility has been confirmed by the Community Scripts maintainers; as a result, the version installed by the helper script may not be the most current version of Immich",
-      "type": "info"
-    },
-    {
-      "text": "During installation, you will be prompted with the option to install Intel OpenVINO for hardware-accelerated machine-learning. If you opt in, increase your LXC RAM after installation, as OpenVINO is memory-intensive",
-      "type": "info"
-    },
-    {
-      "text": "HW-accelerated video transcoding is supported, but must be enabled in Immich Settings",
-      "type": "info"
-    },
-    {
-      "text": "To change upload location, edit 'IMMICH_MEDIA_LOCATION' in `/opt/immich/.env`, and create the symlink 'upload' in /opt/immich/app & /opt/immich/app/machine-learning to your new upload location",
-      "type": "info"
-    },
-    {
-      "text": "Logs: `/var/log/immich`",
-      "type": "info"
+  "notes": [],
+  "platform": {
+    "desktop": false,
+    "mobile": false,
+    "web_extensions": false,
+    "hosting": true,
+    "ui_interface": true
+  },
+  "deployment": {
+    "script": true,
+    "docker": true,
+    "docker_compose": true,
+    "helm": true,
+    "kubernetes": true,
+    "terraform": true,
+    "paths": {
+      "script": "/public/manifest/dummy/script.sh",
+      "docker": "/public/manifest/dummy/Dockerfile",
+      "docker_compose": "/public/manifest/dummy/docker-compose.yaml",
+      "helm": "/public/manifest/dummy/helm.yaml",
+      "kubernetes": "/public/manifest/dummy/k8s-deployment.yaml",
+      "terraform": "/public/manifest/dummy/main.tf"
     }
-  ]
+  }
 }

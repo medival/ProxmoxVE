@@ -1,29 +1,43 @@
 {
-  "name": "BookLore",
+  "name": "booklore",
   "slug": "booklore",
   "categories": [
-    13
+    21
   ],
-  "date_created": "2025-06-27",
-  "type": "ct",
-  "updateable": true,
-  "privileged": false,
-  "interface_port": 6060,
-  "documentation": "https://booklore-app.github.io/booklore-docs/docs/getting-started",
-  "website": "https://github.com/booklore-app/booklore",
+  "date_created": "2025-11-23",
+  "interface_port": null,
+  "documentation": "github.com/booklore-app/booklore",
+  "website": "demo.booklore.dev",
+  "source_code": "github.com/booklore-app/booklore",
   "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/webp/booklore.webp",
-  "config_path": "/opt/booklore_storage/.env",
-  "description": "BookLore is a self-hosted digital library for managing and reading books, offering a beautiful interface and support for metadata management. Built with a modern tech stack, it provides support for importing, organizing, and reading EPUBs and PDFs, while also managing cover images and book metadata.",
+  "description": "Booklore is a self-hosted app for managing and tracking your reading lists. It allows users to log books, mark them as read or unread, add ratings and reviews, and access the library via a simple, responsive web UI.",
   "install_methods": [
     {
-      "type": "default",
-      "script": "ct/booklore.sh",
-      "resources": {
-        "cpu": 3,
-        "ram": 3072,
-        "hdd": 7,
-        "os": "debian",
-        "version": "12"
+      "platform": {
+        "desktop": {
+          "linux": false,
+          "windows": false,
+          "macos": false
+        },
+        "mobile": {
+          "android": false,
+          "ios": false
+        },
+        "web_app": false,
+        "browser_extension": false,
+        "cli_only": false,
+        "hosting": {
+          "self_hosted": false,
+          "saas": false,
+          "managed_cloud": false
+        },
+        "ui": {
+          "cli": false,
+          "gui": false,
+          "web_ui": false,
+          "api": false,
+          "tui": false
+        }
       }
     }
   ],
@@ -31,10 +45,28 @@
     "username": null,
     "password": null
   },
-  "notes": [
-    {
-      "text": "Starting Booklore (Web UI) may take up to 2 minutes after a restart or fresh installation.",
-      "type": "info"
+  "notes": [],
+  "platform": {
+    "desktop": false,
+    "mobile": false,
+    "web_extensions": false,
+    "hosting": false,
+    "ui_interface": true
+  },
+  "deployment": {
+    "script": true,
+    "docker": true,
+    "docker_compose": true,
+    "helm": true,
+    "kubernetes": true,
+    "terraform": true,
+    "paths": {
+      "script": "/public/manifest/dummy/script.sh",
+      "docker": "/public/manifest/dummy/Dockerfile",
+      "docker_compose": "/public/manifest/dummy/docker-compose.yaml",
+      "helm": "/public/manifest/dummy/helm.yaml",
+      "kubernetes": "/public/manifest/dummy/k8s-deployment.yaml",
+      "terraform": "/public/manifest/dummy/main.tf"
     }
-  ]
+  }
 }

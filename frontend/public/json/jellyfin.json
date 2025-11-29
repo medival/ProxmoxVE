@@ -1,29 +1,43 @@
 {
-  "name": "Jellyfin Media Server",
+  "name": "jellyfin",
   "slug": "jellyfin",
   "categories": [
-    13
+    100
   ],
-  "date_created": "2024-05-02",
-  "type": "ct",
-  "updateable": true,
-  "privileged": false,
-  "interface_port": 8096,
-  "documentation": "https://jellyfin.org/docs/",
-  "website": "https://jellyfin.org/",
+  "date_created": "2025-11-23",
+  "interface_port": null,
+  "documentation": "github.com/jellyfin/jellyfin",
+  "website": "jellyfin.org",
+  "source_code": "github.com/jellyfin/jellyfin",
   "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/webp/jellyfin.webp",
-  "config_path": "/etc/jellyfin/",
-  "description": "Jellyfin is a free and open-source media server and suite of multimedia applications designed to organize, manage, and share digital media files to networked devices.",
+  "description": "Jellyfin is a free, open source media server that organizes and streams movies, shows and music to many devices. It offers multi user libraries, live TV, hardware transcoding and a wide ecosystem of clients, all fully self hosted.",
   "install_methods": [
     {
-      "type": "default",
-      "script": "ct/jellyfin.sh",
-      "resources": {
-        "cpu": 2,
-        "ram": 2048,
-        "hdd": 16,
-        "os": "ubuntu",
-        "version": "24.04"
+      "platform": {
+        "desktop": {
+          "linux": false,
+          "windows": false,
+          "macos": false
+        },
+        "mobile": {
+          "android": false,
+          "ios": false
+        },
+        "web_app": false,
+        "browser_extension": false,
+        "cli_only": false,
+        "hosting": {
+          "self_hosted": false,
+          "saas": false,
+          "managed_cloud": false
+        },
+        "ui": {
+          "cli": false,
+          "gui": false,
+          "web_ui": false,
+          "api": false,
+          "tui": false
+        }
       }
     }
   ],
@@ -31,18 +45,28 @@
     "username": null,
     "password": null
   },
-  "notes": [
-    {
-      "text": "With Privileged/Unprivileged Hardware Acceleration Support",
-      "type": "info"
-    },
-    {
-      "text": "FFmpeg path: /usr/lib/jellyfin-ffmpeg/ffmpeg",
-      "type": "info"
-    },
-     {
-      "text": "For NVIDIA graphics cards, you'll need to install the same drivers in the container that you did on the host. In the container, run the driver installation script and add the CLI arg --no-kernel-module",
-      "type": "info"
+  "notes": [],
+  "platform": {
+    "desktop": false,
+    "mobile": false,
+    "web_extensions": false,
+    "hosting": false,
+    "ui_interface": false
+  },
+  "deployment": {
+    "script": true,
+    "docker": true,
+    "docker_compose": true,
+    "helm": true,
+    "kubernetes": true,
+    "terraform": true,
+    "paths": {
+      "script": "/public/manifest/dummy/script.sh",
+      "docker": "/public/manifest/dummy/Dockerfile",
+      "docker_compose": "/public/manifest/dummy/docker-compose.yaml",
+      "helm": "/public/manifest/dummy/helm.yaml",
+      "kubernetes": "/public/manifest/dummy/k8s-deployment.yaml",
+      "terraform": "/public/manifest/dummy/main.tf"
     }
-  ]
+  }
 }

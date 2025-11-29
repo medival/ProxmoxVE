@@ -1,29 +1,43 @@
 {
-  "name": "Livebook",
+  "name": "livebook",
   "slug": "livebook",
   "categories": [
-    20
+    196
   ],
-  "date_created": "2025-10-30",
-  "type": "ct",
-  "updateable": true,
-  "privileged": false,
-  "interface_port": 8080,
-  "documentation": "https://hexdocs.pm/livebook/readme.html",
-  "config_path": null,
-  "website": "https://livebook.dev",
+  "date_created": "2025-11-23",
+  "interface_port": null,
+  "documentation": "github.com/livebook-dev/livebook",
+  "website": "livebook.dev",
+  "source_code": "github.com/livebook-dev/livebook",
   "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/webp/livebook.webp",
-  "description": "Elixir Livebook is an interactive, web-based notebook platform for Elixir that combines code, documentation, and visualizations in a single document. Similar to Jupyter notebooks, it allows developers to write and execute Elixir code in real-time, making it ideal for data exploration, prototyping, learning, and collaborative development. Livebook features rich markdown support, built-in charting capabilities, and seamless integration with the Elixir ecosystem.",
+  "description": "Livebook is a self-hosted notebook application for running Elixir code, visualizing data, and creating interactive workflows. It includes collaboration features and integrates with machine learning tools and runtimes.",
   "install_methods": [
     {
-      "type": "default",
-      "script": "ct/livebook.sh",
-      "resources": {
-        "cpu": 1,
-        "ram": 1024,
-        "hdd": 4,
-        "os": "Ubuntu",
-        "version": "24.04"
+      "platform": {
+        "desktop": {
+          "linux": false,
+          "windows": false,
+          "macos": false
+        },
+        "mobile": {
+          "android": false,
+          "ios": false
+        },
+        "web_app": false,
+        "browser_extension": false,
+        "cli_only": false,
+        "hosting": {
+          "self_hosted": false,
+          "saas": false,
+          "managed_cloud": false
+        },
+        "ui": {
+          "cli": false,
+          "gui": false,
+          "web_ui": false,
+          "api": false,
+          "tui": false
+        }
       }
     }
   ],
@@ -31,10 +45,28 @@
     "username": null,
     "password": null
   },
-  "notes": [
-    {
-      "text": "Show initial Livebook password: `cat ~/livebook.creds`",
-      "type": "info"
+  "notes": [],
+  "platform": {
+    "desktop": false,
+    "mobile": false,
+    "web_extensions": false,
+    "hosting": false,
+    "ui_interface": false
+  },
+  "deployment": {
+    "script": true,
+    "docker": true,
+    "docker_compose": true,
+    "helm": true,
+    "kubernetes": true,
+    "terraform": true,
+    "paths": {
+      "script": "/public/manifest/dummy/script.sh",
+      "docker": "/public/manifest/dummy/Dockerfile",
+      "docker_compose": "/public/manifest/dummy/docker-compose.yaml",
+      "helm": "/public/manifest/dummy/helm.yaml",
+      "kubernetes": "/public/manifest/dummy/k8s-deployment.yaml",
+      "terraform": "/public/manifest/dummy/main.tf"
     }
-  ]
+  }
 }

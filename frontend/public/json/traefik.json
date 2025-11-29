@@ -1,40 +1,43 @@
 {
-  "name": "Traefik",
+  "name": "traefik",
   "slug": "traefik",
   "categories": [
-    21
+    137
   ],
-  "date_created": "2024-05-20",
-  "type": "ct",
-  "updateable": true,
-  "privileged": false,
-  "interface_port": 8080,
-  "documentation": "https://doc.traefik.io/",
-  "website": "https://traefik.io/",
+  "date_created": "2025-11-23",
+  "interface_port": null,
+  "documentation": "github.com/traefik/traefik",
+  "website": "traefik.io",
+  "source_code": "github.com/traefik/traefik",
   "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/webp/traefik.webp",
-  "config_path": "/etc/traefik/traefik.yaml",
-  "description": "Traefik (pronounced traffic) is an open-source edge router and reverse proxy that simplifies managing microservices. It automatically discovers services, dynamically updates routing rules without downtime, provides load balancing, handles SSL termination, and supports various middleware for added functionality. Ideal for cloud-native environments, it integrates seamlessly with platforms like Docker and Kubernetes.",
+  "description": "Traefik is a modern reverse proxy and load balancer that dynamically discovers services and routes traffic. It supports Kubernetes, Docker, and more, with a simple configuration, web dashboard, and extensive HTTP API.",
   "install_methods": [
     {
-      "type": "default",
-      "script": "ct/traefik.sh",
-      "resources": {
-        "cpu": 1,
-        "ram": 512,
-        "hdd": 2,
-        "os": "debian",
-        "version": "13"
-      }
-    },
-    {
-      "type": "alpine",
-      "script": "ct/alpine-traefik.sh",
-      "resources": {
-        "cpu": 1,
-        "ram": 512,
-        "hdd": 1,
-        "os": "alpine",
-        "version": "3.22"
+      "platform": {
+        "desktop": {
+          "linux": false,
+          "windows": false,
+          "macos": false
+        },
+        "mobile": {
+          "android": false,
+          "ios": false
+        },
+        "web_app": false,
+        "browser_extension": false,
+        "cli_only": false,
+        "hosting": {
+          "self_hosted": false,
+          "saas": false,
+          "managed_cloud": false
+        },
+        "ui": {
+          "cli": false,
+          "gui": false,
+          "web_ui": false,
+          "api": false,
+          "tui": false
+        }
       }
     }
   ],
@@ -42,5 +45,28 @@
     "username": null,
     "password": null
   },
-  "notes": []
+  "notes": [],
+  "platform": {
+    "desktop": false,
+    "mobile": false,
+    "web_extensions": false,
+    "hosting": false,
+    "ui_interface": false
+  },
+  "deployment": {
+    "script": true,
+    "docker": true,
+    "docker_compose": true,
+    "helm": true,
+    "kubernetes": true,
+    "terraform": true,
+    "paths": {
+      "script": "/public/manifest/dummy/script.sh",
+      "docker": "/public/manifest/dummy/Dockerfile",
+      "docker_compose": "/public/manifest/dummy/docker-compose.yaml",
+      "helm": "/public/manifest/dummy/helm.yaml",
+      "kubernetes": "/public/manifest/dummy/k8s-deployment.yaml",
+      "terraform": "/public/manifest/dummy/main.tf"
+    }
+  }
 }

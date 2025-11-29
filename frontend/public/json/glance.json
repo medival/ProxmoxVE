@@ -1,29 +1,43 @@
 {
-  "name": "Glance",
+  "name": "glance",
   "slug": "glance",
   "categories": [
-    9
+    37
   ],
-  "date_created": "2024-12-02",
-  "type": "ct",
-  "updateable": true,
-  "privileged": false,
-  "interface_port": 8080,
-  "documentation": "https://github.com/glanceapp/glance/blob/main/docs/configuration.md",
-  "website": "https://github.com/glanceapp/glance",
+  "date_created": "2025-11-23",
+  "interface_port": null,
+  "documentation": "github.com/glanceapp/glance",
+  "website": "github.com/glanceapp/glance",
+  "source_code": "github.com/glanceapp/glance",
   "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/webp/glance.webp",
-  "config_path": "/opt/glance/glance.yml",
-  "description": "A self-hosted dashboard that puts all your feeds in one place",
+  "description": "Glance is a dynamic homepage and dashboard builder for self-hosted setups. It allows users to display widgets for services, schedules, weather, or links, all configured via simple YAML files.",
   "install_methods": [
     {
-      "type": "default",
-      "script": "ct/glance.sh",
-      "resources": {
-        "cpu": 1,
-        "ram": 512,
-        "hdd": 2,
-        "os": "debian",
-        "version": "12"
+      "platform": {
+        "desktop": {
+          "linux": false,
+          "windows": false,
+          "macos": false
+        },
+        "mobile": {
+          "android": false,
+          "ios": false
+        },
+        "web_app": false,
+        "browser_extension": false,
+        "cli_only": false,
+        "hosting": {
+          "self_hosted": false,
+          "saas": false,
+          "managed_cloud": false
+        },
+        "ui": {
+          "cli": false,
+          "gui": false,
+          "web_ui": false,
+          "api": false,
+          "tui": false
+        }
       }
     }
   ],
@@ -31,5 +45,28 @@
     "username": null,
     "password": null
   },
-  "notes": []
+  "notes": [],
+  "platform": {
+    "desktop": false,
+    "mobile": false,
+    "web_extensions": false,
+    "hosting": true,
+    "ui_interface": true
+  },
+  "deployment": {
+    "script": true,
+    "docker": true,
+    "docker_compose": true,
+    "helm": true,
+    "kubernetes": true,
+    "terraform": true,
+    "paths": {
+      "script": "/public/manifest/dummy/script.sh",
+      "docker": "/public/manifest/dummy/Dockerfile",
+      "docker_compose": "/public/manifest/dummy/docker-compose.yaml",
+      "helm": "/public/manifest/dummy/helm.yaml",
+      "kubernetes": "/public/manifest/dummy/k8s-deployment.yaml",
+      "terraform": "/public/manifest/dummy/main.tf"
+    }
+  }
 }

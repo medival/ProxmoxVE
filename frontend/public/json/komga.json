@@ -1,29 +1,43 @@
 {
-  "name": "Komga",
+  "name": "komga",
   "slug": "komga",
   "categories": [
-    13
+    95
   ],
-  "date_created": "2024-11-15",
-  "type": "ct",
-  "updateable": true,
-  "privileged": false,
-  "interface_port": 25600,
-  "documentation": "https://komga.org/docs/introduction",
-  "website": "https://komga.org/",
+  "date_created": "2025-11-23",
+  "interface_port": null,
+  "documentation": "github.com/gotson/komga",
+  "website": "komga.org",
+  "source_code": "github.com/gotson/komga",
   "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/webp/komga.webp",
-  "config_path": "~/.komga/application.yml",
-  "description": "A media server for your comics, mangas, BDs, magazines and eBooks. Organize your CBZ, CBR, PDF and EPUB files in different libraries, collections or reading lists. Use the integrated Webreader, the Mihon extension, any OPDS reader, or other integrations. Edit metadata for your series and books.",
+  "description": "Komga is a self hosted comics and manga server. It organizes libraries, tracks reading progress, supports multiple users and provides a responsive reader interface, similar to what Jellyfin or Plex offer for video.",
   "install_methods": [
     {
-      "type": "default",
-      "script": "ct/komga.sh",
-      "resources": {
-        "cpu": 1,
-        "ram": 2048,
-        "hdd": 4,
-        "os": "debian",
-        "version": "13"
+      "platform": {
+        "desktop": {
+          "linux": false,
+          "windows": false,
+          "macos": false
+        },
+        "mobile": {
+          "android": false,
+          "ios": false
+        },
+        "web_app": false,
+        "browser_extension": false,
+        "cli_only": false,
+        "hosting": {
+          "self_hosted": false,
+          "saas": false,
+          "managed_cloud": false
+        },
+        "ui": {
+          "cli": false,
+          "gui": false,
+          "web_ui": false,
+          "api": false,
+          "tui": false
+        }
       }
     }
   ],
@@ -31,10 +45,28 @@
     "username": null,
     "password": null
   },
-  "notes": [
-    {
-      "text": "Starting Komga (Web UI) may take up to 2 minutes after a restart or fresh installation.",
-      "type": "info"
+  "notes": [],
+  "platform": {
+    "desktop": false,
+    "mobile": false,
+    "web_extensions": false,
+    "hosting": false,
+    "ui_interface": true
+  },
+  "deployment": {
+    "script": true,
+    "docker": true,
+    "docker_compose": true,
+    "helm": true,
+    "kubernetes": true,
+    "terraform": true,
+    "paths": {
+      "script": "/public/manifest/dummy/script.sh",
+      "docker": "/public/manifest/dummy/Dockerfile",
+      "docker_compose": "/public/manifest/dummy/docker-compose.yaml",
+      "helm": "/public/manifest/dummy/helm.yaml",
+      "kubernetes": "/public/manifest/dummy/k8s-deployment.yaml",
+      "terraform": "/public/manifest/dummy/main.tf"
     }
-  ]
+  }
 }

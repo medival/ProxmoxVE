@@ -1,29 +1,43 @@
 {
-  "name": "Leantime",
+  "name": "leantime",
   "slug": "leantime",
   "categories": [
-    12
+    125
   ],
-  "date_created": "2025-09-06",
-  "type": "ct",
-  "updateable": true,
-  "privileged": false,
-  "interface_port": 80,
-  "documentation": "https://docs.leantime.io/",
-  "config_path": "/opt/Leantime/config/.env",
-  "website": "https://leantime.io",
+  "date_created": "2025-11-23",
+  "interface_port": null,
+  "documentation": "github.com/Leantime/leantime",
+  "website": "leantime.io",
+  "source_code": "github.com/Leantime/leantime",
   "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/webp/leantime.webp",
-  "description": "Leantime is a goals focused project management system for non-project managers. Building with ADHD, Autism, and dyslexia in mind. ",
+  "description": "Leantime is an open-source project management system designed for teams and startups. It combines lean methodology with strategic planning, task management, idea boards, and reporting—all in a modern self-hosted web UI.",
   "install_methods": [
     {
-      "type": "default",
-      "script": "ct/leantime.sh",
-      "resources": {
-        "cpu": 2,
-        "ram": 2048,
-        "hdd": 20,
-        "os": "Debian",
-        "version": "13"
+      "platform": {
+        "desktop": {
+          "linux": false,
+          "windows": false,
+          "macos": false
+        },
+        "mobile": {
+          "android": false,
+          "ios": false
+        },
+        "web_app": false,
+        "browser_extension": false,
+        "cli_only": false,
+        "hosting": {
+          "self_hosted": false,
+          "saas": false,
+          "managed_cloud": false
+        },
+        "ui": {
+          "cli": false,
+          "gui": false,
+          "web_ui": false,
+          "api": false,
+          "tui": false
+        }
       }
     }
   ],
@@ -31,5 +45,28 @@
     "username": null,
     "password": null
   },
-  "notes": []
+  "notes": [],
+  "platform": {
+    "desktop": false,
+    "mobile": false,
+    "web_extensions": false,
+    "hosting": false,
+    "ui_interface": false
+  },
+  "deployment": {
+    "script": true,
+    "docker": true,
+    "docker_compose": true,
+    "helm": true,
+    "kubernetes": true,
+    "terraform": true,
+    "paths": {
+      "script": "/public/manifest/dummy/script.sh",
+      "docker": "/public/manifest/dummy/Dockerfile",
+      "docker_compose": "/public/manifest/dummy/docker-compose.yaml",
+      "helm": "/public/manifest/dummy/helm.yaml",
+      "kubernetes": "/public/manifest/dummy/k8s-deployment.yaml",
+      "terraform": "/public/manifest/dummy/main.tf"
+    }
+  }
 }

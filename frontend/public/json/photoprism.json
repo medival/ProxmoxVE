@@ -1,40 +1,72 @@
 {
-  "name": "PhotoPrism",
+  "name": "photoprism",
   "slug": "photoprism",
   "categories": [
-    13
+    120
   ],
-  "date_created": "2024-05-02",
-  "type": "ct",
-  "updateable": true,
-  "privileged": false,
-  "interface_port": 2342,
-  "documentation": "https://docs.photoprism.app/",
-  "website": "https://photoprism.app/",
+  "date_created": "2025-11-23",
+  "interface_port": null,
+  "documentation": "github.com/photoprism/photoprism",
+  "website": "www.photoprism.app",
+  "source_code": "github.com/photoprism/photoprism",
   "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/webp/photoprism.webp",
-  "config_path": "/opt/photoprism/config/.env",
-  "description": "PhotoPrism is an AI-Powered Photos App for the Decentralized Web. It makes use of the latest technologies to tag and find pictures automatically without getting in your way.",
+  "description": "PhotoPrism is a self-hosted AI-powered photo organizer that automatically tags and indexes images using machine learning. It supports RAW formats, browsing, search, and has a polished UI for photographers.",
   "install_methods": [
     {
-      "type": "default",
-      "script": "ct/photoprism.sh",
-      "resources": {
-        "cpu": 2,
-        "ram": 3072,
-        "hdd": 8,
-        "os": "debian",
-        "version": "13"
+      "platform": {
+        "desktop": {
+          "linux": false,
+          "windows": false,
+          "macos": false
+        },
+        "mobile": {
+          "android": false,
+          "ios": false
+        },
+        "web_app": false,
+        "browser_extension": false,
+        "cli_only": false,
+        "hosting": {
+          "self_hosted": false,
+          "saas": false,
+          "managed_cloud": false
+        },
+        "ui": {
+          "cli": false,
+          "gui": false,
+          "web_ui": false,
+          "api": false,
+          "tui": false
+        }
       }
     }
   ],
   "default_credentials": {
-    "username": "admin",
-    "password": "changeme"
+    "username": null,
+    "password": null
   },
-  "notes": [
-    {
-      "text": "Please note that Ubuntu 22.04 and Debian 12 are supported, while older Linux distributions may not be compatible.",
-      "type": "warning"
+  "notes": [],
+  "platform": {
+    "desktop": false,
+    "mobile": false,
+    "web_extensions": false,
+    "hosting": false,
+    "ui_interface": false
+  },
+  "deployment": {
+    "script": true,
+    "docker": true,
+    "docker_compose": true,
+    "helm": true,
+    "kubernetes": true,
+    "terraform": true,
+    "paths": {
+      "script": "/public/manifest/dummy/script.sh",
+      "docker": "/public/manifest/dummy/Dockerfile",
+      "docker_compose": "/public/manifest/dummy/docker-compose.yaml",
+      "helm": "/public/manifest/dummy/helm.yaml",
+      "kubernetes": "/public/manifest/dummy/k8s-deployment.yaml",
+      "terraform": "/public/manifest/dummy/main.tf"
     }
-  ]
+  }
 }

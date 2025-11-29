@@ -1,35 +1,72 @@
 {
-  "name": "Tianji",
+  "name": "tianji",
   "slug": "tianji",
   "categories": [
-    9
+    186
   ],
-  "date_created": "2024-09-14",
-  "type": "ct",
-  "updateable": true,
-  "privileged": false,
-  "interface_port": 12345,
-  "documentation": "https://tianji.dev/docs/intro",
-  "website": "https://tianji.msgbyte.com/",
+  "date_created": "2025-11-23",
+  "interface_port": null,
+  "documentation": "github.com/msgbyte/tianji",
+  "website": "tianji.dev",
+  "source_code": "github.com/msgbyte/tianji",
   "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/webp/tianji.webp",
-  "config_path": "/opt/tianji/src/server/.env",
-  "description": "Tianji is an open-source tool for website analytics, uptime monitoring, and server status tracking, all in one. It\u2019s lightweight, privacy-focused, and helps teams monitor web traffic, server health, and gather user interaction data",
+  "description": "Tianji is a self-hosted website analytics and monitoring platform focused on privacy. It tracks visits, referrers, uptime, and performance, presenting insights in a modern, lightweight dashboard.",
   "install_methods": [
     {
-      "type": "default",
-      "script": "ct/tianji.sh",
-      "resources": {
-        "cpu": 4,
-        "ram": 4096,
-        "hdd": 12,
-        "os": "debian",
-        "version": "13"
+      "platform": {
+        "desktop": {
+          "linux": false,
+          "windows": false,
+          "macos": false
+        },
+        "mobile": {
+          "android": false,
+          "ios": false
+        },
+        "web_app": false,
+        "browser_extension": false,
+        "cli_only": false,
+        "hosting": {
+          "self_hosted": false,
+          "saas": false,
+          "managed_cloud": false
+        },
+        "ui": {
+          "cli": false,
+          "gui": false,
+          "web_ui": false,
+          "api": false,
+          "tui": false
+        }
       }
     }
   ],
   "default_credentials": {
-    "username": "admin",
-    "password": "admin"
+    "username": null,
+    "password": null
   },
-  "notes": []
+  "notes": [],
+  "platform": {
+    "desktop": false,
+    "mobile": false,
+    "web_extensions": false,
+    "hosting": false,
+    "ui_interface": false
+  },
+  "deployment": {
+    "script": true,
+    "docker": true,
+    "docker_compose": true,
+    "helm": true,
+    "kubernetes": true,
+    "terraform": true,
+    "paths": {
+      "script": "/public/manifest/dummy/script.sh",
+      "docker": "/public/manifest/dummy/Dockerfile",
+      "docker_compose": "/public/manifest/dummy/docker-compose.yaml",
+      "helm": "/public/manifest/dummy/helm.yaml",
+      "kubernetes": "/public/manifest/dummy/k8s-deployment.yaml",
+      "terraform": "/public/manifest/dummy/main.tf"
+    }
+  }
 }

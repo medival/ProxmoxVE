@@ -1,40 +1,43 @@
 {
-  "name": "Prometheus",
+  "name": "prometheus",
   "slug": "prometheus",
   "categories": [
-    9
+    103
   ],
-  "date_created": "2024-05-02",
-  "type": "ct",
-  "updateable": true,
-  "privileged": false,
-  "interface_port": 9090,
-  "documentation": "https://prometheus.io/docs/introduction/overview/",
-  "website": "https://prometheus.io/",
+  "date_created": "2025-11-23",
+  "interface_port": null,
+  "documentation": "github.com/prometheus/prometheus",
+  "website": "prometheus.io/",
+  "source_code": "github.com/prometheus/prometheus",
   "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/webp/prometheus.webp",
-  "config_path": "/etc/prometheus/prometheus.yml",
-  "description": "Prometheus is widely used to monitor the performance and health of various infrastructure components and applications, and trigger alerts based on predefined rules. It has a multi-dimensional data model and supports various data sources and exporters, making it an extremely flexible and scalable monitoring solution.",
+  "description": "Prometheus is a leading open-source system monitoring and alerting toolkit. It collects metrics via pull-based scraping, stores them efficiently, and uses PromQL for powerful queries and visualizations.",
   "install_methods": [
     {
-      "type": "default",
-      "script": "ct/prometheus.sh",
-      "resources": {
-        "cpu": 1,
-        "ram": 2048,
-        "hdd": 4,
-        "os": "debian",
-        "version": "13"
-      }
-    },
-    {
-      "type": "alpine",
-      "script": "ct/alpine-prometheus.sh",
-      "resources": {
-        "cpu": 1,
-        "ram": 256,
-        "hdd": 1,
-        "os": "alpine",
-        "version": "3.22"
+      "platform": {
+        "desktop": {
+          "linux": false,
+          "windows": false,
+          "macos": false
+        },
+        "mobile": {
+          "android": false,
+          "ios": false
+        },
+        "web_app": false,
+        "browser_extension": false,
+        "cli_only": false,
+        "hosting": {
+          "self_hosted": false,
+          "saas": false,
+          "managed_cloud": false
+        },
+        "ui": {
+          "cli": false,
+          "gui": false,
+          "web_ui": false,
+          "api": false,
+          "tui": false
+        }
       }
     }
   ],
@@ -42,5 +45,28 @@
     "username": null,
     "password": null
   },
-  "notes": []
+  "notes": [],
+  "platform": {
+    "desktop": false,
+    "mobile": false,
+    "web_extensions": false,
+    "hosting": false,
+    "ui_interface": false
+  },
+  "deployment": {
+    "script": true,
+    "docker": true,
+    "docker_compose": true,
+    "helm": true,
+    "kubernetes": true,
+    "terraform": true,
+    "paths": {
+      "script": "/public/manifest/dummy/script.sh",
+      "docker": "/public/manifest/dummy/Dockerfile",
+      "docker_compose": "/public/manifest/dummy/docker-compose.yaml",
+      "helm": "/public/manifest/dummy/helm.yaml",
+      "kubernetes": "/public/manifest/dummy/k8s-deployment.yaml",
+      "terraform": "/public/manifest/dummy/main.tf"
+    }
+  }
 }

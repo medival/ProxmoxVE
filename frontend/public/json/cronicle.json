@@ -1,40 +1,72 @@
 {
-  "name": "Cronicle Primary",
+  "name": "cronicle",
   "slug": "cronicle",
   "categories": [
-    19
+    158
   ],
-  "date_created": "2024-05-02",
-  "type": "ct",
-  "updateable": true,
-  "privileged": false,
-  "interface_port": 3012,
-  "documentation": "https://github.com/jhuckaby/Cronicle/blob/master/README.md",
-  "website": "https://github.com/jhuckaby/Cronicle",
-  "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/webp/chronicle.webp",
-  "config_path": "/opt/cronicle/conf/config.json",
-  "description": "Cronicle is a task scheduling and management software that allows users to schedule and run tasks automatically on multiple servers. It has a web-based user interface that provides a convenient and centralized way to manage tasks and view their execution status. With Cronicle, users can schedule tasks to run at specific times, or on demand, and assign tasks to specific worker servers. The software provides real-time statistics and a live log viewer to help users monitor the progress of tasks. Cronicle is designed for use in large-scale environments, making it a valuable tool for automation and management of complex and time-sensitive tasks.",
+  "date_created": "2025-11-23",
+  "interface_port": null,
+  "documentation": "github.com/jhuckaby/Cronicle",
+  "website": "http://cronicle.net",
+  "source_code": "github.com/jhuckaby/Cronicle",
+  "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/webp/cronicle.webp",
+  "description": "Cronicle is a self-hosted distributed task scheduler with a web-based GUI for managing jobs across multiple servers. It supports load balancing, per-job permissions, job history, plugins, and notifications.",
   "install_methods": [
     {
-      "type": "default",
-      "script": "ct/cronicle.sh",
-      "resources": {
-        "cpu": 1,
-        "ram": 512,
-        "hdd": 2,
-        "os": "debian",
-        "version": "12"
+      "platform": {
+        "desktop": {
+          "linux": false,
+          "windows": false,
+          "macos": false
+        },
+        "mobile": {
+          "android": false,
+          "ios": false
+        },
+        "web_app": false,
+        "browser_extension": false,
+        "cli_only": false,
+        "hosting": {
+          "self_hosted": false,
+          "saas": false,
+          "managed_cloud": false
+        },
+        "ui": {
+          "cli": false,
+          "gui": false,
+          "web_ui": false,
+          "api": false,
+          "tui": false
+        }
       }
     }
   ],
   "default_credentials": {
-    "username": "admin",
-    "password": "admin"
+    "username": null,
+    "password": null
   },
-  "notes": [
-    {
-      "text": "Primary and Worker Private Keys Must Match in the config file",
-      "type": "warning"
+  "notes": [],
+  "platform": {
+    "desktop": false,
+    "mobile": false,
+    "web_extensions": false,
+    "hosting": false,
+    "ui_interface": false
+  },
+  "deployment": {
+    "script": true,
+    "docker": true,
+    "docker_compose": true,
+    "helm": true,
+    "kubernetes": true,
+    "terraform": true,
+    "paths": {
+      "script": "/public/manifest/dummy/script.sh",
+      "docker": "/public/manifest/dummy/Dockerfile",
+      "docker_compose": "/public/manifest/dummy/docker-compose.yaml",
+      "helm": "/public/manifest/dummy/helm.yaml",
+      "kubernetes": "/public/manifest/dummy/k8s-deployment.yaml",
+      "terraform": "/public/manifest/dummy/main.tf"
     }
-  ]
+  }
 }

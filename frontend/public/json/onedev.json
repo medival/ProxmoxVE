@@ -1,29 +1,43 @@
 {
-  "name": "OneDev",
+  "name": "onedev",
   "slug": "onedev",
   "categories": [
-    20
+    72
   ],
-  "date_created": "2024-11-30",
-  "type": "ct",
-  "updateable": true,
-  "privileged": false,
-  "interface_port": 6610,
-  "documentation": "https://docs.onedev.io/",
-  "website": "https://onedev.io/",
+  "date_created": "2025-11-23",
+  "interface_port": null,
+  "documentation": "github.com/theonedev/onedev",
+  "website": "onedev.io",
+  "source_code": "github.com/theonedev/onedev",
   "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/webp/onedev.webp",
-  "config_path": "/opt/onedev/conf",
-  "description": "Git server with CI/CD, kanban, and packages.",
+  "description": "OneDev is a self-hosted Git hosting and CI platform. It includes code review, issue tracking, Kanban boards, and pipelines in a single, Docker-based application with a modern UI.",
   "install_methods": [
     {
-      "type": "default",
-      "script": "ct/onedev.sh",
-      "resources": {
-        "cpu": 2,
-        "ram": 2048,
-        "hdd": 4,
-        "os": "debian",
-        "version": "13"
+      "platform": {
+        "desktop": {
+          "linux": false,
+          "windows": false,
+          "macos": false
+        },
+        "mobile": {
+          "android": false,
+          "ios": false
+        },
+        "web_app": false,
+        "browser_extension": false,
+        "cli_only": false,
+        "hosting": {
+          "self_hosted": false,
+          "saas": false,
+          "managed_cloud": false
+        },
+        "ui": {
+          "cli": false,
+          "gui": false,
+          "web_ui": false,
+          "api": false,
+          "tui": false
+        }
       }
     }
   ],
@@ -31,5 +45,28 @@
     "username": null,
     "password": null
   },
-  "notes": []
+  "notes": [],
+  "platform": {
+    "desktop": false,
+    "mobile": false,
+    "web_extensions": false,
+    "hosting": false,
+    "ui_interface": false
+  },
+  "deployment": {
+    "script": true,
+    "docker": true,
+    "docker_compose": true,
+    "helm": true,
+    "kubernetes": true,
+    "terraform": true,
+    "paths": {
+      "script": "/public/manifest/dummy/script.sh",
+      "docker": "/public/manifest/dummy/Dockerfile",
+      "docker_compose": "/public/manifest/dummy/docker-compose.yaml",
+      "helm": "/public/manifest/dummy/helm.yaml",
+      "kubernetes": "/public/manifest/dummy/k8s-deployment.yaml",
+      "terraform": "/public/manifest/dummy/main.tf"
+    }
+  }
 }

@@ -1,29 +1,43 @@
 {
-  "name": "FileFlows",
+  "name": "fileflows",
   "slug": "fileflows",
   "categories": [
-    13
+    "Tidak ditemukan"
   ],
-  "date_created": "2025-03-24",
-  "type": "ct",
-  "updateable": true,
-  "privileged": false,
-  "interface_port": 19200,
-  "documentation": "https://fileflows.com/docs",
-  "website": "https://fileflows.com/",
+  "date_created": "2025-11-23",
+  "interface_port": null,
+  "documentation": null,
+  "website": "fileflows.com",
+  "source_code": null,
   "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/webp/fileflows.webp",
-  "config_path": "/opt/fileflows/Data/server.config",
-  "description": "FileFlows is a powerful, open-source tool for automating media file processing workflows, including encoding, decoding, and media management. It offers an intuitive GUI and extensive plugin support, making it ideal for tasks like video transcoding, organizing, and managing large media libraries.",
+  "description": "Tidak ditemukan",
   "install_methods": [
     {
-      "type": "default",
-      "script": "ct/fileflows.sh",
-      "resources": {
-        "cpu": 2,
-        "ram": 2048,
-        "hdd": 8,
-        "os": "Debian",
-        "version": "12"
+      "platform": {
+        "desktop": {
+          "linux": false,
+          "windows": false,
+          "macos": false
+        },
+        "mobile": {
+          "android": false,
+          "ios": false
+        },
+        "web_app": false,
+        "browser_extension": false,
+        "cli_only": false,
+        "hosting": {
+          "self_hosted": false,
+          "saas": false,
+          "managed_cloud": false
+        },
+        "ui": {
+          "cli": false,
+          "gui": false,
+          "web_ui": false,
+          "api": false,
+          "tui": false
+        }
       }
     }
   ],
@@ -31,10 +45,28 @@
     "username": null,
     "password": null
   },
-  "notes": [
-    {
-      "text": "With Privileged/Unprivileged Hardware Acceleration Support",
-      "type": "info"
+  "notes": [],
+  "platform": {
+    "desktop": false,
+    "mobile": false,
+    "web_extensions": false,
+    "hosting": false,
+    "ui_interface": false
+  },
+  "deployment": {
+    "script": true,
+    "docker": true,
+    "docker_compose": true,
+    "helm": true,
+    "kubernetes": true,
+    "terraform": true,
+    "paths": {
+      "script": "/public/manifest/dummy/script.sh",
+      "docker": "/public/manifest/dummy/Dockerfile",
+      "docker_compose": "/public/manifest/dummy/docker-compose.yaml",
+      "helm": "/public/manifest/dummy/helm.yaml",
+      "kubernetes": "/public/manifest/dummy/k8s-deployment.yaml",
+      "terraform": "/public/manifest/dummy/main.tf"
     }
-  ]
+  }
 }

@@ -1,29 +1,43 @@
 {
-  "name": "Radicale",
+  "name": "radicale",
   "slug": "radicale",
   "categories": [
-    0
+    23
   ],
-  "date_created": "2025-02-02",
-  "type": "ct",
-  "updateable": true,
-  "privileged": false,
-  "interface_port": 5232,
-  "documentation": "https://radicale.org/master.html#documentation-1",
-  "website": "https://radicale.org/",
+  "date_created": "2025-11-23",
+  "interface_port": null,
+  "documentation": "github.com/Kozea/Radicale",
+  "website": "radicale.org",
+  "source_code": "github.com/Kozea/Radicale",
   "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/webp/radicale.webp",
-  "config_path": "/etc/radicale/config or ~/.config/radicale/config",
-  "description": "Radicale is a small but powerful CalDAV (calendars, to-do lists) and CardDAV (contacts)",
+  "description": "Radicale is a self-hosted CalDAV and CardDAV server for contact and calendar syncing across devices. It’s lightweight and easy to deploy with a minimal configuration.",
   "install_methods": [
     {
-      "type": "default",
-      "script": "ct/radicale.sh",
-      "resources": {
-        "cpu": 1,
-        "ram": 512,
-        "hdd": 2,
-        "os": "debian",
-        "version": "13"
+      "platform": {
+        "desktop": {
+          "linux": false,
+          "windows": false,
+          "macos": false
+        },
+        "mobile": {
+          "android": false,
+          "ios": false
+        },
+        "web_app": false,
+        "browser_extension": false,
+        "cli_only": false,
+        "hosting": {
+          "self_hosted": false,
+          "saas": false,
+          "managed_cloud": false
+        },
+        "ui": {
+          "cli": false,
+          "gui": false,
+          "web_ui": false,
+          "api": false,
+          "tui": false
+        }
       }
     }
   ],
@@ -31,14 +45,28 @@
     "username": null,
     "password": null
   },
-  "notes": [
-    {
-      "text": "To view the user credentials : `cat radicale.creds`",
-      "type": "info"
-    },
-    {
-      "text": "This application requires additional configuration. Please refer to https://github.com/community-scripts/ProxmoxVE/discussions/2073.",
-      "type": "info"
+  "notes": [],
+  "platform": {
+    "desktop": false,
+    "mobile": false,
+    "web_extensions": false,
+    "hosting": false,
+    "ui_interface": false
+  },
+  "deployment": {
+    "script": true,
+    "docker": true,
+    "docker_compose": true,
+    "helm": true,
+    "kubernetes": true,
+    "terraform": true,
+    "paths": {
+      "script": "/public/manifest/dummy/script.sh",
+      "docker": "/public/manifest/dummy/Dockerfile",
+      "docker_compose": "/public/manifest/dummy/docker-compose.yaml",
+      "helm": "/public/manifest/dummy/helm.yaml",
+      "kubernetes": "/public/manifest/dummy/k8s-deployment.yaml",
+      "terraform": "/public/manifest/dummy/main.tf"
     }
-  ]
+  }
 }

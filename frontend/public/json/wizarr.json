@@ -1,30 +1,43 @@
 {
-  "name": "Wizarr",
+  "name": "wizarr",
   "slug": "wizarr",
   "categories": [
-    14,
-    13
+    165
   ],
-  "date_created": "2025-06-19",
-  "type": "ct",
-  "updateable": true,
-  "privileged": false,
-  "interface_port": 5690,
-  "documentation": "https://docs.wizarr.dev/",
-  "website": "https://docs.wizarr.dev/",
+  "date_created": "2025-11-23",
+  "interface_port": null,
+  "documentation": "github.com/wizarrrr/wizarr",
+  "website": "docs.wizarr.dev",
+  "source_code": "github.com/wizarrrr/wizarr",
   "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/webp/wizarr.webp",
-  "config_path": "/opt/wizarr/.env",
-  "description": "Wizarr is an automatic user invitation system for Plex, Jellyfin and Emby. Create a unique link and share it to a user and they will automatically be invited to your media Server",
+  "description": "Wizarr is a self-hosted invite management portal for media servers like Jellyfin and Plex. It streamlines onboarding by generating invite links, collecting user details, and provisioning accounts via a friendly web front-end.",
   "install_methods": [
     {
-      "type": "default",
-      "script": "ct/wizarr.sh",
-      "resources": {
-        "cpu": 1,
-        "ram": 1024,
-        "hdd": 4,
-        "os": "debian",
-        "version": "13"
+      "platform": {
+        "desktop": {
+          "linux": false,
+          "windows": false,
+          "macos": false
+        },
+        "mobile": {
+          "android": false,
+          "ios": false
+        },
+        "web_app": false,
+        "browser_extension": false,
+        "cli_only": false,
+        "hosting": {
+          "self_hosted": false,
+          "saas": false,
+          "managed_cloud": false
+        },
+        "ui": {
+          "cli": false,
+          "gui": false,
+          "web_ui": false,
+          "api": false,
+          "tui": false
+        }
       }
     }
   ],
@@ -32,5 +45,28 @@
     "username": null,
     "password": null
   },
-  "notes": []
+  "notes": [],
+  "platform": {
+    "desktop": false,
+    "mobile": false,
+    "web_extensions": false,
+    "hosting": false,
+    "ui_interface": false
+  },
+  "deployment": {
+    "script": true,
+    "docker": true,
+    "docker_compose": true,
+    "helm": true,
+    "kubernetes": true,
+    "terraform": true,
+    "paths": {
+      "script": "/public/manifest/dummy/script.sh",
+      "docker": "/public/manifest/dummy/Dockerfile",
+      "docker_compose": "/public/manifest/dummy/docker-compose.yaml",
+      "helm": "/public/manifest/dummy/helm.yaml",
+      "kubernetes": "/public/manifest/dummy/k8s-deployment.yaml",
+      "terraform": "/public/manifest/dummy/main.tf"
+    }
+  }
 }

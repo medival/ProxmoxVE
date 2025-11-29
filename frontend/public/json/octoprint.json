@@ -1,29 +1,43 @@
 {
-  "name": "OctoPrint",
+  "name": "octoprint",
   "slug": "octoprint",
   "categories": [
-    24
+    3
   ],
-  "date_created": "2024-05-02",
-  "type": "ct",
-  "updateable": true,
-  "privileged": true,
-  "interface_port": 5000,
-  "documentation": "https://docs.octoprint.org/en/master/",
-  "website": "https://octoprint.org/",
+  "date_created": "2025-11-23",
+  "interface_port": null,
+  "documentation": "github.com/OctoPrint/OctoPrint",
+  "website": "octoprint.org",
+  "source_code": "github.com/OctoPrint/OctoPrint",
   "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/webp/octoprint.webp",
-  "config_path": "",
-  "description": "OctoPrint is a free and open-source web-based 3D printer control software that allows you to remotely control and monitor your 3D printer from a web interface. It was designed to be compatible with a wide range of 3D printers.",
+  "description": "OctoPrint is a powerful web interface for controlling 3D printers remotely. It offers live streaming, gcode upload, plugins, and terminal access, making it ideal for self-hosted workshop setups.",
   "install_methods": [
     {
-      "type": "default",
-      "script": "ct/octoprint.sh",
-      "resources": {
-        "cpu": 1,
-        "ram": 1024,
-        "hdd": 4,
-        "os": "debian",
-        "version": "13"
+      "platform": {
+        "desktop": {
+          "linux": false,
+          "windows": false,
+          "macos": false
+        },
+        "mobile": {
+          "android": false,
+          "ios": false
+        },
+        "web_app": false,
+        "browser_extension": false,
+        "cli_only": false,
+        "hosting": {
+          "self_hosted": false,
+          "saas": false,
+          "managed_cloud": false
+        },
+        "ui": {
+          "cli": false,
+          "gui": false,
+          "web_ui": false,
+          "api": false,
+          "tui": false
+        }
       }
     }
   ],
@@ -31,5 +45,28 @@
     "username": null,
     "password": null
   },
-  "notes": []
+  "notes": [],
+  "platform": {
+    "desktop": false,
+    "mobile": false,
+    "web_extensions": false,
+    "hosting": false,
+    "ui_interface": false
+  },
+  "deployment": {
+    "script": true,
+    "docker": true,
+    "docker_compose": true,
+    "helm": true,
+    "kubernetes": true,
+    "terraform": true,
+    "paths": {
+      "script": "/public/manifest/dummy/script.sh",
+      "docker": "/public/manifest/dummy/Dockerfile",
+      "docker_compose": "/public/manifest/dummy/docker-compose.yaml",
+      "helm": "/public/manifest/dummy/helm.yaml",
+      "kubernetes": "/public/manifest/dummy/k8s-deployment.yaml",
+      "terraform": "/public/manifest/dummy/main.tf"
+    }
+  }
 }

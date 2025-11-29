@@ -1,40 +1,43 @@
 {
-  "name": "Bitmagnet",
+  "name": "bitmagnet",
   "slug": "bitmagnet",
   "categories": [
-    11
+    166
   ],
-  "date_created": "2025-05-15",
-  "type": "ct",
-  "updateable": true,
-  "privileged": false,
-  "interface_port": 3333,
-  "documentation": "https://bitmagnet.io/setup.html",
-  "website": "https://bitmagnet.io/",
+  "date_created": "2025-11-23",
+  "interface_port": null,
+  "documentation": "github.com/bitmagnet-io/bitmagnet",
+  "website": "bitmagnet.io/",
+  "source_code": "github.com/bitmagnet-io/bitmagnet",
   "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/webp/bitmagnet.webp",
-  "config_path": "`/opt/bitmagnet/config.yml` or `/opt/bitmagnet/.env`",
-  "description": "A self-hosted BitTorrent indexer, DHT crawler, content classifier and torrent search engine with web UI, GraphQL API and Servarr stack integration.",
+  "description": "BitMagnet is an open-source torrent metadata indexer and DHT crawler that collects and structures BitTorrent data. It includes a web UI for browsing and analyzing torrent metadata, with an option to self-host and extend via API.",
   "install_methods": [
     {
-      "type": "default",
-      "script": "ct/bitmagnet.sh",
-      "resources": {
-        "cpu": 2,
-        "ram": 1024,
-        "hdd": 4,
-        "os": "debian",
-        "version": "12"
-      }
-    },
-    {
-      "type": "alpine",
-      "script": "ct/alpine-bitmagnet.sh",
-      "resources": {
-        "cpu": 2,
-        "ram": 1024,
-        "hdd": 3,
-        "os": "alpine",
-        "version": "3.22"
+      "platform": {
+        "desktop": {
+          "linux": false,
+          "windows": false,
+          "macos": false
+        },
+        "mobile": {
+          "android": false,
+          "ios": false
+        },
+        "web_app": false,
+        "browser_extension": false,
+        "cli_only": false,
+        "hosting": {
+          "self_hosted": false,
+          "saas": false,
+          "managed_cloud": false
+        },
+        "ui": {
+          "cli": false,
+          "gui": false,
+          "web_ui": false,
+          "api": false,
+          "tui": false
+        }
       }
     }
   ],
@@ -42,10 +45,28 @@
     "username": null,
     "password": null
   },
-  "notes": [
-    {
-      "text": "During installation you will be asked to enter your TMDB API key, if you wanna use it. Make sure you have it ready.",
-      "type": "info"
+  "notes": [],
+  "platform": {
+    "desktop": false,
+    "mobile": false,
+    "web_extensions": false,
+    "hosting": false,
+    "ui_interface": false
+  },
+  "deployment": {
+    "script": true,
+    "docker": true,
+    "docker_compose": true,
+    "helm": true,
+    "kubernetes": true,
+    "terraform": true,
+    "paths": {
+      "script": "/public/manifest/dummy/script.sh",
+      "docker": "/public/manifest/dummy/Dockerfile",
+      "docker_compose": "/public/manifest/dummy/docker-compose.yaml",
+      "helm": "/public/manifest/dummy/helm.yaml",
+      "kubernetes": "/public/manifest/dummy/k8s-deployment.yaml",
+      "terraform": "/public/manifest/dummy/main.tf"
     }
-  ]
+  }
 }

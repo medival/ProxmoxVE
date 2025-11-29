@@ -1,29 +1,43 @@
 {
-  "name": "Readeck",
+  "name": "readeck",
   "slug": "readeck",
   "categories": [
-    12
+    129
   ],
-  "date_created": "2024-05-02",
-  "type": "ct",
-  "updateable": true,
-  "privileged": false,
-  "interface_port": 8000,
-  "documentation": "https://readeck.org/en/docs/",
-  "website": "https://readeck.org/",
+  "date_created": "2025-11-23",
+  "interface_port": null,
+  "documentation": "codeberg.org/readeck/readeck",
+  "website": "readeck.org/",
+  "source_code": "codeberg.org/readeck/readeck",
   "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/webp/readeck.webp",
-  "config_path": "/opt/readeck/config.toml",
-  "description": "Readeck helps you keep all that web content you want to revisit in an hour, tomorrow, or in 20 years.",
+  "description": "Readeck is a self-hosted bookmarking and read-it-later tool. It supports importing, tagging, and organizing articles with a distraction-free reading mode.",
   "install_methods": [
     {
-      "type": "default",
-      "script": "ct/readeck.sh",
-      "resources": {
-        "cpu": 1,
-        "ram": 512,
-        "hdd": 2,
-        "os": "debian",
-        "version": "13"
+      "platform": {
+        "desktop": {
+          "linux": false,
+          "windows": false,
+          "macos": false
+        },
+        "mobile": {
+          "android": false,
+          "ios": false
+        },
+        "web_app": false,
+        "browser_extension": false,
+        "cli_only": false,
+        "hosting": {
+          "self_hosted": false,
+          "saas": false,
+          "managed_cloud": false
+        },
+        "ui": {
+          "cli": false,
+          "gui": false,
+          "web_ui": false,
+          "api": false,
+          "tui": false
+        }
       }
     }
   ],
@@ -31,5 +45,28 @@
     "username": null,
     "password": null
   },
-  "notes": []
+  "notes": [],
+  "platform": {
+    "desktop": false,
+    "mobile": false,
+    "web_extensions": false,
+    "hosting": false,
+    "ui_interface": true
+  },
+  "deployment": {
+    "script": true,
+    "docker": true,
+    "docker_compose": true,
+    "helm": true,
+    "kubernetes": true,
+    "terraform": true,
+    "paths": {
+      "script": "/public/manifest/dummy/script.sh",
+      "docker": "/public/manifest/dummy/Dockerfile",
+      "docker_compose": "/public/manifest/dummy/docker-compose.yaml",
+      "helm": "/public/manifest/dummy/helm.yaml",
+      "kubernetes": "/public/manifest/dummy/k8s-deployment.yaml",
+      "terraform": "/public/manifest/dummy/main.tf"
+    }
+  }
 }

@@ -1,40 +1,72 @@
 {
-    "name": "Duplicati",
-    "slug": "duplicati",
-    "categories": [
-        7
-    ],
-    "date_created": "2025-02-06",
-    "type": "ct",
-    "updateable": true,
-    "privileged": false,
-    "interface_port": 8200,
-    "documentation": "https://docs.duplicati.com/",
-    "website": "https://duplicati.com/",
-    "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/webp/duplicati.webp",
-    "config_path": "",
-    "description": "Duplicati is a free, open-source backup solution that offers zero-trust, fully encrypted backups for your data.",
-    "install_methods": [
-        {
-            "type": "default",
-            "script": "ct/duplicati.sh",
-            "resources": {
-                "cpu": 1,
-                "ram": 1048,
-                "hdd": 10,
-                "os": "debian",
-                "version": "12"
-            }
+  "name": "duplicati",
+  "slug": "duplicati",
+  "categories": [
+    18
+  ],
+  "date_created": "2025-11-23",
+  "interface_port": null,
+  "documentation": "github.com/duplicati/duplicati",
+  "website": "github.com/duplicati/duplicati",
+  "source_code": "github.com/duplicati/duplicati",
+  "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/webp/duplicati.webp",
+  "description": "Duplicati is a backup client that stores encrypted, incremental backups on cloud storage services or local disks. It has a web interface for scheduling, restoring, and configuring backup jobs, and runs well on headless servers.",
+  "install_methods": [
+    {
+      "platform": {
+        "desktop": {
+          "linux": false,
+          "windows": false,
+          "macos": false
+        },
+        "mobile": {
+          "android": false,
+          "ios": false
+        },
+        "web_app": false,
+        "browser_extension": false,
+        "cli_only": false,
+        "hosting": {
+          "self_hosted": false,
+          "saas": false,
+          "managed_cloud": false
+        },
+        "ui": {
+          "cli": false,
+          "gui": false,
+          "web_ui": false,
+          "api": false,
+          "tui": false
         }
-    ],
-    "default_credentials": {
-        "username": null,
-        "password": null
-    },
-    "notes": [
-        {
-            "text": "Admin password and database encryption key: `cat ~/duplicati.creds`",
-            "type": "info"
-        }
-    ]
+      }
+    }
+  ],
+  "default_credentials": {
+    "username": null,
+    "password": null
+  },
+  "notes": [],
+  "platform": {
+    "desktop": false,
+    "mobile": false,
+    "web_extensions": false,
+    "hosting": false,
+    "ui_interface": false
+  },
+  "deployment": {
+    "script": true,
+    "docker": true,
+    "docker_compose": true,
+    "helm": true,
+    "kubernetes": true,
+    "terraform": true,
+    "paths": {
+      "script": "/public/manifest/dummy/script.sh",
+      "docker": "/public/manifest/dummy/Dockerfile",
+      "docker_compose": "/public/manifest/dummy/docker-compose.yaml",
+      "helm": "/public/manifest/dummy/helm.yaml",
+      "kubernetes": "/public/manifest/dummy/k8s-deployment.yaml",
+      "terraform": "/public/manifest/dummy/main.tf"
+    }
+  }
 }

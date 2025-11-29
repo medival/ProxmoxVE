@@ -1,29 +1,43 @@
 {
-  "name": "VictoriaMetrics",
+  "name": "victoriametrics",
   "slug": "victoriametrics",
   "categories": [
-    8
+    103
   ],
-  "date_created": "2025-02-24",
-  "type": "ct",
-  "updateable": true,
-  "privileged": false,
-  "interface_port": 8428,
-  "documentation": "https://docs.victoriametrics.com/",
-  "website": "https://victoriametrics.com/",
+  "date_created": "2025-11-23",
+  "interface_port": null,
+  "documentation": "github.com/VictoriaMetrics/VictoriaMetrics",
+  "website": "victoriametrics.com/",
+  "source_code": "github.com/VictoriaMetrics/VictoriaMetrics",
   "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/webp/victoriametrics.webp",
-  "config_path": "",
-  "description": "VictoriaMetrics is a fast, cost-saving, and scalable solution for monitoring and managing time series data. It delivers high performance and reliability, making it an ideal choice for businesses of all sizes.",
+  "description": "VictoriaMetrics is a fast, cost-effective time series database and monitoring solution. It can act as Prometheus-compatible storage, supports clustering, and exposes a web UI and HTTP APIs for queries and metrics.",
   "install_methods": [
     {
-      "type": "default",
-      "script": "ct/victoriametrics.sh",
-      "resources": {
-        "cpu": 2,
-        "ram": 2048,
-        "hdd": 16,
-        "os": "debian",
-        "version": "13"
+      "platform": {
+        "desktop": {
+          "linux": false,
+          "windows": false,
+          "macos": false
+        },
+        "mobile": {
+          "android": false,
+          "ios": false
+        },
+        "web_app": false,
+        "browser_extension": false,
+        "cli_only": false,
+        "hosting": {
+          "self_hosted": false,
+          "saas": false,
+          "managed_cloud": false
+        },
+        "ui": {
+          "cli": false,
+          "gui": false,
+          "web_ui": false,
+          "api": false,
+          "tui": false
+        }
       }
     }
   ],
@@ -31,10 +45,28 @@
     "username": null,
     "password": null
   },
-  "notes": [
-    {
-      "text": "Included option to install VictoriaLogs.",
-      "type": "info"
+  "notes": [],
+  "platform": {
+    "desktop": false,
+    "mobile": false,
+    "web_extensions": false,
+    "hosting": false,
+    "ui_interface": false
+  },
+  "deployment": {
+    "script": true,
+    "docker": true,
+    "docker_compose": true,
+    "helm": true,
+    "kubernetes": true,
+    "terraform": true,
+    "paths": {
+      "script": "/public/manifest/dummy/script.sh",
+      "docker": "/public/manifest/dummy/Dockerfile",
+      "docker_compose": "/public/manifest/dummy/docker-compose.yaml",
+      "helm": "/public/manifest/dummy/helm.yaml",
+      "kubernetes": "/public/manifest/dummy/k8s-deployment.yaml",
+      "terraform": "/public/manifest/dummy/main.tf"
     }
-  ]
+  }
 }

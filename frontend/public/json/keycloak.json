@@ -1,44 +1,72 @@
 {
-  "name": "Keycloak",
+  "name": "keycloak",
   "slug": "keycloak",
   "categories": [
-    6
+    79
   ],
-  "date_created": "2024-05-02",
-  "type": "ct",
-  "updateable": true,
-  "privileged": false,
-  "interface_port": 8080,
-  "documentation": "https://www.keycloak.org/documentation",
-  "website": "https://www.keycloak.org/",
+  "date_created": "2025-11-23",
+  "interface_port": null,
+  "documentation": "github.com/keycloak/keycloak",
+  "website": "www.keycloak.org",
+  "source_code": "github.com/keycloak/keycloak",
   "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/webp/keycloak.webp",
-  "config_path": "/opt/keycloak/conf/keycloak.conf",
-  "description": "Keycloak is an open-source identity and access management solution that provides centralized authentication and authorization for modern applications and services. It enables organizations to secure their applications and services with a single sign-on (SSO) solution, reducing the need for users to remember multiple login credentials. Keycloak supports various authentication protocols, including SAML, OAuth, and OpenID Connect, and integrates with a wide range of applications and services. With Keycloak, administrators can manage user identities, define security policies, and monitor access to their applications and services. The software is designed to be scalable, flexible, and easy to use, making it a valuable tool for enhancing the security and usability of modern applications and services.",
+  "description": "Keycloak is an open source identity and access management solution. It provides SSO, OAuth2 and OpenID Connect, user federation and fine grained authorization policies, and can be self hosted or used as part of managed offerings.",
   "install_methods": [
     {
-      "type": "default",
-      "script": "ct/keycloak.sh",
-      "resources": {
-        "cpu": 2,
-        "ram": 2048,
-        "hdd": 4,
-        "os": "debian",
-        "version": "12"
+      "platform": {
+        "desktop": {
+          "linux": false,
+          "windows": false,
+          "macos": false
+        },
+        "mobile": {
+          "android": false,
+          "ios": false
+        },
+        "web_app": false,
+        "browser_extension": false,
+        "cli_only": false,
+        "hosting": {
+          "self_hosted": false,
+          "saas": false,
+          "managed_cloud": false
+        },
+        "ui": {
+          "cli": false,
+          "gui": false,
+          "web_ui": false,
+          "api": false,
+          "tui": false
+        }
       }
     }
   ],
   "default_credentials": {
-    "username": "tmpadm",
-    "password": "admin123"
+    "username": null,
+    "password": null
   },
-  "notes": [
-    {
-      "text": "First start can take a few minutes",
-      "type": "warning"
-    },
-    {
-      "text": "When updating, if you had modified cache-ispn.xml: Re-apply your changes to the new file, otherwise leave it unchanged.",
-      "type": "info"
+  "notes": [],
+  "platform": {
+    "desktop": false,
+    "mobile": false,
+    "web_extensions": false,
+    "hosting": false,
+    "ui_interface": false
+  },
+  "deployment": {
+    "script": true,
+    "docker": true,
+    "docker_compose": true,
+    "helm": true,
+    "kubernetes": true,
+    "terraform": true,
+    "paths": {
+      "script": "/public/manifest/dummy/script.sh",
+      "docker": "/public/manifest/dummy/Dockerfile",
+      "docker_compose": "/public/manifest/dummy/docker-compose.yaml",
+      "helm": "/public/manifest/dummy/helm.yaml",
+      "kubernetes": "/public/manifest/dummy/k8s-deployment.yaml",
+      "terraform": "/public/manifest/dummy/main.tf"
     }
-  ]
+  }
 }

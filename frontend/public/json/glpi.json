@@ -1,35 +1,72 @@
 {
-  "name": "GLPI",
+  "name": "glpi",
   "slug": "glpi",
   "categories": [
-    25
+    146
   ],
-  "date_created": "2025-01-06",
-  "type": "ct",
-  "updateable": false,
-  "privileged": false,
-  "interface_port": 80,
-  "documentation": "https://glpi-project.org/documentation/",
-  "website": "https://glpi-project.org/",
+  "date_created": "2025-11-23",
+  "interface_port": null,
+  "documentation": "github.com/glpi-project/glpi",
+  "website": "glpi-project.org",
+  "source_code": "github.com/glpi-project/glpi",
   "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/webp/glpi.webp",
-  "config_path": "/etc/glpi",
-  "description": "GLPI is a Free Asset and IT Management Software package, Data center management, ITIL Service Desk, licenses tracking and software auditing.",
+  "description": "GLPI is a full-featured IT asset and service management platform that includes helpdesk, inventory, documentation, and automation tools. It is widely used in enterprise environments to manage IT assets and service requests.",
   "install_methods": [
     {
-      "type": "default",
-      "script": "ct/glpi.sh",
-      "resources": {
-        "cpu": 2,
-        "ram": 2048,
-        "hdd": 10,
-        "os": "debian",
-        "version": "13"
+      "platform": {
+        "desktop": {
+          "linux": false,
+          "windows": false,
+          "macos": false
+        },
+        "mobile": {
+          "android": false,
+          "ios": false
+        },
+        "web_app": false,
+        "browser_extension": false,
+        "cli_only": false,
+        "hosting": {
+          "self_hosted": false,
+          "saas": false,
+          "managed_cloud": false
+        },
+        "ui": {
+          "cli": false,
+          "gui": false,
+          "web_ui": false,
+          "api": false,
+          "tui": false
+        }
       }
     }
   ],
   "default_credentials": {
-    "username": "glpi",
-    "password": "glpi"
+    "username": null,
+    "password": null
   },
-  "notes": []
+  "notes": [],
+  "platform": {
+    "desktop": false,
+    "mobile": false,
+    "web_extensions": false,
+    "hosting": false,
+    "ui_interface": false
+  },
+  "deployment": {
+    "script": true,
+    "docker": true,
+    "docker_compose": true,
+    "helm": true,
+    "kubernetes": true,
+    "terraform": true,
+    "paths": {
+      "script": "/public/manifest/dummy/script.sh",
+      "docker": "/public/manifest/dummy/Dockerfile",
+      "docker_compose": "/public/manifest/dummy/docker-compose.yaml",
+      "helm": "/public/manifest/dummy/helm.yaml",
+      "kubernetes": "/public/manifest/dummy/k8s-deployment.yaml",
+      "terraform": "/public/manifest/dummy/main.tf"
+    }
+  }
 }

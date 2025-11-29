@@ -1,29 +1,43 @@
 {
-  "name": "Ghostfolio",
+  "name": "ghostfolio",
   "slug": "ghostfolio",
   "categories": [
-    23
+    185
   ],
-  "date_created": "2025-09-29",
-  "type": "ct",
-  "updateable": true,
-  "privileged": false,
-  "interface_port": 3333,
-  "documentation": "https://github.com/ghostfolio/ghostfolio?tab=readme-ov-file#self-hosting",
-  "website": "https://ghostfol.io/",
+  "date_created": "2025-11-23",
+  "interface_port": null,
+  "documentation": "github.com/ghostfolio/ghostfolio",
+  "website": "Ghostfol.io",
+  "source_code": "github.com/ghostfolio/ghostfolio",
   "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/webp/ghostfolio.webp",
-  "config_path": "/opt/ghostfolio/.env",
-  "description": "Ghostfolio is an open source wealth management software built with web technology. The application empowers busy people to keep track of stocks, ETFs or cryptocurrencies and make solid, data-driven investment decisions.",
+  "description": "Ghostfolio is a self-hosted investment and portfolio tracker with detailed analytics, portfolio breakdowns, and financial dashboards. It supports multiple brokers and integrates live data with a privacy-first approach.",
   "install_methods": [
     {
-      "type": "default",
-      "script": "ct/ghostfolio.sh",
-      "resources": {
-        "cpu": 2,
-        "ram": 4096,
-        "hdd": 8,
-        "os": "debian",
-        "version": "13"
+      "platform": {
+        "desktop": {
+          "linux": false,
+          "windows": false,
+          "macos": false
+        },
+        "mobile": {
+          "android": false,
+          "ios": false
+        },
+        "web_app": false,
+        "browser_extension": false,
+        "cli_only": false,
+        "hosting": {
+          "self_hosted": false,
+          "saas": false,
+          "managed_cloud": false
+        },
+        "ui": {
+          "cli": false,
+          "gui": false,
+          "web_ui": false,
+          "api": false,
+          "tui": false
+        }
       }
     }
   ],
@@ -31,22 +45,28 @@
     "username": null,
     "password": null
   },
-  "notes": [
-    {
-      "text": "Create your first user account by visiting the web interface and clicking 'Get Started'. The first user will automatically get admin privileges.",
-      "type": "info"
-    },
-    {
-      "text": "Database and Redis credentials: `cat ~/ghostfolio.creds`",
-      "type": "info"
-    },
-    {
-      "text": "Optional: CoinGecko API keys can be added during installation or later in the .env file for enhanced cryptocurrency data.",
-      "type": "info"
-    },
-    {
-      "text": "Build process requires 4GB RAM (runtime: ~2GB). A temporary swap file will be created automatically if insufficient memory is detected.",
-      "type": "warning"
+  "notes": [],
+  "platform": {
+    "desktop": false,
+    "mobile": false,
+    "web_extensions": false,
+    "hosting": false,
+    "ui_interface": false
+  },
+  "deployment": {
+    "script": true,
+    "docker": true,
+    "docker_compose": true,
+    "helm": true,
+    "kubernetes": true,
+    "terraform": true,
+    "paths": {
+      "script": "/public/manifest/dummy/script.sh",
+      "docker": "/public/manifest/dummy/Dockerfile",
+      "docker_compose": "/public/manifest/dummy/docker-compose.yaml",
+      "helm": "/public/manifest/dummy/helm.yaml",
+      "kubernetes": "/public/manifest/dummy/k8s-deployment.yaml",
+      "terraform": "/public/manifest/dummy/main.tf"
     }
-  ]
+  }
 }

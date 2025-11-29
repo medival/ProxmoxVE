@@ -1,29 +1,43 @@
 {
-  "name": "AdventureLog",
+  "name": "adventurelog",
   "slug": "adventurelog",
   "categories": [
-    24
+    125
   ],
-  "date_created": "2024-10-26",
-  "type": "ct",
-  "updateable": true,
-  "privileged": false,
-  "interface_port": 3000,
-  "documentation": "https://adventurelog.app/docs/intro/adventurelog_overview.html",
-  "website": "https://adventurelog.app/",
+  "date_created": "2025-11-23",
+  "interface_port": null,
+  "documentation": "github.com/seanmorley15/AdventureLog",
+  "website": "adventurelog.app",
+  "source_code": "github.com/seanmorley15/AdventureLog",
   "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/webp/adventurelog.webp",
-  "config_path": "/opt/adventurelog/backend/server/.env",
-  "description": "Adventure Log is an app designed to track outdoor activities and personal achievements, allowing users to log their adventures with photos, notes, and location data. It focuses on enhancing outdoor experiences by preserving memories and sharing them with others.",
+  "description": "AdventureLog is a web-based adventure journaling app where users can track their travels, add stories, locations and timelines. It supports rich posts with media and is ideal for self-hosted digital travel diaries and adventure logs.",
   "install_methods": [
     {
-      "type": "default",
-      "script": "ct/adventurelog.sh",
-      "resources": {
-        "cpu": 2,
-        "ram": 2048,
-        "hdd": 7,
-        "os": "debian",
-        "version": "13"
+      "platform": {
+        "desktop": {
+          "linux": false,
+          "windows": false,
+          "macos": false
+        },
+        "mobile": {
+          "android": false,
+          "ios": false
+        },
+        "web_app": false,
+        "browser_extension": false,
+        "cli_only": false,
+        "hosting": {
+          "self_hosted": false,
+          "saas": false,
+          "managed_cloud": false
+        },
+        "ui": {
+          "cli": false,
+          "gui": false,
+          "web_ui": false,
+          "api": false,
+          "tui": false
+        }
       }
     }
   ],
@@ -31,14 +45,28 @@
     "username": null,
     "password": null
   },
-  "notes": [
-    {
-      "text": "AdventureLog uses an initial local IP, if you change your LXC-IP, you need to change the IP here: `/opt/adventurelog/backend/server/.env` and here: `/opt/adventurelog/frontend/.env`",
-      "type": "warning"
-    },
-    {
-      "text": "Use `cat ~/adventurelog.creds` to see login credentials.",
-      "type": "info"
+  "notes": [],
+  "platform": {
+    "desktop": false,
+    "mobile": false,
+    "web_extensions": false,
+    "hosting": false,
+    "ui_interface": false
+  },
+  "deployment": {
+    "script": true,
+    "docker": true,
+    "docker_compose": true,
+    "helm": true,
+    "kubernetes": true,
+    "terraform": true,
+    "paths": {
+      "script": "/public/manifest/dummy/script.sh",
+      "docker": "/public/manifest/dummy/Dockerfile",
+      "docker_compose": "/public/manifest/dummy/docker-compose.yaml",
+      "helm": "/public/manifest/dummy/helm.yaml",
+      "kubernetes": "/public/manifest/dummy/k8s-deployment.yaml",
+      "terraform": "/public/manifest/dummy/main.tf"
     }
-  ]
+  }
 }

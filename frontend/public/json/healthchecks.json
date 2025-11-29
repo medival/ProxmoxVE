@@ -1,29 +1,43 @@
 {
-  "name": "Healthchecks",
+  "name": "healthchecks",
   "slug": "healthchecks",
   "categories": [
-    9
+    173
   ],
-  "date_created": "2025-08-25",
-  "type": "ct",
-  "updateable": true,
-  "privileged": false,
-  "config_path": "/opt/healthchecks/hc/local_settings.py",
-  "interface_port": 3000,
-  "documentation": "https://healthchecks.io/docs/",
-  "website": "https://healthchecks.io/",
+  "date_created": "2025-11-23",
+  "interface_port": null,
+  "documentation": "github.com/healthchecks/healthchecks",
+  "website": "healthchecks.io",
+  "source_code": "github.com/healthchecks/healthchecks",
   "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/webp/healthchecks.webp",
-  "description": "Healthchecks is a cron job monitoring service. It listens for HTTP requests and email messages (\"pings\") from your cron jobs and scheduled tasks (\"checks\"). When a ping does not arrive on time, Healthchecks sends out alerts. Healthchecks comes with a web dashboard, API, 25+ integrations for delivering notifications, monthly email reports, WebAuthn 2FA support, team management features: projects, team members, read-only access.",
+  "description": "Healthchecks is a self hosted cron job and heartbeat monitoring service. You ping unique URLs from your scripts, containers or IoT devices and Healthchecks alerts you when jobs fail or run late, via email, chat, or webhooks.",
   "install_methods": [
     {
-      "type": "default",
-      "script": "ct/healthchecks.sh",
-      "resources": {
-        "cpu": 2,
-        "ram": 2048,
-        "hdd": 5,
-        "os": "Debian",
-        "version": "12"
+      "platform": {
+        "desktop": {
+          "linux": false,
+          "windows": false,
+          "macos": false
+        },
+        "mobile": {
+          "android": false,
+          "ios": false
+        },
+        "web_app": false,
+        "browser_extension": false,
+        "cli_only": false,
+        "hosting": {
+          "self_hosted": false,
+          "saas": false,
+          "managed_cloud": false
+        },
+        "ui": {
+          "cli": false,
+          "gui": false,
+          "web_ui": false,
+          "api": false,
+          "tui": false
+        }
       }
     }
   ],
@@ -31,14 +45,28 @@
     "username": null,
     "password": null
   },
-  "notes": [
-    {
-      "text": "if you change your LXC-IP, you need to update /etc/caddy/Caddyfile & /opt/healthchecks/hc/local_settings.py",
-      "type": "info"
-    },
-    {
-      "text": "Show credentials: `cat ~/healthchecks.creds`",
-      "type": "info"
+  "notes": [],
+  "platform": {
+    "desktop": false,
+    "mobile": false,
+    "web_extensions": false,
+    "hosting": false,
+    "ui_interface": false
+  },
+  "deployment": {
+    "script": true,
+    "docker": true,
+    "docker_compose": true,
+    "helm": true,
+    "kubernetes": true,
+    "terraform": true,
+    "paths": {
+      "script": "/public/manifest/dummy/script.sh",
+      "docker": "/public/manifest/dummy/Dockerfile",
+      "docker_compose": "/public/manifest/dummy/docker-compose.yaml",
+      "helm": "/public/manifest/dummy/helm.yaml",
+      "kubernetes": "/public/manifest/dummy/k8s-deployment.yaml",
+      "terraform": "/public/manifest/dummy/main.tf"
     }
-  ]
+  }
 }

@@ -1,29 +1,43 @@
 {
-  "name": "Autobrr",
+  "name": "autobrr",
   "slug": "autobrr",
   "categories": [
-    14
+    166
   ],
-  "date_created": "2024-05-02",
-  "type": "ct",
-  "updateable": true,
-  "privileged": false,
-  "interface_port": 7474,
-  "documentation": "https://autobrr.com/configuration/autobrr",
-  "website": "https://autobrr.com/",
+  "date_created": "2025-11-23",
+  "interface_port": null,
+  "documentation": "github.com/autobrr/autobrr",
+  "website": "autobrr.com/introduction",
+  "source_code": "github.com/autobrr/autobrr",
   "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/webp/autobrr.webp",
-  "config_path": "/root/.config/autobrr/config.toml",
-  "description": "Autobrr is a torrent downloading tool that automates the process of downloading torrents. It is designed to be modern and user-friendly, providing users with a convenient and efficient way to download torrent files. With Autobrr, you can schedule and manage your torrent downloads, and have the ability to automatically download torrents based on certain conditions, such as time of day or availability of seeds. This can save you time and effort, allowing you to focus on other tasks while your torrents are being downloaded in the background.",
+  "description": "Autobrr is an automated tool that monitors torrent trackers and pushes downloads to clients like qBittorrent and Deluge. It filters releases in real-time and supports Radarr, Sonarr, and Lidarr automation.",
   "install_methods": [
     {
-      "type": "default",
-      "script": "ct/autobrr.sh",
-      "resources": {
-        "cpu": 2,
-        "ram": 2048,
-        "hdd": 8,
-        "os": "debian",
-        "version": "12"
+      "platform": {
+        "desktop": {
+          "linux": false,
+          "windows": false,
+          "macos": false
+        },
+        "mobile": {
+          "android": false,
+          "ios": false
+        },
+        "web_app": false,
+        "browser_extension": false,
+        "cli_only": false,
+        "hosting": {
+          "self_hosted": false,
+          "saas": false,
+          "managed_cloud": false
+        },
+        "ui": {
+          "cli": false,
+          "gui": false,
+          "web_ui": false,
+          "api": false,
+          "tui": false
+        }
       }
     }
   ],
@@ -31,5 +45,28 @@
     "username": null,
     "password": null
   },
-  "notes": []
+  "notes": [],
+  "platform": {
+    "desktop": false,
+    "mobile": false,
+    "web_extensions": false,
+    "hosting": false,
+    "ui_interface": false
+  },
+  "deployment": {
+    "script": true,
+    "docker": true,
+    "docker_compose": true,
+    "helm": true,
+    "kubernetes": true,
+    "terraform": true,
+    "paths": {
+      "script": "/public/manifest/dummy/script.sh",
+      "docker": "/public/manifest/dummy/Dockerfile",
+      "docker_compose": "/public/manifest/dummy/docker-compose.yaml",
+      "helm": "/public/manifest/dummy/helm.yaml",
+      "kubernetes": "/public/manifest/dummy/k8s-deployment.yaml",
+      "terraform": "/public/manifest/dummy/main.tf"
+    }
+  }
 }

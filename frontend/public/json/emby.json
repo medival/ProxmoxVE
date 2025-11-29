@@ -1,29 +1,43 @@
 {
-  "name": "Emby Media Server",
+  "name": "emby",
   "slug": "emby",
   "categories": [
-    13
+    "Tidak ditemukan"
   ],
-  "date_created": "2024-05-02",
-  "type": "ct",
-  "updateable": true,
-  "privileged": false,
-  "interface_port": 8096,
-  "documentation": "https://emby.media/support/articles/Home.html",
-  "website": "https://emby.media/",
+  "date_created": "2025-11-23",
+  "interface_port": null,
+  "documentation": "emby.media/",
+  "website": "emby.media/",
+  "source_code": "emby.media/",
   "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/webp/emby.webp",
-  "config_path": "/var/lib/emby/config/system.xml",
-  "description": "Emby brings together your personal videos, music, photos, and live television.",
+  "description": "Emby is a media server platform that organizes and streams personal video, music, and photos to many devices. It offers apps for TVs and mobiles, a web interface, user profiles, and features like live TV and DVR for home media setups.",
   "install_methods": [
     {
-      "type": "default",
-      "script": "ct/emby.sh",
-      "resources": {
-        "cpu": 2,
-        "ram": 2048,
-        "hdd": 8,
-        "os": "ubuntu",
-        "version": "24.04"
+      "platform": {
+        "desktop": {
+          "linux": false,
+          "windows": false,
+          "macos": false
+        },
+        "mobile": {
+          "android": false,
+          "ios": false
+        },
+        "web_app": false,
+        "browser_extension": false,
+        "cli_only": false,
+        "hosting": {
+          "self_hosted": false,
+          "saas": false,
+          "managed_cloud": false
+        },
+        "ui": {
+          "cli": false,
+          "gui": false,
+          "web_ui": false,
+          "api": false,
+          "tui": false
+        }
       }
     }
   ],
@@ -31,10 +45,28 @@
     "username": null,
     "password": null
   },
-  "notes": [
-    {
-      "text": "With Privileged/Unprivileged Hardware Acceleration Support",
-      "type": "info"
+  "notes": [],
+  "platform": {
+    "desktop": false,
+    "mobile": false,
+    "web_extensions": false,
+    "hosting": false,
+    "ui_interface": false
+  },
+  "deployment": {
+    "script": true,
+    "docker": true,
+    "docker_compose": true,
+    "helm": true,
+    "kubernetes": true,
+    "terraform": true,
+    "paths": {
+      "script": "/public/manifest/dummy/script.sh",
+      "docker": "/public/manifest/dummy/Dockerfile",
+      "docker_compose": "/public/manifest/dummy/docker-compose.yaml",
+      "helm": "/public/manifest/dummy/helm.yaml",
+      "kubernetes": "/public/manifest/dummy/k8s-deployment.yaml",
+      "terraform": "/public/manifest/dummy/main.tf"
     }
-  ]
+  }
 }

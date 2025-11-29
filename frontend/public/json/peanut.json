@@ -1,29 +1,43 @@
 {
-  "name": "PeaNUT",
+  "name": "peanut",
   "slug": "peanut",
   "categories": [
-    4
+    17
   ],
-  "date_created": "2024-06-14",
-  "type": "ct",
-  "updateable": true,
-  "privileged": false,
-  "interface_port": 3000,
-  "documentation": "https://github.com/Brandawg93/PeaNUT/blob/main/README.md",
-  "website": "https://github.com/Brandawg93/PeaNUT/",
+  "date_created": "2025-11-23",
+  "interface_port": null,
+  "documentation": "github.com/Brandawg93/PeaNUT",
+  "website": "github.com/Brandawg93/PeaNUT",
+  "source_code": "github.com/Brandawg93/PeaNUT",
   "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/webp/peanut.webp",
-  "config_path": "/etc/peanut/settings.yml",
-  "description": "PeaNUT is a small dashboard for Network UPS Tools (NUT). It provides a web interface to monitor and manage UPS devices. PeaNUT allows users to view device status, retrieve information, and manage UPS parameters through its API. It's customizable for different UPS devices and supports integration with the Homepage dashboard.",
+  "description": "PeaNUT is a self-hosted network visualization tool that provides insights into connected devices and services within homelab environments. It offers graph views for network topology and metadata.",
   "install_methods": [
     {
-      "type": "default",
-      "script": "ct/peanut.sh",
-      "resources": {
-        "cpu": 2,
-        "ram": 4096,
-        "hdd": 7,
-        "os": "debian",
-        "version": "13"
+      "platform": {
+        "desktop": {
+          "linux": false,
+          "windows": false,
+          "macos": false
+        },
+        "mobile": {
+          "android": false,
+          "ios": false
+        },
+        "web_app": false,
+        "browser_extension": false,
+        "cli_only": false,
+        "hosting": {
+          "self_hosted": false,
+          "saas": false,
+          "managed_cloud": false
+        },
+        "ui": {
+          "cli": false,
+          "gui": false,
+          "web_ui": false,
+          "api": false,
+          "tui": false
+        }
       }
     }
   ],
@@ -31,5 +45,28 @@
     "username": null,
     "password": null
   },
-  "notes": []
+  "notes": [],
+  "platform": {
+    "desktop": false,
+    "mobile": false,
+    "web_extensions": false,
+    "hosting": false,
+    "ui_interface": false
+  },
+  "deployment": {
+    "script": true,
+    "docker": true,
+    "docker_compose": true,
+    "helm": true,
+    "kubernetes": true,
+    "terraform": true,
+    "paths": {
+      "script": "/public/manifest/dummy/script.sh",
+      "docker": "/public/manifest/dummy/Dockerfile",
+      "docker_compose": "/public/manifest/dummy/docker-compose.yaml",
+      "helm": "/public/manifest/dummy/helm.yaml",
+      "kubernetes": "/public/manifest/dummy/k8s-deployment.yaml",
+      "terraform": "/public/manifest/dummy/main.tf"
+    }
+  }
 }

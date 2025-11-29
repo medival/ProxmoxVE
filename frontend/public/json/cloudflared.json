@@ -1,29 +1,43 @@
 {
-  "name": "Cloudflared",
+  "name": "cloudflared",
   "slug": "cloudflared",
   "categories": [
-    4
+    137
   ],
-  "date_created": "2024-05-02",
-  "type": "ct",
-  "updateable": true,
-  "privileged": false,
+  "date_created": "2025-11-23",
   "interface_port": null,
-  "documentation": "https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/",
-  "website": "https://www.cloudflare.com/",
-  "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/webp/cloudflare.webp",
-  "config_path": "/usr/local/etc/cloudflared/config.yml",
-  "description": "Cloudflared is a command-line tool that allows you to securely access resources on the Cloudflare network, such as websites and APIs, from your local computer. It works by creating a secure tunnel between your computer and the Cloudflare network, allowing you to access resources as if they were on your local network.",
+  "documentation": "github.com/cloudflare/cloudflared",
+  "website": "github.com/cloudflare/cloudflared",
+  "source_code": "github.com/cloudflare/cloudflared",
+  "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/webp/cloudflared.webp",
+  "description": "Cloudflared is a command-line client used to connect your private services securely to Cloudflare's network using tunnels. It enables exposing local apps, SSH, and RDP without exposing ports publicly.",
   "install_methods": [
     {
-      "type": "default",
-      "script": "ct/cloudflared.sh",
-      "resources": {
-        "cpu": 1,
-        "ram": 512,
-        "hdd": 2,
-        "os": "debian",
-        "version": "13"
+      "platform": {
+        "desktop": {
+          "linux": false,
+          "windows": false,
+          "macos": false
+        },
+        "mobile": {
+          "android": false,
+          "ios": false
+        },
+        "web_app": false,
+        "browser_extension": false,
+        "cli_only": false,
+        "hosting": {
+          "self_hosted": false,
+          "saas": false,
+          "managed_cloud": false
+        },
+        "ui": {
+          "cli": false,
+          "gui": false,
+          "web_ui": false,
+          "api": false,
+          "tui": false
+        }
       }
     }
   ],
@@ -31,10 +45,28 @@
     "username": null,
     "password": null
   },
-  "notes": [
-    {
-      "text": "With an option to configure cloudflared as a DNS-over-HTTPS (DoH) proxy",
-      "type": "info"
+  "notes": [],
+  "platform": {
+    "desktop": false,
+    "mobile": false,
+    "web_extensions": false,
+    "hosting": false,
+    "ui_interface": false
+  },
+  "deployment": {
+    "script": true,
+    "docker": true,
+    "docker_compose": true,
+    "helm": true,
+    "kubernetes": true,
+    "terraform": true,
+    "paths": {
+      "script": "/public/manifest/dummy/script.sh",
+      "docker": "/public/manifest/dummy/Dockerfile",
+      "docker_compose": "/public/manifest/dummy/docker-compose.yaml",
+      "helm": "/public/manifest/dummy/helm.yaml",
+      "kubernetes": "/public/manifest/dummy/k8s-deployment.yaml",
+      "terraform": "/public/manifest/dummy/main.tf"
     }
-  ]
+  }
 }

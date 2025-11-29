@@ -1,29 +1,43 @@
 {
-  "name": "InfluxDB",
+  "name": "influxdb",
   "slug": "influxdb",
   "categories": [
-    8
+    133
   ],
-  "date_created": "2024-05-02",
-  "type": "ct",
-  "updateable": true,
-  "privileged": false,
-  "interface_port": 8086,
-  "documentation": "https://docs.influxdata.com/",
-  "website": "https://www.influxdata.com/",
+  "date_created": "2025-11-23",
+  "interface_port": null,
+  "documentation": "github.com/influxdata/influxdb",
+  "website": "influxdata.com",
+  "source_code": "github.com/influxdata/influxdb",
   "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/webp/influxdb.webp",
-  "config_path": "",
-  "description": "InfluxDB is designed to handle high write and query loads, and is optimized for storing and analyzing time-stamped data, such as metrics, events, and logs. InfluxDB supports SQL-like query language and has a built-in HTTP API for data ingestion and retrieval. It's commonly used for IoT and industrial applications where time-series data is involved.\r\n\r\nTelegraf is a server agent that collects, processes, and aggregates metrics and events data from different sources, such as systems, databases, and APIs, and outputs the data to various outputs, such as InfluxDB, Prometheus, Elasticsearch, and many others.",
+  "description": "InfluxDB is a high performance time series database optimized for metrics and events. It supports SQL like queries, retention policies and integrations with dashboards and agents, and can be run self hosted or in managed cloud offerings.",
   "install_methods": [
     {
-      "type": "default",
-      "script": "ct/influxdb.sh",
-      "resources": {
-        "cpu": 2,
-        "ram": 2048,
-        "hdd": 8,
-        "os": "debian",
-        "version": "12"
+      "platform": {
+        "desktop": {
+          "linux": false,
+          "windows": false,
+          "macos": false
+        },
+        "mobile": {
+          "android": false,
+          "ios": false
+        },
+        "web_app": false,
+        "browser_extension": false,
+        "cli_only": false,
+        "hosting": {
+          "self_hosted": false,
+          "saas": false,
+          "managed_cloud": false
+        },
+        "ui": {
+          "cli": false,
+          "gui": false,
+          "web_ui": false,
+          "api": false,
+          "tui": false
+        }
       }
     }
   ],
@@ -31,14 +45,28 @@
     "username": null,
     "password": null
   },
-  "notes": [
-    {
-      "text": "Port for V1: 8888",
-      "type": "info"
-    },
-    {
-      "text": "Port for V2: 8086",
-      "type": "info"
+  "notes": [],
+  "platform": {
+    "desktop": false,
+    "mobile": false,
+    "web_extensions": false,
+    "hosting": false,
+    "ui_interface": false
+  },
+  "deployment": {
+    "script": true,
+    "docker": true,
+    "docker_compose": true,
+    "helm": true,
+    "kubernetes": true,
+    "terraform": true,
+    "paths": {
+      "script": "/public/manifest/dummy/script.sh",
+      "docker": "/public/manifest/dummy/Dockerfile",
+      "docker_compose": "/public/manifest/dummy/docker-compose.yaml",
+      "helm": "/public/manifest/dummy/helm.yaml",
+      "kubernetes": "/public/manifest/dummy/k8s-deployment.yaml",
+      "terraform": "/public/manifest/dummy/main.tf"
     }
-  ]
+  }
 }

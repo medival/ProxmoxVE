@@ -1,29 +1,43 @@
 {
-  "name": "Palmr",
+  "name": "palmr",
   "slug": "palmr",
   "categories": [
-    11
+    75
   ],
-  "date_created": "2025-08-08",
-  "type": "ct",
-  "updateable": true,
-  "privileged": false,
-  "interface_port": 3000,
-  "documentation": "https://palmr.kyantech.com.br/docs/3.1-beta",
-  "config_path": "/opt/palmr/apps/server/.env, /opt/palmr/apps/web/.env",
-  "website": "https://palmr.kyantech.com.br/",
+  "date_created": "2025-11-23",
+  "interface_port": null,
+  "documentation": "github.com/kyantech/Palmr",
+  "website": "palmr.kyantech.com.br",
+  "source_code": "github.com/kyantech/Palmr",
   "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/webp/palmr.webp",
-  "description": "Palmr is a fast and secure platform for sharing files, built with performance and privacy in mind.",
+  "description": "Palmr is a self-hosted personal finance tool built on Next.js. It offers expense tracking, budget categories, and insights with a modern, customizable web UI and a responsive design.",
   "install_methods": [
     {
-      "type": "default",
-      "script": "ct/palmr.sh",
-      "resources": {
-        "cpu": 4,
-        "ram": 6144,
-        "hdd": 6,
-        "os": "Debian",
-        "version": "13"
+      "platform": {
+        "desktop": {
+          "linux": false,
+          "windows": false,
+          "macos": false
+        },
+        "mobile": {
+          "android": false,
+          "ios": false
+        },
+        "web_app": false,
+        "browser_extension": false,
+        "cli_only": false,
+        "hosting": {
+          "self_hosted": false,
+          "saas": false,
+          "managed_cloud": false
+        },
+        "ui": {
+          "cli": false,
+          "gui": false,
+          "web_ui": false,
+          "api": false,
+          "tui": false
+        }
       }
     }
   ],
@@ -31,14 +45,28 @@
     "username": null,
     "password": null
   },
-  "notes": [
-    {
-      "text": "To use a bind mount for storage, create symlinks to your mount for both `uploads` and `temp-uploads` in `/opt/palmr_data`, and uncomment `CUSTOM_PATH` to add the path to your bind mount",
-      "type": "info"
-    },
-    {
-      "text": "To use Palmr with a reverse proxy, uncomment `SECURE_SITE` in `/opt/palmr/apps/server/.env`",
-      "type": "info"
+  "notes": [],
+  "platform": {
+    "desktop": false,
+    "mobile": false,
+    "web_extensions": false,
+    "hosting": false,
+    "ui_interface": false
+  },
+  "deployment": {
+    "script": true,
+    "docker": true,
+    "docker_compose": true,
+    "helm": true,
+    "kubernetes": true,
+    "terraform": true,
+    "paths": {
+      "script": "/public/manifest/dummy/script.sh",
+      "docker": "/public/manifest/dummy/Dockerfile",
+      "docker_compose": "/public/manifest/dummy/docker-compose.yaml",
+      "helm": "/public/manifest/dummy/helm.yaml",
+      "kubernetes": "/public/manifest/dummy/k8s-deployment.yaml",
+      "terraform": "/public/manifest/dummy/main.tf"
     }
-  ]
+  }
 }

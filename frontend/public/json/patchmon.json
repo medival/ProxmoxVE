@@ -1,29 +1,43 @@
 {
-  "name": "PatchMon",
+  "name": "patchmon",
   "slug": "patchmon",
   "categories": [
-    9
+    172
   ],
-  "date_created": "2025-10-25",
-  "type": "ct",
-  "updateable": true,
-  "privileged": false,
-  "interface_port": 3399,
-  "documentation": "https://docs.patchmon.net",
-  "website": "https://patchmon.net",
+  "date_created": "2025-11-23",
+  "interface_port": null,
+  "documentation": "github.com/PatchMon/PatchMon",
+  "website": "patchmon.net",
+  "source_code": "github.com/PatchMon/PatchMon",
   "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/webp/patchmon.webp",
-  "config_path": "/opt/patchmon/backend/.env, /opt/patchmon/frontend/.env",
-  "description": "Monitor Linux patches across all your hosts with real-time visibility, security update tracking, and comprehensive package management.",
+  "description": "PatchMon is a self-hosted solution for patch management for small IT teams. It helps track available updates, automate installations, and manage system patching schedules through a clean web UI.",
   "install_methods": [
     {
-      "type": "default",
-      "script": "ct/patchmon.sh",
-      "resources": {
-        "cpu": 2,
-        "ram": 2048,
-        "hdd": 4,
-        "os": "debian",
-        "version": "13"
+      "platform": {
+        "desktop": {
+          "linux": false,
+          "windows": false,
+          "macos": false
+        },
+        "mobile": {
+          "android": false,
+          "ios": false
+        },
+        "web_app": false,
+        "browser_extension": false,
+        "cli_only": false,
+        "hosting": {
+          "self_hosted": false,
+          "saas": false,
+          "managed_cloud": false
+        },
+        "ui": {
+          "cli": false,
+          "gui": false,
+          "web_ui": false,
+          "api": false,
+          "tui": false
+        }
       }
     }
   ],
@@ -31,5 +45,28 @@
     "username": null,
     "password": null
   },
-  "notes": []
+  "notes": [],
+  "platform": {
+    "desktop": true,
+    "mobile": false,
+    "web_extensions": false,
+    "hosting": false,
+    "ui_interface": true
+  },
+  "deployment": {
+    "script": true,
+    "docker": true,
+    "docker_compose": true,
+    "helm": true,
+    "kubernetes": true,
+    "terraform": true,
+    "paths": {
+      "script": "/public/manifest/dummy/script.sh",
+      "docker": "/public/manifest/dummy/Dockerfile",
+      "docker_compose": "/public/manifest/dummy/docker-compose.yaml",
+      "helm": "/public/manifest/dummy/helm.yaml",
+      "kubernetes": "/public/manifest/dummy/k8s-deployment.yaml",
+      "terraform": "/public/manifest/dummy/main.tf"
+    }
+  }
 }

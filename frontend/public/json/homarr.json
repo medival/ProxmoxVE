@@ -1,29 +1,43 @@
 {
-  "name": "Homarr",
+  "name": "homarr",
   "slug": "homarr",
   "categories": [
-    10
+    34
   ],
-  "date_created": "2025-01-28",
-  "type": "ct",
-  "updateable": true,
-  "privileged": false,
-  "interface_port": 7575,
-  "documentation": "https://homarr.dev/docs/getting-started/",
-  "website": "https://homarr.dev/",
+  "date_created": "2025-11-23",
+  "interface_port": null,
+  "documentation": "github.com/homarr-labs/homarr",
+  "website": "homarr.dev",
+  "source_code": "github.com/homarr-labs/homarr",
   "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/webp/homarr.webp",
-  "config_path": "/opt/homarr/.env",
-  "description": "Homarr is a sleek, modern dashboard that puts all of your apps and services at your fingertips.",
+  "description": "Homarr is a modern self hosted dashboard and homepage that aggregates links, widgets and service status in a grid layout. It includes app detection, search, theming and drag and drop customization for homelab users.",
   "install_methods": [
     {
-      "type": "default",
-      "script": "ct/homarr.sh",
-      "resources": {
-        "cpu": 3,
-        "ram": 6144,
-        "hdd": 8,
-        "os": "debian",
-        "version": "12"
+      "platform": {
+        "desktop": {
+          "linux": false,
+          "windows": false,
+          "macos": false
+        },
+        "mobile": {
+          "android": false,
+          "ios": false
+        },
+        "web_app": false,
+        "browser_extension": false,
+        "cli_only": false,
+        "hosting": {
+          "self_hosted": false,
+          "saas": false,
+          "managed_cloud": false
+        },
+        "ui": {
+          "cli": false,
+          "gui": false,
+          "web_ui": false,
+          "api": false,
+          "tui": false
+        }
       }
     }
   ],
@@ -31,5 +45,28 @@
     "username": null,
     "password": null
   },
-  "notes": []
+  "notes": [],
+  "platform": {
+    "desktop": false,
+    "mobile": false,
+    "web_extensions": false,
+    "hosting": true,
+    "ui_interface": false
+  },
+  "deployment": {
+    "script": true,
+    "docker": true,
+    "docker_compose": true,
+    "helm": true,
+    "kubernetes": true,
+    "terraform": true,
+    "paths": {
+      "script": "/public/manifest/dummy/script.sh",
+      "docker": "/public/manifest/dummy/Dockerfile",
+      "docker_compose": "/public/manifest/dummy/docker-compose.yaml",
+      "helm": "/public/manifest/dummy/helm.yaml",
+      "kubernetes": "/public/manifest/dummy/k8s-deployment.yaml",
+      "terraform": "/public/manifest/dummy/main.tf"
+    }
+  }
 }

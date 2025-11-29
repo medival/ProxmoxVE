@@ -1,29 +1,43 @@
 {
-  "name": "PVE Netdata",
+  "name": "netdata",
   "slug": "netdata",
   "categories": [
-    1
+    103
   ],
-  "date_created": "2024-04-29",
-  "type": "addon",
-  "updateable": false,
-  "privileged": false,
-  "interface_port": 19999,
-  "documentation": "https://learn.netdata.cloud/",
-  "website": "https://www.netdata.cloud/",
+  "date_created": "2025-11-23",
+  "interface_port": null,
+  "documentation": "github.com/netdata/netdata",
+  "website": "www.netdata.cloud",
+  "source_code": "github.com/netdata/netdata",
   "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/webp/netdata.webp",
-  "config_path": "/etc/netdata/netdata.conf",
-  "description": "Netdata is an open-source, real-time performance monitoring tool designed to provide insights into the performance and health of systems and applications. It is often used by system administrators, DevOps professionals, and developers to monitor and troubleshoot issues on servers and other devices.",
+  "description": "Netdata is a real-time performance monitoring platform for servers, containers, and applications. It provides actionable dashboards with alerts and metrics, supporting both self-hosted and SaaS deployments.",
   "install_methods": [
     {
-      "type": "default",
-      "script": "tools/addon/netdata.sh",
-      "resources": {
-        "cpu": null,
-        "ram": null,
-        "hdd": null,
-        "os": null,
-        "version": null
+      "platform": {
+        "desktop": {
+          "linux": false,
+          "windows": false,
+          "macos": false
+        },
+        "mobile": {
+          "android": false,
+          "ios": false
+        },
+        "web_app": false,
+        "browser_extension": false,
+        "cli_only": false,
+        "hosting": {
+          "self_hosted": false,
+          "saas": false,
+          "managed_cloud": false
+        },
+        "ui": {
+          "cli": false,
+          "gui": false,
+          "web_ui": false,
+          "api": false,
+          "tui": false
+        }
       }
     }
   ],
@@ -31,10 +45,28 @@
     "username": null,
     "password": null
   },
-  "notes": [
-    {
-      "text": "Execute within the Proxmox shell",
-      "type": "info"
+  "notes": [],
+  "platform": {
+    "desktop": false,
+    "mobile": false,
+    "web_extensions": false,
+    "hosting": false,
+    "ui_interface": false
+  },
+  "deployment": {
+    "script": true,
+    "docker": true,
+    "docker_compose": true,
+    "helm": true,
+    "kubernetes": true,
+    "terraform": true,
+    "paths": {
+      "script": "/public/manifest/dummy/script.sh",
+      "docker": "/public/manifest/dummy/Dockerfile",
+      "docker_compose": "/public/manifest/dummy/docker-compose.yaml",
+      "helm": "/public/manifest/dummy/helm.yaml",
+      "kubernetes": "/public/manifest/dummy/k8s-deployment.yaml",
+      "terraform": "/public/manifest/dummy/main.tf"
     }
-  ]
+  }
 }

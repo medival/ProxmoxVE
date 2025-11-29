@@ -1,29 +1,43 @@
 {
-  "name": "Wastebin",
+  "name": "wastebin",
   "slug": "wastebin",
   "categories": [
-    12
+    118
   ],
-  "date_created": "2024-05-02",
-  "type": "ct",
-  "updateable": true,
-  "privileged": false,
-  "interface_port": 8088,
-  "documentation": "https://github.com/matze/wastebin/blob/a297749b932ed9ff32569f3af7ee8e4a5b499834/README.md",
-  "website": "https://github.com/matze/wastebin",
+  "date_created": "2025-11-23",
+  "interface_port": null,
+  "documentation": "github.com/matze/wastebin",
+  "website": "github.com/matze/wastebin",
+  "source_code": "github.com/matze/wastebin",
   "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/webp/wastebin.webp",
-  "config_path": "/opt/wastebin-data/.env",
-  "description": "Wastebin is a minimal pastebin with a design shamelessly copied from bin.",
+  "description": "Wastebin is a simple self-hosted pastebin service for sharing text snippets and logs. It offers syntax highlighting, expiration options, and a minimalistic web UI.",
   "install_methods": [
     {
-      "type": "default",
-      "script": "ct/wastebin.sh",
-      "resources": {
-        "cpu": 1,
-        "ram": 1024,
-        "hdd": 4,
-        "os": "debian",
-        "version": "13"
+      "platform": {
+        "desktop": {
+          "linux": false,
+          "windows": false,
+          "macos": false
+        },
+        "mobile": {
+          "android": false,
+          "ios": false
+        },
+        "web_app": false,
+        "browser_extension": false,
+        "cli_only": false,
+        "hosting": {
+          "self_hosted": false,
+          "saas": false,
+          "managed_cloud": false
+        },
+        "ui": {
+          "cli": false,
+          "gui": false,
+          "web_ui": false,
+          "api": false,
+          "tui": false
+        }
       }
     }
   ],
@@ -31,5 +45,28 @@
     "username": null,
     "password": null
   },
-  "notes": []
+  "notes": [],
+  "platform": {
+    "desktop": false,
+    "mobile": false,
+    "web_extensions": false,
+    "hosting": false,
+    "ui_interface": false
+  },
+  "deployment": {
+    "script": true,
+    "docker": true,
+    "docker_compose": true,
+    "helm": true,
+    "kubernetes": true,
+    "terraform": true,
+    "paths": {
+      "script": "/public/manifest/dummy/script.sh",
+      "docker": "/public/manifest/dummy/Dockerfile",
+      "docker_compose": "/public/manifest/dummy/docker-compose.yaml",
+      "helm": "/public/manifest/dummy/helm.yaml",
+      "kubernetes": "/public/manifest/dummy/k8s-deployment.yaml",
+      "terraform": "/public/manifest/dummy/main.tf"
+    }
+  }
 }

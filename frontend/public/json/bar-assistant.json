@@ -1,29 +1,43 @@
 {
-  "name": "Bar-Assistant",
+  "name": "bar-assistant",
   "slug": "bar-assistant",
   "categories": [
-    24
+    52
   ],
-  "date_created": "2025-07-14",
-  "type": "ct",
-  "updateable": true,
-  "privileged": false,
-  "interface_port": 80,
-  "documentation": "https://docs.barassistant.app/",
-  "website": "https://barassistant.app/",
+  "date_created": "2025-11-23",
+  "interface_port": null,
+  "documentation": "github.com/karlomikus/bar-assistant",
+  "website": "barassistant.app",
+  "source_code": "github.com/karlomikus/bar-assistant",
   "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/webp/bar-assistant.webp",
-  "config_path": "/opt/bar-assistant",
-  "description": "Bar Assistant is all-in-one solution for managing your home bar. Compared to other recipe management software that usually tries to be more for general use, Bar Assistant is made specifically for managing cocktail recipes. This means that there are a lot of cocktail-oriented features, like ingredient substitutes, first-class ingredients, ABV calculations, unit switching and more..",
+  "description": "Bar Assistant is a self-hosted cocktail recipe and inventory management app designed for professional bartenders or enthusiasts. It lets users track available ingredients, manage recipes, and plan menus through a mobile-friendly UI.",
   "install_methods": [
     {
-      "type": "default",
-      "script": "ct/bar-assistant.sh",
-      "resources": {
-        "cpu": 2,
-        "ram": 2048,
-        "hdd": 4,
-        "os": "debian",
-        "version": "12"
+      "platform": {
+        "desktop": {
+          "linux": false,
+          "windows": false,
+          "macos": false
+        },
+        "mobile": {
+          "android": false,
+          "ios": false
+        },
+        "web_app": false,
+        "browser_extension": false,
+        "cli_only": false,
+        "hosting": {
+          "self_hosted": false,
+          "saas": false,
+          "managed_cloud": false
+        },
+        "ui": {
+          "cli": false,
+          "gui": false,
+          "web_ui": false,
+          "api": false,
+          "tui": false
+        }
       }
     }
   ],
@@ -31,5 +45,28 @@
     "username": null,
     "password": null
   },
-  "notes": []
+  "notes": [],
+  "platform": {
+    "desktop": false,
+    "mobile": false,
+    "web_extensions": false,
+    "hosting": false,
+    "ui_interface": false
+  },
+  "deployment": {
+    "script": true,
+    "docker": true,
+    "docker_compose": true,
+    "helm": true,
+    "kubernetes": true,
+    "terraform": true,
+    "paths": {
+      "script": "/public/manifest/dummy/script.sh",
+      "docker": "/public/manifest/dummy/Dockerfile",
+      "docker_compose": "/public/manifest/dummy/docker-compose.yaml",
+      "helm": "/public/manifest/dummy/helm.yaml",
+      "kubernetes": "/public/manifest/dummy/k8s-deployment.yaml",
+      "terraform": "/public/manifest/dummy/main.tf"
+    }
+  }
 }

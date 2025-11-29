@@ -1,29 +1,43 @@
 {
-  "name": "Warracker",
+  "name": "warracker",
   "slug": "warracker",
   "categories": [
-    12
+    166
   ],
-  "date_created": "2025-09-29",
-  "type": "ct",
-  "updateable": true,
-  "privileged": false,
-  "interface_port": 80,
-  "documentation": null,
-  "config_path": "/opt/.env",
-  "website": "https://warracker.com/",
+  "date_created": "2025-11-23",
+  "interface_port": null,
+  "documentation": "github.com/sassanix/Warracker",
+  "website": "warracker.com",
+  "source_code": "github.com/sassanix/Warracker",
   "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/webp/warracker.webp",
-  "description": "Warracker is an open source, self-hostable warranty tracker to monitor expirations, store receipts, files. You own the data, your rules!",
+  "description": "Warracker is a self-hosted tracker for game achievements or war reports, collecting stats and presenting them in dashboards and leaderboards via a browser interface.",
   "install_methods": [
     {
-      "type": "default",
-      "script": "ct/warracker.sh",
-      "resources": {
-        "cpu": 1,
-        "ram": 512,
-        "hdd": 4,
-        "os": "Debian",
-        "version": "13"
+      "platform": {
+        "desktop": {
+          "linux": false,
+          "windows": false,
+          "macos": false
+        },
+        "mobile": {
+          "android": false,
+          "ios": false
+        },
+        "web_app": false,
+        "browser_extension": false,
+        "cli_only": false,
+        "hosting": {
+          "self_hosted": false,
+          "saas": false,
+          "managed_cloud": false
+        },
+        "ui": {
+          "cli": false,
+          "gui": false,
+          "web_ui": false,
+          "api": false,
+          "tui": false
+        }
       }
     }
   ],
@@ -31,10 +45,28 @@
     "username": null,
     "password": null
   },
-  "notes": [
-    {
-      "text": "The first user you register will be the admin user.",
-      "type": "info"
+  "notes": [],
+  "platform": {
+    "desktop": false,
+    "mobile": false,
+    "web_extensions": false,
+    "hosting": false,
+    "ui_interface": false
+  },
+  "deployment": {
+    "script": true,
+    "docker": true,
+    "docker_compose": true,
+    "helm": true,
+    "kubernetes": true,
+    "terraform": true,
+    "paths": {
+      "script": "/public/manifest/dummy/script.sh",
+      "docker": "/public/manifest/dummy/Dockerfile",
+      "docker_compose": "/public/manifest/dummy/docker-compose.yaml",
+      "helm": "/public/manifest/dummy/helm.yaml",
+      "kubernetes": "/public/manifest/dummy/k8s-deployment.yaml",
+      "terraform": "/public/manifest/dummy/main.tf"
     }
-  ]
+  }
 }

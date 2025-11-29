@@ -3,7 +3,7 @@ name: Deploy frontend to GitHub Pages
 on:
   push:
     branches:
-      - claude/improve-hero-section-01Bc3gGx4Se131KJ6eTZM1oP
+      - main
 
 jobs:
   build-and-deploy:
@@ -23,7 +23,6 @@ jobs:
           node-version: '20'
           cache: 'npm'
           cache-dependency-path: frontend/package-lock.json
-
 
       - name: Install dependencies
         run: npm ci

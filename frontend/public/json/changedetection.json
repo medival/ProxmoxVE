@@ -1,29 +1,43 @@
 {
-  "name": "Change Detection",
+  "name": "changedetection",
   "slug": "changedetection",
   "categories": [
-    24
+    119
   ],
-  "date_created": "2024-05-02",
-  "type": "ct",
-  "updateable": true,
-  "privileged": false,
-  "interface_port": 5000,
-  "documentation": "https://changedetection.io/tutorials",
-  "website": "https://changedetection.io/",
+  "date_created": "2025-11-23",
+  "interface_port": null,
+  "documentation": "github.com/dgtlmoon/changedetection.io",
+  "website": "changedetection.io",
+  "source_code": "github.com/dgtlmoon/changedetection.io",
   "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/webp/changedetection.webp",
-  "config_path": "/opt/changedetection/url-watches.json",
-  "description": "Change Detection is a service that allows you to monitor changes to web pages and receive notifications when changes occur. It can be used for a variety of purposes such as keeping track of online price changes, monitoring news websites for updates, or tracking changes to online forums.",
+  "description": "changedetection.io is a self-hosted web service that monitors website content for changes and sends notifications when updates occur. It supports diff highlighting, scheduled checks, RSS feeds, and multi-user dashboards.",
   "install_methods": [
     {
-      "type": "default",
-      "script": "ct/changedetection.sh",
-      "resources": {
-        "cpu": 2,
-        "ram": 2048,
-        "hdd": 10,
-        "os": "debian",
-        "version": "12"
+      "platform": {
+        "desktop": {
+          "linux": false,
+          "windows": false,
+          "macos": false
+        },
+        "mobile": {
+          "android": false,
+          "ios": false
+        },
+        "web_app": false,
+        "browser_extension": false,
+        "cli_only": false,
+        "hosting": {
+          "self_hosted": false,
+          "saas": false,
+          "managed_cloud": false
+        },
+        "ui": {
+          "cli": false,
+          "gui": false,
+          "web_ui": false,
+          "api": false,
+          "tui": false
+        }
       }
     }
   ],
@@ -31,5 +45,28 @@
     "username": null,
     "password": null
   },
-  "notes": []
+  "notes": [],
+  "platform": {
+    "desktop": false,
+    "mobile": false,
+    "web_extensions": false,
+    "hosting": false,
+    "ui_interface": false
+  },
+  "deployment": {
+    "script": true,
+    "docker": true,
+    "docker_compose": true,
+    "helm": true,
+    "kubernetes": true,
+    "terraform": true,
+    "paths": {
+      "script": "/public/manifest/dummy/script.sh",
+      "docker": "/public/manifest/dummy/Dockerfile",
+      "docker_compose": "/public/manifest/dummy/docker-compose.yaml",
+      "helm": "/public/manifest/dummy/helm.yaml",
+      "kubernetes": "/public/manifest/dummy/k8s-deployment.yaml",
+      "terraform": "/public/manifest/dummy/main.tf"
+    }
+  }
 }

@@ -1,40 +1,72 @@
 {
-    "name": "seelf",
-    "slug": "seelf",
-    "categories": [
-        4
-    ],
-    "date_created": "2025-02-04",
-    "type": "ct",
-    "updateable": true,
-    "privileged": false,
-    "interface_port": 8080,
-    "documentation": "https://yuukanoo.github.io/seelf/guide/quickstart.html",
-    "website": "https://yuukanoo.github.io/seelf/",
-    "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/webp/seelf.webp",
-    "config_path": "",
-    "description": "seelf is a self-hosted software which makes it easy to deploy your own applications on your own hardware using an easy to use interface.",
-    "install_methods": [
-        {
-            "type": "default",
-            "script": "ct/seelf.sh",
-            "resources": {
-                "cpu": 2,
-                "ram": 4096,
-                "hdd": 10,
-                "os": "debian",
-                "version": "13"
-            }
+  "name": "seelf",
+  "slug": "seelf",
+  "categories": [
+    112
+  ],
+  "date_created": "2025-11-23",
+  "interface_port": null,
+  "documentation": "github.com/YuukanOO/seelf",
+  "website": "yuukanoo.github.io/seelf/",
+  "source_code": "github.com/YuukanOO/seelf",
+  "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/webp/seelf.webp",
+  "description": "Seelf is a self-hosted journaling and diary platform with encryption, a clean UI, and tagging for organizing entries. Built for personal privacy and reflection.",
+  "install_methods": [
+    {
+      "platform": {
+        "desktop": {
+          "linux": false,
+          "windows": false,
+          "macos": false
+        },
+        "mobile": {
+          "android": false,
+          "ios": false
+        },
+        "web_app": false,
+        "browser_extension": false,
+        "cli_only": false,
+        "hosting": {
+          "self_hosted": false,
+          "saas": false,
+          "managed_cloud": false
+        },
+        "ui": {
+          "cli": false,
+          "gui": false,
+          "web_ui": false,
+          "api": false,
+          "tui": false
         }
-    ],
-    "default_credentials": {
-        "username": null,
-        "password": null
-    },
-    "notes": [
-        {
-            "text": "Initial admin email and password: `cat ~/seelf.creds`",
-            "type": "info"
-        }
-    ]
+      }
+    }
+  ],
+  "default_credentials": {
+    "username": null,
+    "password": null
+  },
+  "notes": [],
+  "platform": {
+    "desktop": false,
+    "mobile": false,
+    "web_extensions": false,
+    "hosting": true,
+    "ui_interface": true
+  },
+  "deployment": {
+    "script": true,
+    "docker": true,
+    "docker_compose": true,
+    "helm": true,
+    "kubernetes": true,
+    "terraform": true,
+    "paths": {
+      "script": "/public/manifest/dummy/script.sh",
+      "docker": "/public/manifest/dummy/Dockerfile",
+      "docker_compose": "/public/manifest/dummy/docker-compose.yaml",
+      "helm": "/public/manifest/dummy/helm.yaml",
+      "kubernetes": "/public/manifest/dummy/k8s-deployment.yaml",
+      "terraform": "/public/manifest/dummy/main.tf"
+    }
+  }
 }

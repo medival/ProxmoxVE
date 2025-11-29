@@ -1,44 +1,72 @@
 {
-    "name": "Graylog",
-    "slug": "graylog",
-    "categories": [
-        9
-    ],
-    "date_created": "2025-02-12",
-    "type": "ct",
-    "updateable": true,
-    "privileged": false,
-    "interface_port": 9000,
-    "documentation": "https://go2docs.graylog.org/current/home.htm",
-    "website": "https://graylog.org/",
-    "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/webp/graylog.webp",
-    "config_path": "/etc/graylog/server/server.conf",
-    "description": "Graylog is an open-source log management and analysis platform that centralizes and processes log data from various sources, enabling real-time search, analysis, and alerting for IT infrastructure monitoring and troubleshooting.",
-    "install_methods": [
-        {
-            "type": "default",
-            "script": "ct/graylog.sh",
-            "resources": {
-                "cpu": 2,
-                "ram": 8192,
-                "hdd": 30,
-                "os": "debian",
-                "version": "12"
-            }
-        }
-    ],
-    "default_credentials": {
-        "username": null,
-        "password": null
-    },
-    "notes": [
-        {
-            "text": "Initial Setup credentials: `tail /var/log/graylog-server/server.log` after the server starts for the first time.",
-            "type": "info"
+  "name": "graylog",
+  "slug": "graylog",
+  "categories": [
+    93
+  ],
+  "date_created": "2025-11-23",
+  "interface_port": null,
+  "documentation": "github.com/Graylog2/graylog2-server",
+  "website": "www.graylog.org",
+  "source_code": "github.com/Graylog2/graylog2-server",
+  "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/webp/graylog.webp",
+  "description": "Graylog is a self-hosted log management and SIEM platform for collecting, indexing, and analyzing log data. It includes dashboards, alerts, log search, and integrates with Elasticsearch and MongoDB for monitoring large systems.",
+  "install_methods": [
+    {
+      "platform": {
+        "desktop": {
+          "linux": false,
+          "windows": false,
+          "macos": false
         },
-        {
-            "text": "Type `cat ~/graylog.creds` to get admin password that you use to log in AFTER the Initial Setup",
-            "type": "info"
+        "mobile": {
+          "android": false,
+          "ios": false
+        },
+        "web_app": false,
+        "browser_extension": false,
+        "cli_only": false,
+        "hosting": {
+          "self_hosted": false,
+          "saas": false,
+          "managed_cloud": false
+        },
+        "ui": {
+          "cli": false,
+          "gui": false,
+          "web_ui": false,
+          "api": false,
+          "tui": false
         }
-    ]
+      }
+    }
+  ],
+  "default_credentials": {
+    "username": null,
+    "password": null
+  },
+  "notes": [],
+  "platform": {
+    "desktop": false,
+    "mobile": false,
+    "web_extensions": false,
+    "hosting": false,
+    "ui_interface": false
+  },
+  "deployment": {
+    "script": true,
+    "docker": true,
+    "docker_compose": true,
+    "helm": true,
+    "kubernetes": true,
+    "terraform": true,
+    "paths": {
+      "script": "/public/manifest/dummy/script.sh",
+      "docker": "/public/manifest/dummy/Dockerfile",
+      "docker_compose": "/public/manifest/dummy/docker-compose.yaml",
+      "helm": "/public/manifest/dummy/helm.yaml",
+      "kubernetes": "/public/manifest/dummy/k8s-deployment.yaml",
+      "terraform": "/public/manifest/dummy/main.tf"
+    }
+  }
 }

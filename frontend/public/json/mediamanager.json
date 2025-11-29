@@ -1,45 +1,72 @@
 {
-  "name": "MediaManager",
+  "name": "mediamanager",
   "slug": "mediamanager",
   "categories": [
-    14,
-    13
+    60
   ],
-  "date_created": "2025-08-28",
-  "type": "ct",
-  "updateable": true,
-  "privileged": false,
-  "interface_port": 8000,
-  "documentation": "https://maxdorninger.github.io/MediaManager/introduction.html",
-  "config_path": "/opt/mm/config/config.toml",
-  "website": "https://github.com/maxdorninger/MediaManager",
+  "date_created": "2025-11-23",
+  "interface_port": null,
+  "documentation": "github.com/maxdorninger/MediaManager",
+  "website": "github.com/maxdorninger/MediaManager",
+  "source_code": "github.com/maxdorninger/MediaManager",
   "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/webp/mediamanager.webp",
-  "description": "A modern selfhosted media management system for your media library",
+  "description": "MediaManager is a media collection organizer and categorizer. It provides a web interface to upload, tag, group, and browse files such as images, videos, and documents in a self-hosted environment.",
   "install_methods": [
     {
-      "type": "default",
-      "script": "ct/mediamanager.sh",
-      "resources": {
-        "cpu": 2,
-        "ram": 3072,
-        "hdd": 4,
-        "os": "Debian",
-        "version": "13"
+      "platform": {
+        "desktop": {
+          "linux": false,
+          "windows": false,
+          "macos": false
+        },
+        "mobile": {
+          "android": false,
+          "ios": false
+        },
+        "web_app": false,
+        "browser_extension": false,
+        "cli_only": false,
+        "hosting": {
+          "self_hosted": false,
+          "saas": false,
+          "managed_cloud": false
+        },
+        "ui": {
+          "cli": false,
+          "gui": false,
+          "web_ui": false,
+          "api": false,
+          "tui": false
+        }
       }
     }
   ],
   "default_credentials": {
-    "username": "<email address>",
-    "password": "admin"
+    "username": null,
+    "password": null
   },
-  "notes": [
-    {
-      "text": "During the installation, provide the email address of the first admin user",
-      "type": "info"
-    },
-    {
-      "text": "You're probably going to want to use a bind mount for the media directories",
-      "type": "info"
+  "notes": [],
+  "platform": {
+    "desktop": false,
+    "mobile": false,
+    "web_extensions": false,
+    "hosting": false,
+    "ui_interface": false
+  },
+  "deployment": {
+    "script": true,
+    "docker": true,
+    "docker_compose": true,
+    "helm": true,
+    "kubernetes": true,
+    "terraform": true,
+    "paths": {
+      "script": "/public/manifest/dummy/script.sh",
+      "docker": "/public/manifest/dummy/Dockerfile",
+      "docker_compose": "/public/manifest/dummy/docker-compose.yaml",
+      "helm": "/public/manifest/dummy/helm.yaml",
+      "kubernetes": "/public/manifest/dummy/k8s-deployment.yaml",
+      "terraform": "/public/manifest/dummy/main.tf"
     }
-  ]
+  }
 }

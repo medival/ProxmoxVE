@@ -1,29 +1,43 @@
 {
-  "name": "Cloudreve",
+  "name": "cloudreve",
   "slug": "cloudreve",
   "categories": [
-    12
+    27
   ],
-  "date_created": "2025-07-17",
-  "type": "ct",
-  "updateable": true,
-  "privileged": false,
-  "interface_port": 5212,
-  "documentation": "https://docs.cloudreve.org/en/",
-  "website": "https://cloudreve.org/",
+  "date_created": "2025-11-23",
+  "interface_port": null,
+  "documentation": "github.com/cloudreve/cloudreve",
+  "website": "cloudreve.org",
+  "source_code": "github.com/cloudreve/cloudreve",
   "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/webp/cloudreve.webp",
-  "config_path": "/opt/cloudreve/data/conf.ini",
-  "description": "Cloudreve is an open-source, community-driven cloud storage system that provides file sharing, synchronization, and management features. It supports a wide range of storage backends and integrates with various notification and logging platforms.",
+  "description": "Cloudreve is a file sharing and cloud drive system that supports multiple storage backends, user management, and web-based file uploads. It can be used as a lightweight alternative to commercial cloud drives.",
   "install_methods": [
     {
-      "type": "default",
-      "script": "ct/cloudreve.sh",
-      "resources": {
-        "cpu": 1,
-        "ram": 1024,
-        "hdd": 10,
-        "os": "Debian",
-        "version": "12"
+      "platform": {
+        "desktop": {
+          "linux": false,
+          "windows": false,
+          "macos": false
+        },
+        "mobile": {
+          "android": false,
+          "ios": false
+        },
+        "web_app": false,
+        "browser_extension": false,
+        "cli_only": false,
+        "hosting": {
+          "self_hosted": false,
+          "saas": false,
+          "managed_cloud": false
+        },
+        "ui": {
+          "cli": false,
+          "gui": false,
+          "web_ui": false,
+          "api": false,
+          "tui": false
+        }
       }
     }
   ],
@@ -31,10 +45,28 @@
     "username": null,
     "password": null
   },
-  "notes": [
-    {
-      "text": "After Installation: Register your user -> Login -> Dashboard -> Accept Primary URL.",
-      "type": "warn"
+  "notes": [],
+  "platform": {
+    "desktop": false,
+    "mobile": false,
+    "web_extensions": false,
+    "hosting": false,
+    "ui_interface": false
+  },
+  "deployment": {
+    "script": true,
+    "docker": true,
+    "docker_compose": true,
+    "helm": true,
+    "kubernetes": true,
+    "terraform": true,
+    "paths": {
+      "script": "/public/manifest/dummy/script.sh",
+      "docker": "/public/manifest/dummy/Dockerfile",
+      "docker_compose": "/public/manifest/dummy/docker-compose.yaml",
+      "helm": "/public/manifest/dummy/helm.yaml",
+      "kubernetes": "/public/manifest/dummy/k8s-deployment.yaml",
+      "terraform": "/public/manifest/dummy/main.tf"
     }
-  ]
+  }
 }

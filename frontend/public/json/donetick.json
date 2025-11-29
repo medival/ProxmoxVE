@@ -1,29 +1,43 @@
 {
-  "name": "Donetick",
+  "name": "donetick",
   "slug": "donetick",
   "categories": [
-    19
+    159
   ],
-  "date_created": "2025-11-03",
-  "type": "ct",
-  "updateable": true,
-  "privileged": false,
-  "interface_port": 2021,
-  "documentation": "https://docs.donetick.com/getting-started/",
-  "config_path": "/opt/donetick/selfhosted.yml",
-  "website": "https://donetick.com",
+  "date_created": "2025-11-23",
+  "interface_port": null,
+  "documentation": "github.com/donetick/donetick",
+  "website": "donetick.com",
+  "source_code": "github.com/donetick/donetick",
   "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/webp/donetick.webp",
-  "description": "Donetick an open-source, user-friendly app for managing tasks and chores, featuring customizable options to help you and others stay organized",
+  "description": "Donetick is a self-hosted to-do and task tracking application with projects, due dates, priorities, and recurring tasks. Its clean web interface is designed to make personal productivity and small team planning straightforward and private.",
   "install_methods": [
     {
-      "type": "default",
-      "script": "ct/donetick.sh",
-      "resources": {
-        "cpu": 1,
-        "ram": 512,
-        "hdd": 2,
-        "os": "Debian",
-        "version": "13"
+      "platform": {
+        "desktop": {
+          "linux": false,
+          "windows": false,
+          "macos": false
+        },
+        "mobile": {
+          "android": false,
+          "ios": false
+        },
+        "web_app": false,
+        "browser_extension": false,
+        "cli_only": false,
+        "hosting": {
+          "self_hosted": false,
+          "saas": false,
+          "managed_cloud": false
+        },
+        "ui": {
+          "cli": false,
+          "gui": false,
+          "web_ui": false,
+          "api": false,
+          "tui": false
+        }
       }
     }
   ],
@@ -31,5 +45,28 @@
     "username": null,
     "password": null
   },
-  "notes": []
+  "notes": [],
+  "platform": {
+    "desktop": false,
+    "mobile": false,
+    "web_extensions": false,
+    "hosting": false,
+    "ui_interface": false
+  },
+  "deployment": {
+    "script": true,
+    "docker": true,
+    "docker_compose": true,
+    "helm": true,
+    "kubernetes": true,
+    "terraform": true,
+    "paths": {
+      "script": "/public/manifest/dummy/script.sh",
+      "docker": "/public/manifest/dummy/Dockerfile",
+      "docker_compose": "/public/manifest/dummy/docker-compose.yaml",
+      "helm": "/public/manifest/dummy/helm.yaml",
+      "kubernetes": "/public/manifest/dummy/k8s-deployment.yaml",
+      "terraform": "/public/manifest/dummy/main.tf"
+    }
+  }
 }

@@ -1,29 +1,43 @@
 {
-  "name": "LimeSurvey",
+  "name": "limesurvey",
   "slug": "limesurvey",
   "categories": [
-    25
+    157
   ],
-  "date_created": "2025-10-15",
-  "type": "ct",
-  "updateable": true,
-  "privileged": false,
-  "interface_port": 80,
-  "documentation": "https://www.limesurvey.org/manual/LimeSurvey_Manual",
-  "config_path": "",
-  "website": "https://community.limesurvey.org/",
+  "date_created": "2025-11-23",
+  "interface_port": null,
+  "documentation": "github.com/LimeSurvey/LimeSurvey",
+  "website": "www.limesurvey.org",
+  "source_code": "github.com/LimeSurvey/LimeSurvey",
   "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/webp/limesurvey.webp",
-  "description": "LimeSurvey is the simple, quick and anonymous online survey tool that's bursting with juicy insights. Calling students, professionals and enterprises: design a survey and get the best insights, it’s free and as easy as squeezing a lime. Make a free online survey now!",
+  "description": "LimeSurvey is a professional survey platform that enables creating advanced questionnaires and collecting results. It supports branching logic, custom themes, and export formats, and can be deployed self-hosted or as SaaS.",
   "install_methods": [
     {
-      "type": "default",
-      "script": "ct/limesurvey.sh",
-      "resources": {
-        "cpu": 1,
-        "ram": 512,
-        "hdd": 2,
-        "os": "Debian",
-        "version": "13"
+      "platform": {
+        "desktop": {
+          "linux": false,
+          "windows": false,
+          "macos": false
+        },
+        "mobile": {
+          "android": false,
+          "ios": false
+        },
+        "web_app": false,
+        "browser_extension": false,
+        "cli_only": false,
+        "hosting": {
+          "self_hosted": false,
+          "saas": false,
+          "managed_cloud": false
+        },
+        "ui": {
+          "cli": false,
+          "gui": false,
+          "web_ui": false,
+          "api": false,
+          "tui": false
+        }
       }
     }
   ],
@@ -31,10 +45,28 @@
     "username": null,
     "password": null
   },
-  "notes": [
-    {
-      "text": "You will need to input database credentials into LimeSurvey installer. Use `cat ~/limesurvey.creds` inside LXC.",
-      "type": "info"
+  "notes": [],
+  "platform": {
+    "desktop": false,
+    "mobile": false,
+    "web_extensions": false,
+    "hosting": false,
+    "ui_interface": false
+  },
+  "deployment": {
+    "script": true,
+    "docker": true,
+    "docker_compose": true,
+    "helm": true,
+    "kubernetes": true,
+    "terraform": true,
+    "paths": {
+      "script": "/public/manifest/dummy/script.sh",
+      "docker": "/public/manifest/dummy/Dockerfile",
+      "docker_compose": "/public/manifest/dummy/docker-compose.yaml",
+      "helm": "/public/manifest/dummy/helm.yaml",
+      "kubernetes": "/public/manifest/dummy/k8s-deployment.yaml",
+      "terraform": "/public/manifest/dummy/main.tf"
     }
-  ]
+  }
 }

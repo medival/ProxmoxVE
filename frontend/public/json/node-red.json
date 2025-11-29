@@ -1,40 +1,43 @@
 {
-  "name": "Node-Red",
+  "name": "node-red",
   "slug": "node-red",
   "categories": [
     16
   ],
-  "date_created": "2024-05-02",
-  "type": "ct",
-  "updateable": true,
-  "privileged": false,
-  "interface_port": 1880,
-  "documentation": "https://nodered.org/docs/",
-  "website": "https://nodered.org/",
+  "date_created": "2025-11-23",
+  "interface_port": null,
+  "documentation": "github.com/node-red/node-red",
+  "website": "http://nodered.org",
+  "source_code": "github.com/node-red/node-red",
   "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons/webp/node-red.webp",
-  "config_path": "~/.node-red/settings.js",
-  "description": "Node-RED is a visual programming tool that allows developers and non-developers alike to easily wire together hardware devices, APIs, and online services to create custom applications. It provides a visual interface for building workflows, making it easy to create and modify complex integrations without having to write any code. Node-RED is used in a wide range of applications, from simple automations to complex integrations, and is known for its simplicity, versatility, and ease of use.",
+  "description": "Node-RED is a flow-based programming tool used for wiring IoT devices and APIs together visually. It offers a browser editor and can be deployed self-hosted to automate workflows, events, and integrations.",
   "install_methods": [
     {
-      "type": "default",
-      "script": "ct/node-red.sh",
-      "resources": {
-        "cpu": 1,
-        "ram": 1024,
-        "hdd": 4,
-        "os": "debian",
-        "version": "13"
-      }
-    },
-    {
-      "type": "alpine",
-      "script": "ct/alpine-node-red.sh",
-      "resources": {
-        "cpu": 1,
-        "ram": 256,
-        "hdd": 1,
-        "os": "alpine",
-        "version": "3.22"
+      "platform": {
+        "desktop": {
+          "linux": false,
+          "windows": false,
+          "macos": false
+        },
+        "mobile": {
+          "android": false,
+          "ios": false
+        },
+        "web_app": false,
+        "browser_extension": false,
+        "cli_only": false,
+        "hosting": {
+          "self_hosted": false,
+          "saas": false,
+          "managed_cloud": false
+        },
+        "ui": {
+          "cli": false,
+          "gui": false,
+          "web_ui": false,
+          "api": false,
+          "tui": false
+        }
       }
     }
   ],
@@ -42,10 +45,28 @@
     "username": null,
     "password": null
   },
-  "notes": [
-    {
-      "text": "To install themes, type `update` in the LXC console. (debian/ubuntu only)",
-      "type": "info"
+  "notes": [],
+  "platform": {
+    "desktop": false,
+    "mobile": false,
+    "web_extensions": false,
+    "hosting": false,
+    "ui_interface": false
+  },
+  "deployment": {
+    "script": true,
+    "docker": true,
+    "docker_compose": true,
+    "helm": true,
+    "kubernetes": true,
+    "terraform": true,
+    "paths": {
+      "script": "/public/manifest/dummy/script.sh",
+      "docker": "/public/manifest/dummy/Dockerfile",
+      "docker_compose": "/public/manifest/dummy/docker-compose.yaml",
+      "helm": "/public/manifest/dummy/helm.yaml",
+      "kubernetes": "/public/manifest/dummy/k8s-deployment.yaml",
+      "terraform": "/public/manifest/dummy/main.tf"
     }
-  ]
+  }
 }
