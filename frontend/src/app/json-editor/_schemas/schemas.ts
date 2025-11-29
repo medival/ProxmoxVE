@@ -8,6 +8,14 @@ export const DeploymentSchema = z.object({
   helm: z.boolean().optional(),
   kubernetes: z.boolean().optional(),
   terraform: z.boolean().optional(),
+  paths: z.object({
+    script: z.string().nullable().optional(),
+    docker: z.string().nullable().optional(),
+    docker_compose: z.string().nullable().optional(),
+    helm: z.string().nullable().optional(),
+    kubernetes: z.string().nullable().optional(),
+    terraform: z.string().nullable().optional(),
+  }).optional(),
 }).partial();
 
 /** Hosting (flags) */
@@ -96,6 +104,8 @@ export const ScriptSchema = z.object({
       type: z.string().min(1, "Note type cannot be empty"),
     }),
   ).optional().default([]),
+
+  deployment: DeploymentSchema.optional(),
 });
 
 export type Script = z.infer<typeof ScriptSchema>;
