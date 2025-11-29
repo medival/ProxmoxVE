@@ -3,7 +3,7 @@ name: Deploy frontend to GitHub Pages
 on:
   push:
     branches:
-      - '**'
+      - main
 
 jobs:
   build-and-deploy:
@@ -11,7 +11,10 @@ jobs:
     permissions:
       pages: write
       id-token: write
-      contents: write
+      contents: read
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
       - name: Checkout repository
@@ -45,11 +48,11 @@ jobs:
       - name: Add .nojekyll file
         run: touch frontend/out/.nojekyll
 
-      - name: Deploy to gh-pages
-        uses: JamesIves/github-pages-deploy-action@v4
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          branch: gh-pages
-          folder: frontend/out
-          clean: true
-          clean-exclude: |
-            .nojekyll
+          path: frontend/out
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
