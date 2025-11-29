@@ -1,0 +1,17 @@
+# Helm installation for 2FAuth
+# Note: This is a template. Adjust according to your Helm chart availability
+
+helm repo add 2fauth https://charts.example.com/2fauth
+helm repo update
+helm install 2fauth 2fauth/2fauth -f values.yaml
+
+# Example values.yaml configuration:
+# image:
+#   repository: 2fauth/2fauth
+#   tag: latest
+# service:
+#   type: ClusterIP
+#   port: 8000
+# persistence:
+#   enabled: true
+#   size: 10Gi
