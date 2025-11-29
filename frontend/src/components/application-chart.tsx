@@ -4,7 +4,7 @@ import { ArcElement, Chart as ChartJS, Tooltip as ChartTooltip, Legend } from "c
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import { BarChart3, PieChart } from "lucide-react";
 import React, { useState } from "react";
-import { Chart } from "react-chartjs-2";
+import { Pie } from "react-chartjs-2";
 
 import {
   Table,
@@ -135,7 +135,7 @@ export default function ApplicationChart({ data }: ApplicationChartProps) {
             <DialogTitle>Applications Distribution</DialogTitle>
           </DialogHeader>
           <div className="h-[60vh] w-full">
-            <Chart type="pie" data={chartData} options={chartOptions} />
+            <Pie data={chartData} options={chartOptions} />
           </div>
           <div className="flex justify-center gap-4">
             <Button
