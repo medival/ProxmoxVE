@@ -11,7 +11,7 @@ jobs:
     permissions:
       pages: write
       id-token: write
-      contents: write
+      contents: read
 
     steps:
       - name: Checkout repository
@@ -45,11 +45,11 @@ jobs:
       - name: Add .nojekyll file
         run: touch frontend/out/.nojekyll
 
-      - name: Deploy to gh-pages
-        uses: JamesIves/github-pages-deploy-action@v4
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          branch: gh-pages
-          folder: frontend/out
-          clean: true
-          clean-exclude: |
-            .nojekyll
+          path: frontend/out
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
