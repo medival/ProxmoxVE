@@ -103,15 +103,15 @@ export function SponsoredSidebar({ items, onScriptSelect }: SponsoredSidebarProp
           {sponsoredScripts.map(script => (
             <Card
               key={script.slug}
-              className="bg-gradient-to-br from-background via-background to-accent/5 border border-blue-500/20 hover:border-blue-500/40 transition-all duration-200 hover:shadow-lg hover:scale-[1.01] flex flex-col relative overflow-hidden group"
+              className="bg-gradient-to-br from-background via-background to-accent/5 border border-blue-500/20 hover:border-blue-500/40 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 hover:scale-[1.02] flex flex-col relative overflow-hidden group"
             >
               {/* Accent bar */}
               <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-500/50 via-blue-600/50 to-blue-500/50" />
 
-              {/* Sponsored Badge - Improved */}
+              {/* Sponsored Badge - Enhanced with glow */}
               <div className="absolute top-2 right-2 z-10">
-                <Badge className="bg-gradient-to-r from-blue-500 to-blue-600 text-white border-0 text-[9px] px-2 py-0.5 shadow-sm">
-                  <Crown className="h-2.5 w-2.5 mr-0.5" />
+                <Badge className="bg-gradient-to-r from-blue-500 to-blue-600 text-white border-0 text-[9px] px-2 py-0.5 shadow-sm group-hover:shadow-blue-500/50 group-hover:shadow-lg transition-all duration-300 animate-in fade-in-0 zoom-in-95">
+                  <Crown className="h-2.5 w-2.5 mr-0.5 group-hover:scale-110 transition-transform duration-300" />
                   Sponsored
                 </Badge>
               </div>
