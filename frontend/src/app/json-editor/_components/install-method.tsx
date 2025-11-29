@@ -55,12 +55,12 @@ const ToggleCheckbox = ({ checked, onChange, children }: any) => {
  */
 export const defaultInstallMethod = {
   platform: {
-    desktop: { linux: false, windows: false, macos: false },
-    mobile: { android: false, ios: false },
+    desktop_detail: { linux: false, windows: false, macos: false },
+    mobile_detail: { android: false, ios: false },
     web_app: false,
     browser_extension: false,
     cli_only: false,
-    hosting: { self_hosted: false, managed_cloud: false },
+    hosting_detail: { self_hosted: false, managed_cloud: false },
     ui: { cli: false, gui: false, web_ui: false, api: false, tui: false },
   },
 } as const;
@@ -206,7 +206,7 @@ function InstallMethod({ script, setScript, setIsValid, setZodErrors }: InstallM
                   <div>
                     <button
                       type="button"
-                      onClick={() => toggleGroup(["desktop"])}
+                      onClick={() => toggleGroup(["desktop_detail"])}
                       className="text-xs text-blue-600 hover:underline"
                     >
                       Select all / Clear
@@ -216,22 +216,22 @@ function InstallMethod({ script, setScript, setIsValid, setZodErrors }: InstallM
 
                 <div className="mt-3 flex gap-4 flex-wrap">
                   <ToggleCheckbox
-                    checked={!!method.platform?.desktop?.linux}
-                    onChange={(v: boolean) => updatePlatform(["desktop", "linux"], v)}
+                    checked={!!method.platform?.desktop_detail?.linux}
+                    onChange={(v: boolean) => updatePlatform(["desktop_detail", "linux"], v)}
                   >
                     Linux
                   </ToggleCheckbox>
 
                   <ToggleCheckbox
-                    checked={!!method.platform?.desktop?.windows}
-                    onChange={(v: boolean) => updatePlatform(["desktop", "windows"], v)}
+                    checked={!!method.platform?.desktop_detail?.windows}
+                    onChange={(v: boolean) => updatePlatform(["desktop_detail", "windows"], v)}
                   >
                     Windows
                   </ToggleCheckbox>
 
                   <ToggleCheckbox
-                    checked={!!method.platform?.desktop?.macos}
-                    onChange={(v: boolean) => updatePlatform(["desktop", "macos"], v)}
+                    checked={!!method.platform?.desktop_detail?.macos}
+                    onChange={(v: boolean) => updatePlatform(["desktop_detail", "macos"], v)}
                   >
                     macOS
                   </ToggleCheckbox>
@@ -248,7 +248,7 @@ function InstallMethod({ script, setScript, setIsValid, setZodErrors }: InstallM
                   <div>
                     <button
                       type="button"
-                      onClick={() => toggleGroup(["mobile"])}
+                      onClick={() => toggleGroup(["mobile_detail"])}
                       className="text-xs text-blue-600 hover:underline"
                     >
                       Select all / Clear
@@ -258,15 +258,15 @@ function InstallMethod({ script, setScript, setIsValid, setZodErrors }: InstallM
 
                 <div className="mt-3 flex gap-4">
                   <ToggleCheckbox
-                    checked={!!method.platform?.mobile?.android}
-                    onChange={(v: boolean) => updatePlatform(["mobile", "android"], v)}
+                    checked={!!method.platform?.mobile_detail?.android}
+                    onChange={(v: boolean) => updatePlatform(["mobile_detail", "android"], v)}
                   >
                     Android
                   </ToggleCheckbox>
 
                   <ToggleCheckbox
-                    checked={!!method.platform?.mobile?.ios}
-                    onChange={(v: boolean) => updatePlatform(["mobile", "ios"], v)}
+                    checked={!!method.platform?.mobile_detail?.ios}
+                    onChange={(v: boolean) => updatePlatform(["mobile_detail", "ios"], v)}
                   >
                     iOS
                   </ToggleCheckbox>
@@ -327,7 +327,7 @@ function InstallMethod({ script, setScript, setIsValid, setZodErrors }: InstallM
                 <div>
                   <button
                     type="button"
-                    onClick={() => toggleGroup(["hosting"])}
+                    onClick={() => toggleGroup(["hosting_detail"])}
                     className="text-xs text-blue-600 hover:underline"
                   >
                     Select all / Clear
@@ -337,15 +337,15 @@ function InstallMethod({ script, setScript, setIsValid, setZodErrors }: InstallM
 
               <div className="mt-3 flex gap-4 flex-wrap">
                 <ToggleCheckbox
-                  checked={!!method.platform?.hosting?.self_hosted}
-                  onChange={(v: boolean) => updatePlatform(["hosting", "self_hosted"], v)}
+                  checked={!!method.platform?.hosting_detail?.self_hosted}
+                  onChange={(v: boolean) => updatePlatform(["hosting_detail", "self_hosted"], v)}
                 >
                   Self-hosted
                 </ToggleCheckbox>
 
                 <ToggleCheckbox
-                  checked={!!method.platform?.hosting?.managed_cloud}
-                  onChange={(v: boolean) => updatePlatform(["hosting", "managed_cloud"], v)}
+                  checked={!!method.platform?.hosting_detail?.managed_cloud}
+                  onChange={(v: boolean) => updatePlatform(["hosting_detail", "managed_cloud"], v)}
                 >
                   Managed Cloud
                 </ToggleCheckbox>

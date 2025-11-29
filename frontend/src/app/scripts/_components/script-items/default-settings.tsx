@@ -39,19 +39,19 @@ export default function DefaultSettings({ item }: { item: Script }) {
   if (!platform) return null;
 
   const desktop = [
-    platform.desktop?.macos && "macOS",
-    platform.desktop?.linux && "Linux",
-    platform.desktop?.windows && "Windows",
+    platform.desktop_detail?.macos && "macOS",
+    platform.desktop_detail?.linux && "Linux",
+    platform.desktop_detail?.windows && "Windows",
   ].filter(Boolean) as string[];
 
   const mobile = [
-    platform.mobile?.android && "Android",
-    platform.mobile?.ios && "iOS",
+    platform.mobile_detail?.android && "Android",
+    platform.mobile_detail?.ios && "iOS",
   ].filter(Boolean) as string[];
 
   const hosting = [
-    platform.hosting?.self_hosted && "Self-hosted",
-    platform.hosting?.managed_cloud && "Managed cloud",
+    platform.hosting_detail?.self_hosted && "Self-hosted",
+    platform.hosting_detail?.managed_cloud && "Managed cloud",
   ].filter(Boolean) as string[];
 
   const deployment = [
