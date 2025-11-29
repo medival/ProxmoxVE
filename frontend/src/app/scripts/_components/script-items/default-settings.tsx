@@ -31,10 +31,9 @@ function PlatformRow({ label, items, icon }: PlatformRowProps) {
 }
 
 export default function DefaultSettings({ item }: { item: Script }) {
-  const defaultMethod =
-    item.install_methods.find((m) => m.type === "default") ?? item.install_methods[0];
+  const defaultMethod = item.install_methods[0];
 
-  const platform = (defaultMethod as any)?.platform;
+  const platform = defaultMethod?.platform;
 
   if (!platform) return null;
 
