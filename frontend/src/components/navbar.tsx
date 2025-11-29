@@ -68,14 +68,14 @@ function Navbar() {
                 <MobileSidebar />
               </Suspense>
             </div>
-            <div className="flex sm:gap-2">
+            <div className="flex gap-2 sm:gap-4">
               <CommandMenu />
               <GitHubStarsButton username="community-scripts" repo="ProxmoxVE" className="hidden md:flex" />
               {navbarLinks.map(({ href, event, icon, text, mobileHidden }) => (
                 <TooltipProvider key={event}>
                   <Tooltip delayDuration={100}>
                     <TooltipTrigger className={mobileHidden ? "hidden lg:block" : ""}>
-                      <Button variant="ghost" size="icon" asChild>
+                      <Button variant="ghost" size="icon" asChild className="hover:bg-accent/80 transition-colors">
                         <Link target="_blank" href={href} data-umami-event={event}>
                           {icon}
                           <span className="sr-only">{text}</span>

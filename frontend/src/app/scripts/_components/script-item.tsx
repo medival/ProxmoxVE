@@ -1,6 +1,6 @@
 "use client";
 
-import { X, Monitor, Smartphone, Cloud, Boxes, Terminal, MousePointerClick, CalendarDays, Globe, BookOpenText, Code, Stars, LayoutGrid } from "lucide-react";
+import { X, Monitor, Smartphone, Cloud, Boxes, Terminal, MousePointerClick, CalendarDays, Globe, BookOpenText, Code, Stars, LayoutGrid, Server, Layers, CloudUpload } from "lucide-react";
 import { motion } from "framer-motion";
 import { Suspense } from "react";
 import Image from "next/image";
@@ -101,7 +101,7 @@ function SecondaryMeta({ item }: { item: Script }) {
     parts.push({
       label: `${githubStars}`,
       href: "",
-      icon: <Stars className="h-5 w-5 text-foreground/60" />,
+      icon: <Stars className="h-5 w-5 text-foreground/60 hover:text-yellow-500 hover:scale-125 transition-all duration-200 cursor-pointer" />,
     });
   }
 
@@ -145,24 +145,37 @@ function PlatformRow({
   label,
   items,
   icon,
+  variant = "default",
 }: {
   label: string;
   items: string[];
   icon: React.ReactNode;
+  variant?: "filled" | "outline" | "minimal" | "default";
 }) {
   if (!items.length) return null;
 
+  const chipStyles = {
+    filled: "bg-primary/10 border-primary/20 text-primary font-semibold",
+    outline: "border border-border/60 text-foreground/80",
+    minimal: "border border-border/30 text-muted-foreground",
+    default: "border border-border/50 text-foreground/70",
+  };
+
   return (
-    <div className="flex items-center gap-2 text-xs text-muted-foreground">
-      {icon}
-      <span className="w-16 shrink-0 text-[11px] uppercase tracking-wide text-muted-foreground">
-        {label}
-      </span>
-      <div className="flex flex-wrap gap-1.5">
+    <div className="flex items-start gap-3">
+      <div className="flex items-center gap-2 min-w-[110px] pt-0.5">
+        <div className="flex items-center justify-center w-5 h-5 text-muted-foreground/70">
+          {icon}
+        </div>
+        <span className="text-[12px] font-semibold text-foreground/80 capitalize">
+          {label}
+        </span>
+      </div>
+      <div className="flex flex-wrap gap-1.5 flex-1">
         {items.map((item) => (
           <span
             key={item}
-            className="rounded-full border px-2 py-0.5 text-[10px] leading-none font-medium"
+            className={`rounded-full px-2.5 py-1 text-[11px] leading-none transition-colors hover:bg-accent/50 ${chipStyles[variant]}`}
           >
             {item}
           </span>
@@ -176,28 +189,24 @@ function PlatformSummary({ method }: { method?: InstallMethodWithPlatform }) {
   const platform = method?.platform;
   if (!platform) return null;
 
-  const desktop = [
+  // Combine Desktop + Mobile into "Platforms"
+  const platforms = [
     platform.desktop?.macos && "macOS",
     platform.desktop?.linux && "Linux",
     platform.desktop?.windows && "Windows",
-  ].filter(Boolean) as string[];
-
-  const mobile = [
     platform.mobile?.android && "Android",
     platform.mobile?.ios && "iOS",
   ].filter(Boolean) as string[];
 
-  const hosting = [
-    platform.hosting?.self_hosted && "Self-hosted",
-    platform.hosting?.managed_cloud && "Managed cloud",
-  ].filter(Boolean) as string[];
-
+  // Combine Hosting + Deploy into "Deployment"
   const deployment = [
-    platform.deployment?.script && "Script",
+    platform.hosting?.self_hosted && "Self-hosted",
+    platform.hosting?.managed_cloud && "Managed Cloud",
     platform.deployment?.docker && "Docker",
     platform.deployment?.docker_compose && "Docker Compose",
-    platform.deployment?.helm && "Helm",
     platform.deployment?.kubernetes && "Kubernetes",
+    platform.deployment?.helm && "Helm",
+    platform.deployment?.script && "Script",
     platform.deployment?.terraform && "Terraform",
   ].filter(Boolean) as string[];
 
@@ -209,42 +218,42 @@ function PlatformSummary({ method }: { method?: InstallMethodWithPlatform }) {
     platform.ui?.api && "API",
   ].filter(Boolean) as string[];
 
-  const interfaceIcon = platform.cli_only ? (
-    <Terminal className="h-3 w-3 shrink-0" />
-  ) : (
-    <MousePointerClick className="h-3 w-3 shrink-0" />
-  );
-
-  if (!desktop.length && !mobile.length && !hosting.length && !deployment.length && !ui.length) {
+  if (!platforms.length && !deployment.length && !ui.length) {
     return null;
   }
 
   return (
-    <div className="mt-3 flex flex-col space-y-2">
-      <div className="text-[11px] font-semibold uppercase text-muted-foreground">
-        Platform
+    <div className="mt-4 flex flex-col space-y-3 rounded-lg bg-accent/5 p-4 border border-border/30">
+      <div className="text-[13px] font-bold text-foreground/90 mb-1">
+        Platform & Deployment
       </div>
-      <PlatformRow
-        label="Desktop"
-        items={desktop}
-        icon={<Monitor className="h-3 w-3 shrink-0" />}
-      />
-      <PlatformRow
-        label="Mobile"
-        items={mobile}
-        icon={<Smartphone className="h-3 w-3 shrink-0" />}
-      />
-      <PlatformRow
-        label="Hosting"
-        items={hosting}
-        icon={<Cloud className="h-3 w-3 shrink-0" />}
-      />
-      <PlatformRow
-        label="Deploy"
-        items={deployment}
-        icon={<Boxes className="h-3 w-3 shrink-0" />}
-      />
-      <PlatformRow label="Interface" items={ui} icon={interfaceIcon} />
+
+      {platforms.length > 0 && (
+        <PlatformRow
+          label="Platforms"
+          items={platforms}
+          icon={<Monitor className="h-4 w-4" />}
+          variant="filled"
+        />
+      )}
+
+      {deployment.length > 0 && (
+        <PlatformRow
+          label="Deployment"
+          items={deployment}
+          icon={<CloudUpload className="h-4 w-4" />}
+          variant="outline"
+        />
+      )}
+
+      {ui.length > 0 && (
+        <PlatformRow
+          label="Interface"
+          items={ui}
+          icon={<Layers className="h-4 w-4" />}
+          variant="minimal"
+        />
+      )}
     </div>
   );
 }
@@ -253,12 +262,13 @@ function ScriptHeader({ item }: { item: Script }) {
   const defaultInstallMethod = item.install_methods?.[0] as InstallMethodWithPlatform | undefined;
 
   return (
-    <div className="flex flex-col lg:flex-row gap-6 w-full">
+    <div className="-m-8 mb-0 p-8 rounded-t-xl bg-gradient-to-br from-card/50 to-accent/10 border-b">
+      <div className="flex flex-col lg:flex-row gap-6 w-full">
       <div className="flex flex-col md:flex-row gap-6 flex-grow">
-        <div className="flex-shrink-0">
+        <div className="flex-shrink-0 self-start">
           {item.logo && item.logo.trim() !== "" ? (
             <Image
-              className="h-32 w-32 rounded-xl bg-gradient-to-br from-accent/40 to-accent/60 object-contain p-3 shadow-lg transition-transform hover:scale-105"
+              className="h-28 w-28 rounded-xl bg-gradient-to-br from-accent/40 to-accent/60 object-contain p-3 shadow-lg transition-transform hover:scale-105"
               src={item.logo}
               width={400}
               onError={(e) => {
@@ -272,8 +282,8 @@ function ScriptHeader({ item }: { item: Script }) {
               unoptimized
             />
           ) : null}
-          <div className={`flex h-32 w-32 items-center justify-center rounded-xl bg-gradient-to-br from-accent/40 to-accent/60 shadow-lg transition-transform hover:scale-105 logo-fallback ${item.logo && item.logo.trim() !== "" ? 'hidden' : ''}`}>
-            <LayoutGrid className="h-16 w-16 text-muted-foreground" />
+          <div className={`flex h-28 w-28 items-center justify-center rounded-xl bg-gradient-to-br from-accent/40 to-accent/60 shadow-lg transition-transform hover:scale-105 logo-fallback ${item.logo && item.logo.trim() !== "" ? 'hidden' : ''}`}>
+            <LayoutGrid className="h-14 w-14 text-muted-foreground" />
           </div>
         </div>
         <div className="flex flex-col justify-between flex-grow space-y-4">
@@ -299,6 +309,7 @@ function ScriptHeader({ item }: { item: Script }) {
       </div>
       <div className="flex flex-col gap-4 justify-between">
         <InterFaces item={item} />
+      </div>
       </div>
     </div>
   );
@@ -336,13 +347,18 @@ export function ScriptItem({ item, setSelectedScript }: ScriptItemProps) {
           </h2>
           <button
             onClick={closeScript}
-            className="rounded-full p-2 text-muted-foreground hover:bg-card/50 transition-colors"
+            className="rounded-full p-2 text-muted-foreground hover:bg-card/50 transition-all duration-200 hover:rotate-90 active:scale-90"
           >
             <X className="h-5 w-5" />
           </button>
         </div>
 
-        <div className="rounded-xl border border-border bg-accent/30 backdrop-blur-sm shadow-lg">
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+          className="rounded-xl border border-border bg-accent/30 backdrop-blur-sm shadow-lg transition-all duration-300 hover:shadow-xl"
+        >
           <div className="p-8 space-y-8">
             <Suspense fallback={<div className="animate-pulse h-32 bg-accent/20 rounded-xl" />}>
               <ScriptHeader item={item} />
@@ -356,8 +372,8 @@ export function ScriptItem({ item, setSelectedScript }: ScriptItemProps) {
             <Separator />
 
             <div className="mt-6 rounded-lg border shadow-md">
-              <div className="flex gap-3 px-6 py-4 bg-accent/25">
-                <h2 className="text-xl font-semibold">
+              <div className="flex gap-3 px-5 py-3 bg-accent/25">
+                <h2 className="text-lg font-semibold">
                   How to Install
                 </h2>
               </div>
@@ -368,8 +384,8 @@ export function ScriptItem({ item, setSelectedScript }: ScriptItemProps) {
               {item.config_path && (
                 <>
                   <Separator />
-                  <div className="flex gap-3 px-6 py-4 bg-accent/25">
-                    <h2 className="text-xl font-semibold">Location of config file</h2>
+                  <div className="flex gap-3 px-5 py-3 bg-accent/25">
+                    <h2 className="text-lg font-semibold">Location of config file</h2>
                   </div>
                   <Separator />
                   <div className="">
@@ -381,7 +397,7 @@ export function ScriptItem({ item, setSelectedScript }: ScriptItemProps) {
 
             <DefaultPassword item={item} />
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   );

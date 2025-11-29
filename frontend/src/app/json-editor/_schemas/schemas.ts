@@ -8,15 +8,21 @@ export const DeploymentSchema = z.object({
   helm: z.boolean().optional(),
   kubernetes: z.boolean().optional(),
   terraform: z.boolean().optional(),
+  paths: z.object({
+    script: z.string().nullable().optional(),
+    docker: z.string().nullable().optional(),
+    docker_compose: z.string().nullable().optional(),
+    helm: z.string().nullable().optional(),
+    kubernetes: z.string().nullable().optional(),
+    terraform: z.string().nullable().optional(),
+  }).optional(),
 }).partial();
 
 /** Hosting (flags) */
-export const HostingSchema = z
-  .object({
-    self_hosted: z.boolean().optional(),
-    managed_cloud: z.boolean().optional(),
-  })
-  .partial();
+export const HostingSchema = z.object({
+  self_hosted: z.boolean().optional(),
+  managed_cloud: z.boolean().optional(),
+}).partial();
 
 /** UI (flags) */
 export const UiSchema = z
@@ -65,12 +71,14 @@ export const ScriptSchema = z.object({
   name: z.string().min(1, "Name is required"),
   slug: z.string().min(1, "Slug is required"),
   categories: z.array(z.number()).min(1, "At least one category is required"),
+
   date_created: z
     .string()
-    .regex(/^\d{4}-\d{2}-\d{2}$/, "Date must be in YYYY-MM-DD format")
-    .min(1, "Date is required"),
+    .regex(/^\d{4}-\d{2}-\d{2}$/, "Date must be in YYYY-MM-DD format"),
+
   interface_port: z.number().nullable().optional(),
-  documentation: z.string().nullable().optional(),
+
+  documentation: z.string().url().nullable().optional(),
   website: z.string().url().nullable().optional(),
   source_code: z.string().url().nullable().optional(),
   logo: z.string().url().nullable().optional(),
@@ -86,12 +94,17 @@ export const ScriptSchema = z.object({
     })
     .optional(),
 
-  notes: z.array(
-    z.object({
-      text: z.string().min(1, "Note text cannot be empty"),
-      type: z.string().min(1, "Note type cannot be empty"),
-    }),
-  ).optional().default([]),
+  platform: PlatformSchema.optional(),
+
+  notes: z
+    .array(
+      z.object({
+        text: z.string().min(1, "Note text cannot be empty"),
+        type: z.string().min(1, "Note type cannot be empty"),
+      })
+    )
+    .optional()
+    .default([]),
 });
 
 export type Script = z.infer<typeof ScriptSchema>;
