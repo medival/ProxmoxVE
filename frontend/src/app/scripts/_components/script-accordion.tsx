@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import * as Icons from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 import type { Category } from "@/lib/types";
 
@@ -36,6 +37,7 @@ export default function ScriptAccordion({
   setSelectedCategory: (category: string | null) => void;
   onItemSelect?: () => void;
 }) {
+  const router = useRouter();
   const [expandedItem, setExpandedItem] = useState<string | undefined>(undefined);
   const linkRefs = useRef<{ [key: string]: HTMLAnchorElement | null }>({});
 
@@ -148,9 +150,14 @@ export default function ScriptAccordion({
                       ? "rounded-lg bg-accent font-semibold dark:bg-accent/30 dark:text-white"
                       : ""
                     }`}
-                    onClick={() => {
-                      handleSelected(script.slug);
-                      setSelectedCategory(category.name);
+                    onClick={(e) => {
+                      // Prevent default Link behavior to control navigation explicitly
+                      e.preventDefault();
+
+                      // Use router.push to ensure history entry is created
+                      router.push(`/scripts?id=${script.slug}&category=${encodeURIComponent(category.name)}`);
+
+                      // Call onItemSelect for mobile sidebar closing
                       onItemSelect?.();
                     }}
                     ref={(el) => {
