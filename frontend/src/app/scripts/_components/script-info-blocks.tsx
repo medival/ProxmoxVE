@@ -400,7 +400,7 @@ export function TrendingScripts({ items }: { items: Category[] }) {
             className="block group"
           >
             <Card className="bg-accent/30 border-2 hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 flex flex-col h-full cursor-pointer relative overflow-hidden">
-              <div className="absolute top-2 left-2 z-0">
+              <div className="absolute top-2 left-2 z-[65]">
                 <Badge className="bg-gradient-to-r from-amber-500 to-orange-500 text-white border-0 text-[10px] px-2 py-0.5">
                   ⭐ Trending
                 </Badge>
@@ -412,16 +412,18 @@ export function TrendingScripts({ items }: { items: Category[] }) {
                   </div>
                   <div className="flex flex-col flex-1 min-w-0 gap-1">
                     <h3 className="font-semibold text-base line-clamp-1">{script.name}</h3>
-                    <p className="text-xs text-muted-foreground flex items-center gap-1" title={script.date_created}>
-                      <CalendarPlus className="h-3 w-3" />
-                      {extractDate(script.date_created)}
-                    </p>
-                    {formatStarCount((script as any).github_stars) && (
-                      <p className="text-xs text-amber-600 dark:text-amber-500 flex items-center gap-1 font-medium">
-                        <Star className="h-3 w-3 fill-current" />
-                        {formatStarCount((script as any).github_stars)}
+                    <div className="flex items-center gap-3">
+                      <p className="text-xs text-muted-foreground flex items-center gap-1" title={script.date_created}>
+                        <CalendarPlus className="h-3 w-3" />
+                        {extractDate(script.date_created)}
                       </p>
-                    )}
+                      {formatStarCount((script as any).github_stars) && (
+                        <p className="text-xs text-muted-foreground flex items-center gap-1">
+                          <Star className="h-3 w-3 fill-current" />
+                          {formatStarCount((script as any).github_stars)}
+                        </p>
+                      )}
+                    </div>
                   </div>
                 </CardTitle>
               </CardHeader>
@@ -545,7 +547,7 @@ export function PopularScripts({ items }: { items: Category[] }) {
             prefetch={false}
           >
             <Card className="bg-accent/30 border-2 hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 flex flex-col h-full cursor-pointer relative overflow-hidden">
-              <div className="absolute top-2 left-2 z-0">
+              <div className="absolute top-2 left-2 z-[65]">
                 <Badge className="bg-gradient-to-r from-purple-500 to-pink-500 text-white border-0 text-[10px] px-2 py-0.5">
                   ⭐ Popular
                 </Badge>
@@ -557,16 +559,18 @@ export function PopularScripts({ items }: { items: Category[] }) {
                   </div>
                   <div className="flex flex-col flex-1 min-w-0 gap-1">
                     <h3 className="font-semibold text-base line-clamp-1">{script.name}</h3>
-                    <p className="text-xs text-muted-foreground flex items-center gap-1" title={script.date_created}>
-                      <CalendarPlus className="h-3 w-3" />
-                      {extractDate(script.date_created)}
-                    </p>
-                    {formatStarCount((script as any).github_stars) && (
-                      <p className="text-xs text-amber-600 dark:text-amber-500 flex items-center gap-1 font-medium">
-                        <Star className="h-3 w-3 fill-current" />
-                        {formatStarCount((script as any).github_stars)}
+                    <div className="flex items-center gap-3">
+                      <p className="text-xs text-muted-foreground flex items-center gap-1" title={script.date_created}>
+                        <CalendarPlus className="h-3 w-3" />
+                        {extractDate(script.date_created)}
                       </p>
-                    )}
+                      {formatStarCount((script as any).github_stars) && (
+                        <p className="text-xs text-muted-foreground flex items-center gap-1">
+                          <Star className="h-3 w-3 fill-current" />
+                          {formatStarCount((script as any).github_stars)}
+                        </p>
+                      )}
+                    </div>
                   </div>
                 </CardTitle>
               </CardHeader>

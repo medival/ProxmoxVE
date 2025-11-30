@@ -98,10 +98,19 @@ function SecondaryMeta({ item }: { item: Script }) {
   // ⭐ Github stars
   const githubStars = (item as any).github_stars;
   if (githubStars) {
+    // Format star count (e.g., 3663 -> "3.7k")
+    const formatStars = (stars: string | number): string => {
+      const num = typeof stars === 'string' ? parseInt(stars, 10) : stars;
+      if (isNaN(num)) return stars.toString();
+      if (num >= 1000000) return `${(num / 1000000).toFixed(1)}m`;
+      if (num >= 1000) return `${(num / 1000).toFixed(1)}k`;
+      return num.toString();
+    };
+
     parts.push({
-      label: `${githubStars}`,
+      label: formatStars(githubStars),
       href: "",
-      icon: <Stars className="h-5 w-5 text-yellow-500" />,
+      icon: <Stars className="h-5 w-5 text-foreground/60" />,
     });
   }
 
