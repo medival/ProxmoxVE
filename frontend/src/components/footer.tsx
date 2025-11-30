@@ -26,7 +26,7 @@ export default function Footer() {
             .
           </p>
         </div>
-        <div className="sm:flex hidden">
+        <div className="flex">
           <Link
             href="/json-editor"
             className={cn(buttonVariants({ variant: "link" }), "text-muted-foreground flex items-center gap-2")}
