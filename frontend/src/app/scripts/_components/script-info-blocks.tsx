@@ -400,7 +400,7 @@ export function TrendingScripts({ items }: { items: Category[] }) {
             className="block group"
           >
             <Card className="bg-accent/30 border-2 hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 flex flex-col h-full cursor-pointer relative overflow-hidden">
-              <div className="absolute top-2 left-2 z-20">
+              <div className="absolute top-2 left-2 z-0">
                 <Badge className="bg-gradient-to-r from-amber-500 to-orange-500 text-white border-0 text-[10px] px-2 py-0.5">
                   ⭐ Trending
                 </Badge>
@@ -545,7 +545,7 @@ export function PopularScripts({ items }: { items: Category[] }) {
             prefetch={false}
           >
             <Card className="bg-accent/30 border-2 hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 flex flex-col h-full cursor-pointer relative overflow-hidden">
-              <div className="absolute top-2 left-2 z-20">
+              <div className="absolute top-2 left-2 z-0">
                 <Badge className="bg-gradient-to-r from-purple-500 to-pink-500 text-white border-0 text-[10px] px-2 py-0.5">
                   ⭐ Popular
                 </Badge>
