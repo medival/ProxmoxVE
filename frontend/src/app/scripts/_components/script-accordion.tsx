@@ -69,10 +69,10 @@ export default function ScriptAccordion({
 
       if (category) {
         setExpandedItem(category.name);
-        handleSelected(selectedScript);
+        // Don't call handleSelected here - it causes infinite loop by calling setSelectedScript again
       }
     }
-  }, [selectedScript, selectedCategory, items, handleSelected]);
+  }, [selectedScript, selectedCategory, items]);
 
   // Group categories by their group field
   const groupedCategories = items.reduce((acc, category) => {
