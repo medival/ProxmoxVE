@@ -2,8 +2,9 @@
 
 import { X, Monitor, Smartphone, Cloud, Boxes, Terminal, MousePointerClick, CalendarDays, Globe, BookOpenText, Code, Stars, LayoutGrid, Server, Layers, CloudUpload } from "lucide-react";
 import { motion } from "framer-motion";
-import { Suspense } from "react";
+import { Suspense, useEffect } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 import type { AppVersion, Script } from "@/lib/types";
 
@@ -345,9 +346,24 @@ function VersionInfo({ item }: { item: Script }) {
 }
 
 export function ScriptItem({ item, setSelectedScript }: ScriptItemProps) {
+  const router = useRouter();
+
+  useEffect(() => {
+    // Track that we've mounted, so we know back button should work
+    sessionStorage.setItem('script-detail-visited', 'true');
+  }, []);
+
   const closeScript = () => {
-    window.history.pushState({}, document.title, window.location.pathname);
-    setSelectedScript(null);
+    // Check if we have previous history in this session
+    const hasHistory = sessionStorage.getItem('script-detail-visited');
+
+    if (hasHistory && typeof window !== 'undefined' && window.history.length > 1) {
+      // Navigate back in history
+      router.back();
+    } else {
+      // Fallback: just clear the selection (in case user landed directly here)
+      setSelectedScript(null);
+    }
   };
 
   return (
