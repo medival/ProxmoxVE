@@ -1,4 +1,4 @@
-import { CalendarPlus, LayoutGrid, TrendingUp, Sparkles, Crown } from "lucide-react";
+import { CalendarPlus, LayoutGrid, TrendingUp, Sparkles, Crown, Star } from "lucide-react";
 import { useMemo, useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -13,6 +13,18 @@ import { extractDate } from "@/lib/time";
 
 const ITEMS_PER_PAGE = 3;
 const ITEMS_PER_PAGE_LARGE = 6;
+
+// ⬇️ Helper to format star count (e.g., 3663 -> "3.7k")
+function formatStarCount(stars?: string | number): string | null {
+  if (!stars) return null;
+
+  const num = typeof stars === 'string' ? parseInt(stars, 10) : stars;
+  if (isNaN(num) || num === 0) return null;
+
+  if (num >= 1000000) return `${(num / 1000000).toFixed(1)}m`;
+  if (num >= 1000) return `${(num / 1000).toFixed(1)}k`;
+  return num.toString();
+}
 
 // ⬇️ Reusable icon loader with fallback
 function AppIcon({ src, name, size = 64 }: { src?: string | null; name: string; size?: number }) {
@@ -388,7 +400,7 @@ export function TrendingScripts({ items }: { items: Category[] }) {
             className="block group"
           >
             <Card className="bg-accent/30 border-2 hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 flex flex-col h-full cursor-pointer relative overflow-hidden">
-              <div className="absolute top-2 left-2 z-10">
+              <div className="absolute top-2 left-2 z-20">
                 <Badge className="bg-gradient-to-r from-amber-500 to-orange-500 text-white border-0 text-[10px] px-2 py-0.5">
                   ⭐ Trending
                 </Badge>
@@ -398,12 +410,18 @@ export function TrendingScripts({ items }: { items: Category[] }) {
                   <div className="flex h-20 w-20 min-w-20 items-center justify-center rounded-xl bg-gradient-to-br from-accent/40 to-accent/60 p-1 shadow-md">
                     <AppIcon src={script.logo} name={script.name || script.slug} size={80} />
                   </div>
-                  <div className="flex flex-col flex-1 min-w-0">
-                    <h3 className="font-semibold text-base line-clamp-1 mb-1">{script.name}</h3>
+                  <div className="flex flex-col flex-1 min-w-0 gap-1">
+                    <h3 className="font-semibold text-base line-clamp-1">{script.name}</h3>
                     <p className="text-xs text-muted-foreground flex items-center gap-1" title={script.date_created}>
                       <CalendarPlus className="h-3 w-3" />
                       {extractDate(script.date_created)}
                     </p>
+                    {formatStarCount((script as any).github_stars) && (
+                      <p className="text-xs text-amber-600 dark:text-amber-500 flex items-center gap-1 font-medium">
+                        <Star className="h-3 w-3 fill-current" />
+                        {formatStarCount((script as any).github_stars)}
+                      </p>
+                    )}
                   </div>
                 </CardTitle>
               </CardHeader>
@@ -527,7 +545,7 @@ export function PopularScripts({ items }: { items: Category[] }) {
             prefetch={false}
           >
             <Card className="bg-accent/30 border-2 hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 flex flex-col h-full cursor-pointer relative overflow-hidden">
-              <div className="absolute top-2 left-2 z-10">
+              <div className="absolute top-2 left-2 z-20">
                 <Badge className="bg-gradient-to-r from-purple-500 to-pink-500 text-white border-0 text-[10px] px-2 py-0.5">
                   ⭐ Popular
                 </Badge>
@@ -537,12 +555,18 @@ export function PopularScripts({ items }: { items: Category[] }) {
                   <div className="flex h-20 w-20 min-w-20 items-center justify-center rounded-xl bg-gradient-to-br from-accent/40 to-accent/60 p-1 shadow-md">
                     <AppIcon src={script.logo} name={script.name || script.slug} size={80} />
                   </div>
-                  <div className="flex flex-col flex-1 min-w-0">
-                    <h3 className="font-semibold text-base line-clamp-1 mb-1">{script.name}</h3>
+                  <div className="flex flex-col flex-1 min-w-0 gap-1">
+                    <h3 className="font-semibold text-base line-clamp-1">{script.name}</h3>
                     <p className="text-xs text-muted-foreground flex items-center gap-1" title={script.date_created}>
                       <CalendarPlus className="h-3 w-3" />
                       {extractDate(script.date_created)}
                     </p>
+                    {formatStarCount((script as any).github_stars) && (
+                      <p className="text-xs text-amber-600 dark:text-amber-500 flex items-center gap-1 font-medium">
+                        <Star className="h-3 w-3 fill-current" />
+                        {formatStarCount((script as any).github_stars)}
+                      </p>
+                    )}
                   </div>
                 </CardTitle>
               </CardHeader>

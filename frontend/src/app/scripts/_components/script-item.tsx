@@ -101,7 +101,7 @@ function SecondaryMeta({ item }: { item: Script }) {
     parts.push({
       label: `${githubStars}`,
       href: "",
-      icon: <Stars className="h-5 w-5 text-foreground/60 hover:text-yellow-500 hover:scale-125 transition-all duration-200 cursor-pointer" />,
+      icon: <Stars className="h-5 w-5 text-yellow-500" />,
     });
   }
 
