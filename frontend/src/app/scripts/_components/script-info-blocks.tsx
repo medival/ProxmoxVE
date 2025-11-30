@@ -1,4 +1,4 @@
-import { CalendarPlus, LayoutGrid, TrendingUp, Sparkles, Crown } from "lucide-react";
+import { CalendarPlus, LayoutGrid, TrendingUp, Sparkles, Crown, Star } from "lucide-react";
 import { useMemo, useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -13,6 +13,18 @@ import { extractDate } from "@/lib/time";
 
 const ITEMS_PER_PAGE = 3;
 const ITEMS_PER_PAGE_LARGE = 6;
+
+// ⬇️ Helper to format star count (e.g., 3663 -> "3.7k")
+function formatStarCount(stars?: string | number): string | null {
+  if (!stars) return null;
+
+  const num = typeof stars === 'string' ? parseInt(stars, 10) : stars;
+  if (isNaN(num) || num === 0) return null;
+
+  if (num >= 1000000) return `${(num / 1000000).toFixed(1)}m`;
+  if (num >= 1000) return `${(num / 1000).toFixed(1)}k`;
+  return num.toString();
+}
 
 // ⬇️ Reusable icon loader with fallback
 function AppIcon({ src, name, size = 64 }: { src?: string | null; name: string; size?: number }) {
@@ -235,6 +247,12 @@ export function LatestScripts({ items }: { items: Category[] }) {
                       <CalendarPlus className="h-3 w-3" />
                       {extractDate(script.date_created)}
                     </p>
+                    {formatStarCount((script as any).github_stars) && (
+                      <p className="text-xs text-muted-foreground flex items-center gap-1">
+                        <Star className="h-3 w-3 fill-current" />
+                        {formatStarCount((script as any).github_stars)}
+                      </p>
+                    )}
                   </div>
                 </CardTitle>
               </CardHeader>
@@ -341,13 +359,28 @@ export function TrendingScripts({ items }: { items: Category[] }) {
       }
     });
 
-    // Get scripts from last 30 days
+    // Helper to parse GitHub stars (e.g., "3.5k" -> 3500)
+    const parseStars = (stars?: string): number => {
+      if (!stars) return 0;
+      const num = parseFloat(stars.replace(/[^0-9.]/g, ''));
+      if (stars.toLowerCase().includes('k')) return num * 1000;
+      if (stars.toLowerCase().includes('m')) return num * 1000000;
+      return num;
+    };
+
+    // Get scripts from last 30 days and sort by GitHub stars
     const thirtyDaysAgo = new Date();
     thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
 
     return Array.from(uniqueScriptsMap.values())
       .filter(script => new Date(script.date_created) >= thirtyDaysAgo)
-      .sort((a, b) => new Date(b.date_created).getTime() - new Date(a.date_created).getTime())
+      .sort((a, b) => {
+        const starsA = parseStars((a as any).github_stars);
+        const starsB = parseStars((b as any).github_stars);
+        // Sort by stars first, then by date
+        if (starsB !== starsA) return starsB - starsA;
+        return new Date(b.date_created).getTime() - new Date(a.date_created).getTime();
+      })
       .slice(0, 6);
   }, [items]);
 
@@ -373,7 +406,7 @@ export function TrendingScripts({ items }: { items: Category[] }) {
             className="block group"
           >
             <Card className="bg-accent/30 border-2 hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 flex flex-col h-full cursor-pointer relative overflow-hidden">
-              <div className="absolute top-2 left-2 z-10">
+              <div className="absolute top-2 left-2 z-[65]">
                 <Badge className="bg-gradient-to-r from-amber-500 to-orange-500 text-white border-0 text-[10px] px-2 py-0.5">
                   ⭐ Trending
                 </Badge>
@@ -383,12 +416,22 @@ export function TrendingScripts({ items }: { items: Category[] }) {
                   <div className="flex h-20 w-20 min-w-20 items-center justify-center rounded-xl bg-gradient-to-br from-accent/40 to-accent/60 p-1 shadow-md">
                     <AppIcon src={script.logo} name={script.name || script.slug} size={80} />
                   </div>
-                  <div className="flex flex-col flex-1 min-w-0">
-                    <h3 className="font-semibold text-base line-clamp-1 mb-1">{script.name}</h3>
-                    <p className="text-xs text-muted-foreground flex items-center gap-1" title={script.date_created}>
-                      <CalendarPlus className="h-3 w-3" />
-                      {extractDate(script.date_created)}
-                    </p>
+                  <div className="flex flex-col flex-1 min-w-0 gap-1">
+                    <h3 className="font-semibold text-base line-clamp-1">{script.name}</h3>
+                    <div className="flex items-center gap-3">
+                      <p className="text-xs text-muted-foreground flex items-center gap-1" title={script.date_created}>
+                        <CalendarPlus className="h-3 w-3" />
+                        {extractDate(script.date_created)}
+                      </p>
+                    </div>
+                    <div>
+                      {formatStarCount((script as any).github_stars) && (
+                        <p className="text-xs text-muted-foreground flex items-center gap-1">
+                          <Star className="h-3 w-3 fill-current" />
+                          {formatStarCount((script as any).github_stars)}
+                        </p>
+                      )}
+                    </div>
                   </div>
                 </CardTitle>
               </CardHeader>
@@ -433,22 +476,41 @@ export function PopularScripts({ items }: { items: Category[] }) {
       }
     });
 
-    // Prioritize scripts from mostPopularScripts, then add others
-    const allScripts = Array.from(uniqueScriptsMap.values());
-    const popular = mostPopularScripts
-      .map(slug => allScripts.find(s => s.slug === slug))
-      .filter(Boolean) as Script[];
+    // Helper to parse GitHub stars (e.g., "3.5k" -> 3500)
+    const parseStars = (stars?: string): number => {
+      if (!stars) return 0;
+      const num = parseFloat(stars.replace(/[^0-9.]/g, ''));
+      if (stars.toLowerCase().includes('k')) return num * 1000;
+      if (stars.toLowerCase().includes('m')) return num * 1000000;
+      return num;
+    };
 
-    // Add more scripts that have docker/k8s deployment
-    const additionalScripts = allScripts
-      .filter(script => !mostPopularScripts.includes(script.slug))
-      .filter(script => {
-        const deployment = script.install_methods?.[0]?.platform?.deployment;
-        return deployment && (deployment.docker || deployment.kubernetes || deployment.helm);
+    // Helper to count deployment methods
+    const countDeploymentMethods = (script: Script): number => {
+      const deployment = script.install_methods?.[0]?.platform?.deployment;
+      if (!deployment) return 0;
+      return Object.values(deployment).filter(Boolean).length;
+    };
+
+    // Calculate popularity score: GitHub stars (80%) + deployment versatility (20%)
+    const allScripts = Array.from(uniqueScriptsMap.values()).map(script => ({
+      script,
+      stars: parseStars((script as any).github_stars),
+      deploymentCount: countDeploymentMethods(script),
+    }));
+
+    // Boost hardcoded popular scripts slightly
+    return allScripts
+      .sort((a, b) => {
+        const boostA = mostPopularScripts.includes(a.script.slug) ? 5000 : 0;
+        const boostB = mostPopularScripts.includes(b.script.slug) ? 5000 : 0;
+
+        const scoreA = (a.stars * 0.8) + (a.deploymentCount * 200) + boostA;
+        const scoreB = (b.stars * 0.8) + (b.deploymentCount * 200) + boostB;
+
+        return scoreB - scoreA;
       })
-      .slice(0, 9);
-
-    return [...popular, ...additionalScripts];
+      .map(item => item.script);
   }, [items]);
 
   const goToNextPage = () => setPage(prev => prev + 1);
@@ -493,7 +555,7 @@ export function PopularScripts({ items }: { items: Category[] }) {
             prefetch={false}
           >
             <Card className="bg-accent/30 border-2 hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 flex flex-col h-full cursor-pointer relative overflow-hidden">
-              <div className="absolute top-2 left-2 z-10">
+              <div className="absolute top-2 left-2 z-[65]">
                 <Badge className="bg-gradient-to-r from-purple-500 to-pink-500 text-white border-0 text-[10px] px-2 py-0.5">
                   ⭐ Popular
                 </Badge>
@@ -503,12 +565,22 @@ export function PopularScripts({ items }: { items: Category[] }) {
                   <div className="flex h-20 w-20 min-w-20 items-center justify-center rounded-xl bg-gradient-to-br from-accent/40 to-accent/60 p-1 shadow-md">
                     <AppIcon src={script.logo} name={script.name || script.slug} size={80} />
                   </div>
-                  <div className="flex flex-col flex-1 min-w-0">
-                    <h3 className="font-semibold text-base line-clamp-1 mb-1">{script.name}</h3>
-                    <p className="text-xs text-muted-foreground flex items-center gap-1" title={script.date_created}>
-                      <CalendarPlus className="h-3 w-3" />
-                      {extractDate(script.date_created)}
-                    </p>
+                  <div className="flex flex-col flex-1 min-w-0 gap-1">
+                    <h3 className="font-semibold text-base line-clamp-1">{script.name}</h3>
+                    <div className="flex items-center gap-3">
+                      <p className="text-xs text-muted-foreground flex items-center gap-1" title={script.date_created}>
+                        <CalendarPlus className="h-3 w-3" />
+                        {extractDate(script.date_created)}
+                      </p>
+                    </div>
+                    <div>
+                      {formatStarCount((script as any).github_stars) && (
+                        <p className="text-xs text-muted-foreground flex items-center gap-1">
+                          <Star className="h-3 w-3 fill-current" />
+                          {formatStarCount((script as any).github_stars)}
+                        </p>
+                      )}
+                    </div>
                   </div>
                 </CardTitle>
               </CardHeader>

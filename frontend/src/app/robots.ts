@@ -9,6 +9,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
+      disallow: ["/data", "/json-editor"],
     },
     sitemap: `https://community-scripts.github.io/${basePath}/sitemap.xml`,
   };
