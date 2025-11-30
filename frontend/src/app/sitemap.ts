@@ -16,9 +16,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: `${protocol}://${domain}/${basePath}/scripts`,
       lastModified: new Date(),
     },
-    {
-      url: `${protocol}://${domain}/${basePath}/json-editor`,
-      lastModified: new Date(),
-    },
   ];
 }
