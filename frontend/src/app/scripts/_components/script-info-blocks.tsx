@@ -247,6 +247,12 @@ export function LatestScripts({ items }: { items: Category[] }) {
                       <CalendarPlus className="h-3 w-3" />
                       {extractDate(script.date_created)}
                     </p>
+                    {formatStarCount((script as any).github_stars) && (
+                      <p className="text-xs text-muted-foreground flex items-center gap-1">
+                        <Star className="h-3 w-3 fill-current" />
+                        {formatStarCount((script as any).github_stars)}
+                      </p>
+                    )}
                   </div>
                 </CardTitle>
               </CardHeader>
@@ -417,6 +423,8 @@ export function TrendingScripts({ items }: { items: Category[] }) {
                         <CalendarPlus className="h-3 w-3" />
                         {extractDate(script.date_created)}
                       </p>
+                    </div>
+                    <div>
                       {formatStarCount((script as any).github_stars) && (
                         <p className="text-xs text-muted-foreground flex items-center gap-1">
                           <Star className="h-3 w-3 fill-current" />
@@ -564,6 +572,8 @@ export function PopularScripts({ items }: { items: Category[] }) {
                         <CalendarPlus className="h-3 w-3" />
                         {extractDate(script.date_created)}
                       </p>
+                    </div>
+                    <div>
                       {formatStarCount((script as any).github_stars) && (
                         <p className="text-xs text-muted-foreground flex items-center gap-1">
                           <Star className="h-3 w-3 fill-current" />
