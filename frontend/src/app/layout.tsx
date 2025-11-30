@@ -15,10 +15,10 @@ import "@/styles/globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Proxmox VE Helper-Scripts",
+  title: "DailyFOSS Helper-Scripts",
   description:
-    "The official website for the Proxmox VE Helper-Scripts (Community) repository. Featuring over 400+ scripts to help you manage your Proxmox Virtual Environment.",
-  applicationName: "Proxmox VE Helper-Scripts",
+    "The official website for the DailyFOSS Helper-Scripts (Community) repository. Featuring over 400+ scripts to help you manage your Proxmox Virtual Environment.",
+  applicationName: "DailyFOSS Helper-Scripts",
   generator: "Next.js",
   referrer: "origin-when-cross-origin",
   keywords: [
@@ -40,9 +40,9 @@ export const metadata: Metadata = {
   ],
   creator: "Bram Suurd",
   publisher: "Community Scripts",
-  metadataBase: new URL(`https://community-scripts.github.io/${basePath}/`),
+  metadataBase: new URL(`https://medival.github.io/${basePath}/`),
   alternates: {
-    canonical: `https://community-scripts.github.io/${basePath}/`,
+    canonical: `https://medival.github.io/${basePath}/`,
   },
   viewport: {
     width: "device-width",
@@ -55,17 +55,17 @@ export const metadata: Metadata = {
     telephone: false,
   },
   openGraph: {
-    title: "Proxmox VE Helper-Scripts",
+    title: "DailyFOSS Helper-Scripts",
     description:
-      "The official website for the Proxmox VE Helper-Scripts (Community) repository. Featuring over 400+ scripts to help you manage your Proxmox Virtual Environment.",
-    url: `https://community-scripts.github.io/${basePath}/`,
-    siteName: "Proxmox VE Helper-Scripts",
+      "The official website for the DailyFOSS Helper-Scripts (Community) repository. Featuring over 400+ scripts to help you manage your Proxmox Virtual Environment.",
+    url: `https://medival.github.io/${basePath}/`,
+    siteName: "DailyFOSS Helper-Scripts",
     images: [
       {
-        url: `https://community-scripts.github.io/${basePath}/defaultimg.png`,
+        url: `https://medival.github.io/${basePath}/defaultimg.png`,
         width: 1200,
         height: 630,
-        alt: "Proxmox VE Helper-Scripts",
+        alt: "DailyFOSS Helper-Scripts",
       },
     ],
     locale: "en_US",
@@ -73,17 +73,17 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Proxmox VE Helper-Scripts",
+    title: "DailyFOSS Helper-Scripts",
     creator: "@BramSuurdje",
     description:
-      "The official website for the Proxmox VE Helper-Scripts (Community) repository. Featuring over 400+ scripts to help you manage your Proxmox Virtual Environment.",
-    images: [`https://community-scripts.github.io/${basePath}/defaultimg.png`],
+      "The official website for the DailyFOSS Helper-Scripts (Community) repository. Featuring over 400+ scripts to help you manage your Proxmox Virtual Environment.",
+    images: [`https://medival.github.io/${basePath}/defaultimg.png`],
   },
   manifest: "/manifest.webmanifest",
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
-    title: "Proxmox VE Helper-Scripts",
+    title: "DailyFOSS Helper-Scripts",
   },
 };
 

@@ -15,7 +15,7 @@ const nextConfig = {
   },
 
   env: {
-    BASE_PATH: "ProxmoxVE",
+    BASE_PATH: "DailyFOSS",
   },
 
   eslint: {
@@ -23,7 +23,7 @@ const nextConfig = {
   },
 
   output: "export",
-  basePath: `/ProxmoxVE`,
+  basePath: `/DailyFOSS`,
 };
 
 export default nextConfig;

@@ -1,11 +1,11 @@
 {
-  "name": "proxmox-helper-scripts-website",
+  "name": "dailyfoss-helper-scripts-website",
   "type": "module",
   "version": "1.0.0",
   "private": true,
   "author": {
     "name": "Bram Suurd",
-    "url": "https://github.com/community-scripts"
+    "url": "https://github.com/medival"
   },
   "license": "MIT",
   "scripts": {

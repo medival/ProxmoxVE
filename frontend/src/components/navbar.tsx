@@ -36,10 +36,10 @@ function Navbar() {
 
   // Hindari hydration mismatch: sebelum mounted pakai default light
   const logoSrc = !mounted
-    ? "/ProxmoxVE/logo_white.png"
+    ? "/DailyFOSS/logo_white.png"
     : resolvedTheme === "dark"
-    ? "/ProxmoxVE/logo_dark.png"
-    : "/ProxmoxVE/logo_white.png";
+    ? "/DailyFOSS/logo_dark.png"
+    : "/DailyFOSS/logo_white.png";
 
   return (
     <>
@@ -70,7 +70,7 @@ function Navbar() {
             </div>
             <div className="flex gap-2 sm:gap-4">
               <CommandMenu />
-              <GitHubStarsButton username="community-scripts" repo="ProxmoxVE" className="hidden md:flex" />
+              <GitHubStarsButton username="medival" repo="ProxmoxVE" className="hidden md:flex" />
               {navbarLinks.map(({ href, event, icon, text, mobileHidden }) => (
                 <TooltipProvider key={event}>
                   <Tooltip delayDuration={100}>
