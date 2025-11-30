@@ -265,24 +265,27 @@ function ScriptHeader({ item }: { item: Script }) {
     <div className="-m-8 mb-0 p-8 rounded-t-xl bg-gradient-to-br from-card/50 to-accent/10 border-b">
       <div className="flex flex-col lg:flex-row gap-6 w-full">
       <div className="flex flex-col md:flex-row gap-6 flex-grow">
-        <div className="flex-shrink-0 self-start">
+        <div className="flex-shrink-0 self-start relative h-28 w-28 rounded-xl bg-gradient-to-br from-accent/40 to-accent/60 shadow-lg transition-transform hover:scale-105 overflow-hidden p-3">
           {item.logo && item.logo.trim() !== "" ? (
             <Image
-              className="h-28 w-28 rounded-xl bg-gradient-to-br from-accent/40 to-accent/60 object-contain p-3 shadow-lg transition-transform hover:scale-105"
               src={item.logo}
-              width={400}
+              height={112}
+              width={112}
+              unoptimized
               onError={(e) => {
                 const target = e.currentTarget as HTMLImageElement;
                 target.style.display = 'none';
-                const fallback = target.parentElement?.querySelector('.logo-fallback');
-                if (fallback) fallback.classList.remove('hidden');
+                const fallback = target.nextElementSibling as HTMLElement;
+                if (fallback) fallback.style.display = 'flex';
               }}
-              height={400}
               alt={item.name}
-              unoptimized
+              className="w-full h-full object-contain"
             />
           ) : null}
-          <div className={`flex h-28 w-28 items-center justify-center rounded-xl bg-gradient-to-br from-accent/40 to-accent/60 shadow-lg transition-transform hover:scale-105 logo-fallback ${item.logo && item.logo.trim() !== "" ? 'hidden' : ''}`}>
+          <div
+            className="absolute inset-0 flex items-center justify-center"
+            style={{ display: item.logo && item.logo.trim() !== "" ? 'none' : 'flex' }}
+          >
             <LayoutGrid className="h-14 w-14 text-muted-foreground" />
           </div>
         </div>

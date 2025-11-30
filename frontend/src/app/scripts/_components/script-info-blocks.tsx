@@ -341,13 +341,28 @@ export function TrendingScripts({ items }: { items: Category[] }) {
       }
     });
 
-    // Get scripts from last 30 days
+    // Helper to parse GitHub stars (e.g., "3.5k" -> 3500)
+    const parseStars = (stars?: string): number => {
+      if (!stars) return 0;
+      const num = parseFloat(stars.replace(/[^0-9.]/g, ''));
+      if (stars.toLowerCase().includes('k')) return num * 1000;
+      if (stars.toLowerCase().includes('m')) return num * 1000000;
+      return num;
+    };
+
+    // Get scripts from last 30 days and sort by GitHub stars
     const thirtyDaysAgo = new Date();
     thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
 
     return Array.from(uniqueScriptsMap.values())
       .filter(script => new Date(script.date_created) >= thirtyDaysAgo)
-      .sort((a, b) => new Date(b.date_created).getTime() - new Date(a.date_created).getTime())
+      .sort((a, b) => {
+        const starsA = parseStars((a as any).github_stars);
+        const starsB = parseStars((b as any).github_stars);
+        // Sort by stars first, then by date
+        if (starsB !== starsA) return starsB - starsA;
+        return new Date(b.date_created).getTime() - new Date(a.date_created).getTime();
+      })
       .slice(0, 6);
   }, [items]);
 
@@ -433,22 +448,41 @@ export function PopularScripts({ items }: { items: Category[] }) {
       }
     });
 
-    // Prioritize scripts from mostPopularScripts, then add others
-    const allScripts = Array.from(uniqueScriptsMap.values());
-    const popular = mostPopularScripts
-      .map(slug => allScripts.find(s => s.slug === slug))
-      .filter(Boolean) as Script[];
+    // Helper to parse GitHub stars (e.g., "3.5k" -> 3500)
+    const parseStars = (stars?: string): number => {
+      if (!stars) return 0;
+      const num = parseFloat(stars.replace(/[^0-9.]/g, ''));
+      if (stars.toLowerCase().includes('k')) return num * 1000;
+      if (stars.toLowerCase().includes('m')) return num * 1000000;
+      return num;
+    };
 
-    // Add more scripts that have docker/k8s deployment
-    const additionalScripts = allScripts
-      .filter(script => !mostPopularScripts.includes(script.slug))
-      .filter(script => {
-        const deployment = script.install_methods?.[0]?.platform?.deployment;
-        return deployment && (deployment.docker || deployment.kubernetes || deployment.helm);
+    // Helper to count deployment methods
+    const countDeploymentMethods = (script: Script): number => {
+      const deployment = script.install_methods?.[0]?.platform?.deployment;
+      if (!deployment) return 0;
+      return Object.values(deployment).filter(Boolean).length;
+    };
+
+    // Calculate popularity score: GitHub stars (80%) + deployment versatility (20%)
+    const allScripts = Array.from(uniqueScriptsMap.values()).map(script => ({
+      script,
+      stars: parseStars((script as any).github_stars),
+      deploymentCount: countDeploymentMethods(script),
+    }));
+
+    // Boost hardcoded popular scripts slightly
+    return allScripts
+      .sort((a, b) => {
+        const boostA = mostPopularScripts.includes(a.script.slug) ? 5000 : 0;
+        const boostB = mostPopularScripts.includes(b.script.slug) ? 5000 : 0;
+
+        const scoreA = (a.stars * 0.8) + (a.deploymentCount * 200) + boostA;
+        const scoreB = (b.stars * 0.8) + (b.deploymentCount * 200) + boostB;
+
+        return scoreB - scoreA;
       })
-      .slice(0, 9);
-
-    return [...popular, ...additionalScripts];
+      .map(item => item.script);
   }, [items]);
 
   const goToNextPage = () => setPage(prev => prev + 1);
