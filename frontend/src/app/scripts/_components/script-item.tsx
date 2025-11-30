@@ -346,7 +346,6 @@ function VersionInfo({ item }: { item: Script }) {
 
 export function ScriptItem({ item, setSelectedScript }: ScriptItemProps) {
   const closeScript = () => {
-    window.history.pushState({}, document.title, window.location.pathname);
     setSelectedScript(null);
   };
 
