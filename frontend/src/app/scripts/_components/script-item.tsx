@@ -4,6 +4,7 @@ import { X, Monitor, Smartphone, Cloud, Boxes, Terminal, MousePointerClick, Cale
 import { motion } from "framer-motion";
 import { Suspense } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 import type { AppVersion, Script } from "@/lib/types";
 
@@ -345,8 +346,10 @@ function VersionInfo({ item }: { item: Script }) {
 }
 
 export function ScriptItem({ item, setSelectedScript }: ScriptItemProps) {
+  const router = useRouter();
+
   const closeScript = () => {
-    setSelectedScript(null);
+    router.back();
   };
 
   return (
